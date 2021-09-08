@@ -21,7 +21,7 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 		
 		batch.begin();
-			fumiko.dibujar(batch);
+		fumiko.dibujar(batch);
 		batch.end();
 	}
 	
