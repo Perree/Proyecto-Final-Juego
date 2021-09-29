@@ -8,6 +8,7 @@ public class Main extends Game {
 	SpriteBatch batch;
 	Fumiko fumiko;
 	Texture img;
+	int cont=0;
 	
 
 	@Override
@@ -19,10 +20,14 @@ public class Main extends Game {
 
 	@Override
 	public void render () {
-		batch.begin();
-		batch.draw(img, 0, 0);
-//		fumiko.dibujar(batch);
-		batch.end();
+		cont++;
+		if(cont==1) {
+			batch.begin();
+			batch.draw(img, 0, 0);
+//			fumiko.dibujar(batch);
+			batch.end();
+		}
+		
 	}
 	
 	@Override
