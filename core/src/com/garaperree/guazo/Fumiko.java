@@ -2,7 +2,6 @@ package com.garaperree.guazo;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.utiles.Render;
 
 public class Fumiko {
@@ -18,7 +17,7 @@ public class Fumiko {
 	}
 	
 
-	public void dibujar(SpriteBatch batch) {
+	public void dibujar() {
 		spr.draw(Render.batch);
 	}
 	

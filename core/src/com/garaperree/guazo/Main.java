@@ -1,9 +1,8 @@
 package com.garaperree.guazo;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.garaperree.guazo.pantallas.PantallaCarga;
 import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
@@ -12,6 +11,7 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		Render.Batch = new SpriteBatch();
+		this.setScreen(new PantallaCarga());
 	}
 
 	@Override

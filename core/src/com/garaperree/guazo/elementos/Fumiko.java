@@ -1,4 +1,4 @@
-package com.garaperree.guazo.personajes;
+package com.garaperree.guazo.elementos;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
