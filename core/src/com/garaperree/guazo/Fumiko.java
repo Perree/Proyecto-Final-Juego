@@ -18,7 +18,7 @@ public class Fumiko {
 	
 
 	public void dibujar() {
-		spr.draw(Render.batch);
+		spr.draw(Render.Batch);
 	}
 	
 	public void setX(float x) {
