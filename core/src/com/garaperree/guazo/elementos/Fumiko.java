@@ -17,11 +17,12 @@ public class Fumiko {
 			this.x = x;
 			this.y = y;
 			this.alto = alto;
-			this.ancho = ancho;}
+			this.ancho = ancho;
+		}
 
 		public void dibujar(SpriteBatch batch) {
 			spr.draw(batch);
-			}
+		}
 	}
 	
 

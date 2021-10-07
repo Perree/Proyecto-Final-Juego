@@ -10,13 +10,13 @@ public class Main extends Game {
 	
 	@Override
 	public void create () {
-		Render.Batch = new SpriteBatch();
+		Render.batch = new SpriteBatch();
 		this.setScreen(new PantallaCarga());
 	}
 
 	@Override
 	public void render () {
-		
+		super.render();
 		
 	}
 	
@@ -26,6 +26,6 @@ public class Main extends Game {
 
 	@Override
 	public void dispose () {
-		Render.Batch.dispose();
+		Render.batch.dispose();
 	}
 }
