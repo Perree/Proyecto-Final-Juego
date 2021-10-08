@@ -21,5 +21,9 @@ public class Imagen {
 	public void setTransparencia(float a) {
 		spr.setAlpha(a);
 	}
+	
+	public void setSize(float ancho, float alto) {
+		spr.setSize(ancho, alto);
+	}
 }
 

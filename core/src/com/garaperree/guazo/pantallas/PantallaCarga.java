@@ -10,9 +10,10 @@ public class PantallaCarga implements Screen {
 
 	Imagen fondo;
 	SpriteBatch b;
-	boolean fadeInTerminado = false;
+	boolean fadeInTerminado = false, termina = false;
 	float a = 0;
 	float contTiempo = 0, tiempoEspera = 5;
+	float contTiempoTermina = 0, tiempoTermina = 0;
 
 	@Override
 	public void show() {
@@ -45,11 +46,20 @@ public class PantallaCarga implements Screen {
 			if (contTiempo > tiempoEspera) {
 				a -= 0.01f;
 				if (a < 0) {
-					a = 0;}
+					a = 0;
+					termina = true;
+				}
 			}
 		}
 
 		fondo.setTransparencia(a);
+		
+		if(termina) {
+			contTiempoTermina += 0.04f;
+			if(contTiempoTermina>tiempoTermina) {
+				Render.app.setScreen(new PantallaMenu());
+			}
+		}
 	}
 
 	@Override

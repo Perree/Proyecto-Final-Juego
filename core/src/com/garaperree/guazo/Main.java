@@ -3,6 +3,7 @@ package com.garaperree.guazo;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.pantallas.PantallaCarga;
+import com.garaperree.guazo.pantallas.PantallaMenu;
 import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
@@ -10,8 +11,10 @@ public class Main extends Game {
 	
 	@Override
 	public void create () {
+		Render.app = this;
 		Render.batch = new SpriteBatch();
-		this.setScreen(new PantallaCarga());
+		this.setScreen(new PantallaMenu());
+
 	}
 
 	@Override

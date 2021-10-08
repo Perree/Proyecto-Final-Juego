@@ -2,6 +2,7 @@ package com.garaperree.guazo.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch.Config;
 import com.garaperree.guazo.Main;
 
 public class DesktopLauncher {
@@ -10,8 +11,8 @@ public class DesktopLauncher {
 		
 		config.title = "El mejor juego del mundo papa";
 		config.resizable = false;
-		config.width = 1920;
-		config.height = 1080;
+		config.width = Config.ANCHO;
+		config.height = Config.ALTO;
 		
 		new LwjglApplication(new Main(), config);
 	}
