@@ -2,8 +2,8 @@ package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch.Config;
 import com.garaperree.guazo.elementos.Imagen;
+import com.garaperree.guazo.utiles.Config;
 import com.garaperree.guazo.utiles.Recursos;
 import com.garaperree.guazo.utiles.Render;
 
@@ -14,7 +14,7 @@ public class PantallaMenu implements Screen{
 	@Override
 	public void show() {
 		fondo = new Imagen(Recursos.FONDOMENU);
-		fondo.setSize(Config.ANCHO,Config.ALTO);
+		fondo.setSize(Config.ANCHO, Config.ALTO);
 		b = Render.batch;
 	}
 
