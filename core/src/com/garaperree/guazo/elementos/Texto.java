@@ -1,69 +1,85 @@
 package com.garaperree.guazo.elementos;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.math.Vector2;
+import com.garaperree.guazo.utiles.Render;
 
-public class Texto implements Screen{
-	private BitmapFont font16;
-    private String texto = "";
-    
-    public void MenuQuotes() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/minecraft.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+public class Texto {
 
-        parameter.size = 16;
-        parameter.color = Color.WHITE;
-        parameter.shadowColor = Color.BLACK;
-        parameter.shadowOffsetX = 1;
-        parameter.shadowOffsetY = 1;
+	BitmapFont fuente;
+	private float x = 0, y = 0;
+	private String texto = "";
+	GlyphLayout layout;
 
-        font16 = generator.generateFont(parameter);
-        generator.dispose();
-    }
+	public Texto(String rutaFuente, int dimension, Color color, boolean sombra) {
+		FreeTypeFontGenerator generador = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
+		FreeTypeFontParameter parametros = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parametros.size = dimension;
+		parametros.color = color;
 
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
+		if (sombra) {
+			parametros.shadowColor = Color.BLACK;
+			parametros.shadowOffsetX = 1;
+			parametros.shadowOffsetY = 1;
+		}
+
+		fuente = generador.generateFont(parametros);
+		layout = new GlyphLayout();
+
 	}
 
-	@Override
-	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
+	public void dibujar() {
+		fuente.draw(Render.batch, texto, x, y);
 	}
 
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
+	public float getX() {
+		return x;
 	}
 
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
+	public void setX(float x) {
+		this.x = x;
 	}
 
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
+	public float getY() {
+		return y;
 	}
 
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+		layout.setText(fuente, texto);
+	}
+
+	public float getAncho() {
+		return  layout.width;
+	}
+	
+	public float getalto() {
+		return  layout.height;
+	}
+	
+	public Vector2 getDimension() {
+		return new Vector2(layout.width,layout.height);
+	}
+	
+	public Vector2 getPosicion() {
+		return new Vector2(x,y);
 	}
 }
