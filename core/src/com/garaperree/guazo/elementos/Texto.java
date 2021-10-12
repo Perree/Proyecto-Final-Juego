@@ -15,8 +15,12 @@ public class Texto {
 	private float x = 0, y = 0;
 	private String texto = "";
 	GlyphLayout layout;
-
+	
 	public Texto(String rutaFuente, int dimension, Color color, boolean sombra) {
+		ganerarTexto(rutaFuente, dimension, color, sombra);
+	}
+
+	private void ganerarTexto(String rutaFuente, int dimension, Color color, boolean sombra) {
 		FreeTypeFontGenerator generador = new FreeTypeFontGenerator(Gdx.files.internal(rutaFuente));
 		FreeTypeFontParameter parametros = new FreeTypeFontGenerator.FreeTypeFontParameter();
 		parametros.size = dimension;
@@ -30,11 +34,14 @@ public class Texto {
 
 		fuente = generador.generateFont(parametros);
 		layout = new GlyphLayout();
-
 	}
 
 	public void dibujar() {
 		fuente.draw(Render.batch, texto, x, y);
+	}
+	
+	public void setColor(Color color) {
+		fuente.setColor(color);
 	}
 
 	public void setPosition(float x, float y) {
@@ -71,7 +78,7 @@ public class Texto {
 		return  layout.width;
 	}
 	
-	public float getalto() {
+	public float getAlto() {
 		return  layout.height;
 	}
 	
