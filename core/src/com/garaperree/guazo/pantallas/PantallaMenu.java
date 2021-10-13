@@ -31,13 +31,13 @@ public class PantallaMenu implements Screen {
 		b = Render.batch;
 
 		Gdx.input.setInputProcessor(entradas);
-		int avance = 30;
+		int avance = 50;
 
 		for (int i = 0; i < opciones.length; i++) {
 			opciones[i] = new Texto(Recursos.FUENTEMENU, 60, Color.WHITE, true);
 			opciones[i].setTexto(textos[i]);
 			opciones[i].setPosition((Config.ANCHO / 2) - (opciones[i].getAncho() / 2),
-					((Config.ALTO / 2) + (opciones[0].getAlto() / 2)) - ((opciones[i].getAlto() * i) * (avance * i)));
+					((Config.ALTO / 2) + (opciones[0].getAlto() / 2)) - ((opciones[i].getAlto()+(avance * i))));
 		}
 
 	}
