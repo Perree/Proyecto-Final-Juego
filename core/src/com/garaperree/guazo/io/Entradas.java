@@ -2,18 +2,33 @@ package com.garaperree.guazo.io;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.garaperree.guazo.pantallas.PantallaMenu;
 
 public class Entradas implements InputProcessor {
 
 	private boolean abajo = false, arriba = false;
-	
+
+	PantallaMenu app;
+
+	public Entradas(PantallaMenu app) {
+		this.app = app;
+	}
+
+	public boolean isAbajo() {
+		return abajo;
+	}
+
+	public boolean isArriba() {
+		return arriba;
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
+		app.tiempo = 0.08f;
+		
 		if (keycode == Keys.DOWN) {
 			abajo = true;
-		}
-
-		if (keycode == Keys.UP) {
+		} else if (keycode == Keys.UP) {
 			arriba = true;
 		}
 		return false;
@@ -23,8 +38,7 @@ public class Entradas implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		if (keycode == Keys.DOWN) {
 			abajo = false;
-		}
-
+		} 
 		if (keycode == Keys.UP) {
 			arriba = false;
 		}

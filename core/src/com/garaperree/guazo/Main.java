@@ -2,7 +2,6 @@ package com.garaperree.guazo;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.garaperree.guazo.pantallas.PantallaCarga;
 import com.garaperree.guazo.pantallas.PantallaMenu;
 import com.garaperree.guazo.utiles.Render;
 
