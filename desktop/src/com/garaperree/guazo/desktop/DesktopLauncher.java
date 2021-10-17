@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		
 		config.title = "El mejor juego del mundo papa";
 		config.resizable = false;
-		config.width = Config.ANCHO;
-		config.height = Config.ALTO;
+		config.width = Config.SCREEN_WIDTH;
+		config.height = Config.SCREEN_HEIGHT;
 		
 		new LwjglApplication(new Main(), config);
 	}
