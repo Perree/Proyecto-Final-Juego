@@ -1,0 +1,97 @@
+
+altlasregion.png
+size: 494, 244
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Bridge
+  rotate: false
+  xy: 434, 18
+  size: 48, 24
+  orig: 48, 24
+  offset: 0, 0
+  index: -1
+Bridge-Support
+  rotate: false
+  xy: 468, 66
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Bridge-handle-01
+  rotate: false
+  xy: 468, 92
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Bridge-handle-02
+  rotate: false
+  xy: 468, 144
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Cave-Background-Rocks-01
+  rotate: false
+  xy: 468, 118
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Cave-Background-Rocks-02
+  rotate: false
+  xy: 434, 44
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+Cave-Entrance
+  rotate: false
+  xy: 344, 6
+  size: 88, 40
+  orig: 88, 40
+  offset: 0, 0
+  index: -1
+Player-Attack-24x24
+  rotate: false
+  xy: 344, 48
+  size: 72, 96
+  orig: 72, 96
+  offset: 0, 0
+  index: -1
+Player-Fall-24x24
+  rotate: false
+  xy: 344, 146
+  size: 72, 96
+  orig: 72, 96
+  offset: 0, 0
+  index: -1
+Player-Idle-24x24
+  rotate: false
+  xy: 418, 120
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Player-Jump-24x24
+  rotate: false
+  xy: 418, 70
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Player-Run-24x24
+  rotate: false
+  xy: 418, 170
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+merged-full-background
+  rotate: false
+  xy: 2, 2
+  size: 340, 240
+  orig: 340, 240
+  offset: 0, 0
+  index: -1

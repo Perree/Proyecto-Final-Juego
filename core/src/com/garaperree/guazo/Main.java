@@ -10,9 +10,9 @@ public class Main extends Game {
 	
 	@Override
 	public void create () {
-		Render.app = this;
-		Render.batch = new SpriteBatch();
-		this.setScreen(new PantallaMenu());
+//		Render.app = this;
+//		Render.batch = new SpriteBatch();
+//		this.setScreen(new PantallaMenu());
 
 	}
 

@@ -15,20 +15,19 @@ import com.garaperree.guazo.utiles.Config;
 public abstract class PantallaMenu extends InputAdapter implements Screen {
 	
 	public Main game;
-	
 	public OrthographicCamera oCam;
 	public SpriteBatch b;
-	public Stage stage;
+	public Stage stage; 
 	
 	public PantallaMenu(Main game) {
 		this.game = game;
 		
-		stage = new Stage(new StretchViewport(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
+		stage = new Stage(new StretchViewport(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT)); // Ayuda a dibujar la interfaz de usuario
 		
 		oCam = new OrthographicCamera(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-		oCam.position.set(Config.SCREEN_WIDTH/2f, Config.SCREEN_HEIGHT/2f, 0);
+		oCam.position.set(Config.SCREEN_WIDTH/2f, Config.SCREEN_HEIGHT/2f, 0); // Centrar camara
 		
-		InputMultiplexer input = new InputMultiplexer(this, stage);
+		InputMultiplexer input = new InputMultiplexer(this, stage); // Eventos del mouse, clicks, etc
 		Gdx.input.setInputProcessor(input);
 		
 		b = new SpriteBatch();
@@ -49,12 +48,12 @@ public abstract class PantallaMenu extends InputAdapter implements Screen {
 //	Entradas entradas = new Entradas(this);
 	
 	@Override
-	public void render(float delta) {
+	public void render(float delta) { // Se llama 60 veces por seg
 		update(delta);
 		
 		stage.act(delta);
 		
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Limpear pantalla
 		
 		draw(delta);
 		
@@ -106,8 +105,10 @@ public abstract class PantallaMenu extends InputAdapter implements Screen {
 //		}
 	}
 	
-	public abstract void draw(float delta);
+	// Dibujar la interface de usuario
+	public abstract void draw(float delta); 
 	
+	// Actualizar la fisica del juego
 	public abstract void update(float delta);
 	
 
@@ -136,7 +137,7 @@ public abstract class PantallaMenu extends InputAdapter implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
+		stage.getViewport().update(width, height, true); //se actualiza el stage si el userinterface cambia de tamaño
 	}
 
 	@Override
