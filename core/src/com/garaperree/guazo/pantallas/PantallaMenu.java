@@ -6,31 +6,37 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.utiles.Config;
 
 public abstract class PantallaMenu extends InputAdapter implements Screen {
 	
-	public Main game;
-	public OrthographicCamera oCam;
-	public SpriteBatch b;
+	private Main game;
+	Texture texture;
+	private OrthographicCamera gamecam;
+	private Viewport gamePort;
+	
 	public Stage stage; 
 	
 	public PantallaMenu(Main game) {
 		this.game = game;
+		texture = new Texture("badlogic.jpg");
+		gamecam = new OrthographicCamera(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+		gamePort = new StretchViewport(800, 480, gamecam);
 		
-		stage = new Stage(new StretchViewport(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT)); // Ayuda a dibujar la interfaz de usuario
-		
-		oCam = new OrthographicCamera(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-		oCam.position.set(Config.SCREEN_WIDTH/2f, Config.SCREEN_HEIGHT/2f, 0); // Centrar camara
-		
-		InputMultiplexer input = new InputMultiplexer(this, stage); // Eventos del mouse, clicks, etc
-		Gdx.input.setInputProcessor(input);
-		
-		b = new SpriteBatch();
+//		gamecam.position.set(Config.SCREEN_WIDTH/2f, Config.SCREEN_HEIGHT/2f, 0); // Centrar camara
+//		
+//		InputMultiplexer input = new InputMultiplexer(this, stage); // Eventos del mouse, clicks, etc
+//		Gdx.input.setInputProcessor(input);
+//		
+//		b = new SpriteBatch();
+//		
+//		stage = new Stage(new StretchViewport(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT)); // Ayuda a dibujar la interfaz de usuario
 	}
 	
 //	Imagen fondo;
@@ -49,15 +55,10 @@ public abstract class PantallaMenu extends InputAdapter implements Screen {
 	
 	@Override
 	public void render(float delta) { // Se llama 60 veces por seg
-		update(delta);
-		
-		stage.act(delta);
-		
+		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Limpear pantalla
-		
-		draw(delta);
-		
-		stage.draw();
+		game.batch.begin();
+		game.batch.end();
 		
 		
 //		b.begin();
@@ -137,7 +138,8 @@ public abstract class PantallaMenu extends InputAdapter implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true); //se actualiza el stage si el userinterface cambia de tamaño
+		gamePort.update(width, height);
+//		stage.getViewport().update(width, height, true); //se actualiza el stage si el userinterface cambia de tamaño
 	}
 
 	@Override

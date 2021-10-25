@@ -6,13 +6,12 @@ import com.garaperree.guazo.pantallas.PantallaMenu;
 import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	
 	@Override
 	public void create () {
-//		Render.app = this;
-//		Render.batch = new SpriteBatch();
-//		this.setScreen(new PantallaMenu());
+		batch = new SpriteBatch();
+		setScreen(new PantallaMenu(this));
 
 	}
 

@@ -3,6 +3,7 @@ package com.garaperree.guazo.personajes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -14,6 +15,7 @@ public class personajePrincipal {
 	private TextureRegion [] regionMovimientos;
 	private Texture imagen;
 	private TextureRegion frameActual;
+	private Sprite sprite;
 	
 	
 	public personajePrincipal(int x, int y) {
@@ -21,7 +23,7 @@ public class personajePrincipal {
 		this.y = y;
 		
 		//cargar la imagen
-		imagen = new Texture(Gdx.files.internal("assets/personajes/principal/Biker_run.png"));
+		sprite = new Sprite (new Texture(Gdx.files.internal("Biker_run.png")), 48, 48);
 		TextureRegion [][] tmp = TextureRegion.split(imagen, imagen.getWidth(), imagen.getHeight());
 		
 		regionMovimientos = new TextureRegion[6];
@@ -37,6 +39,6 @@ public class personajePrincipal {
 	public void render(final SpriteBatch batch) {
 		tiempo += Gdx.graphics.getDeltaTime();
 		frameActual = (TextureRegion) animation.getKeyFrame(tiempo,true);
-		batch.draw(frameActual, x, y);
+		batch.draw(sprite, x, y);
 	}
 }
