@@ -6,6 +6,9 @@ import com.garaperree.guazo.pantallas.PantallaJuego;
 import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
+	public static final int V_WIDTH = 400;
+	public static final int V_HEIGHT = 208;
+	
 	public SpriteBatch batch;
 	
 	@Override
