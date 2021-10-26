@@ -3,17 +3,24 @@ package com.garaperree.guazo.pantallas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
 public class PantallaJuego implements Screen{
 
-	private Main game;
+	private Main game; 
 	Texture texture;
+	private OrthographicCamera gamecam;
+	private Viewport gamePort;
 
 	public PantallaJuego(Main game) {
 		this.game = game;
-		texture = new Texture("badlogic.jpg");
+		texture = new Texture("Biker_run.png");
+		gamecam = new OrthographicCamera();
+		gamePort = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, gamecam);
 	}
 	
 	@Override
@@ -26,6 +33,7 @@ public class PantallaJuego implements Screen{
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Limpear pantalla
+		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
 		game.batch.draw(texture, 0, 0);
 		game.batch.end();
@@ -33,7 +41,7 @@ public class PantallaJuego implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		gamePort.update(width, height);
 		
 	}
 
@@ -62,7 +70,6 @@ public class PantallaJuego implements Screen{
 	}
 	
 	
-		
-	}
+}
 
 
