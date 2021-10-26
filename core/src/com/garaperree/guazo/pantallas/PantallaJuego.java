@@ -26,17 +26,14 @@ public class PantallaJuego implements Screen{
 	
 	public PantallaJuego(Main game) {
 		this.game = game;
-		// Crea una camara para seguir al personaje a travez del mundo
-		gamecam = new OrthographicCamera();
-		// 
+		gamecam = new OrthographicCamera(); // Crea una camara para seguir al personaje a travez del mundo
 		gamePort = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, gamecam);
-		// Crea una hud para puntos/tiempos/niveles
-		hud = new Hud(game.batch);
+		hud = new Hud(game.batch); // Crea una hud para puntos/tiempos/niveles
 		
 		maploader = new TmxMapLoader();
-		map = maploader.load("MapaNivel1.tmx");
+		map = maploader.load("assets/MapaNivel1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
-		gamecam.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
+		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 	}
 	
 	@Override
@@ -62,11 +59,13 @@ public class PantallaJuego implements Screen{
 	public void render(float delta) {
 		update(delta);
 		
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Limpear pantalla
+		// Limpear pantalla con negro
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 
 		
 		renderer.render();
 		
+		//Fijar el batch para dibujar el hud
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
 	}

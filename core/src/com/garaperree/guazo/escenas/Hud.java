@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
 public class Hud {
-	public Stage stage;
-	private Viewport viewport;
+	public Stage stage; // Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
+	private Viewport viewport; // Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
 	
 	private Integer worldTimer;
 	private float timeCount;
@@ -32,9 +32,9 @@ public class Hud {
 		score = 0;
 		
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
-		stage = new Stage(viewport, sb);
+		stage = new Stage(viewport, sb); 
 		
-		Table table = new Table();
+		Table table = new Table(); 
 		table.top();
 		table.setFillParent(true);
 		
