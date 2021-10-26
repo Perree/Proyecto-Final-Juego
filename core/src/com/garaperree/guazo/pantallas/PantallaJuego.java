@@ -1,8 +1,18 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.garaperree.guazo.Main;
 
 public class PantallaJuego implements Screen{
+	
+	private Main game; 
+	Texture texture;
+	
+	public PantallaJuego(Main game) {
+		this.game = game;
+		texture = new Texture("badlogic.jpg");
+	}
 
 	@Override
 	public void show() {
