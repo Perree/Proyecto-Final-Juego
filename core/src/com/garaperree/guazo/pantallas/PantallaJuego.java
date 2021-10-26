@@ -11,7 +11,7 @@ public class PantallaJuego implements Screen{
 	private Main game;
 	Texture texture;
 
-	public PlayScreen(Main game) {
+	public PantallaJuego(Main game) {
 		this.game = game;
 		texture = new Texture("badlogic.jpg");
 	}
