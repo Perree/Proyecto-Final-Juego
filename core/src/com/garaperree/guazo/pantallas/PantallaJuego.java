@@ -1,19 +1,34 @@
 package com.garaperree.guazo.pantallas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.garaperree.guazo.Main;
 
 public class PantallaJuego implements Screen{
 
+	private Main game;
+	Texture texture;
+
+	public PlayScreen(Main game) {
+		this.game = game;
+		texture = new Texture("badlogic.jpg");
+	}
+	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Limpear pantalla
+		game.batch.begin();
+		game.batch.draw(texture, 0, 0);
+		game.batch.end();
 	}
 
 	@Override
