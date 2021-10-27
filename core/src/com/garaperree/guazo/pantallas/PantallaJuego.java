@@ -19,9 +19,10 @@ public class PantallaJuego implements Screen{
 	private Viewport gamePort;
 	public Hud hud;
 	
+	//*** Para el mapa
 	private TmxMapLoader maploader;
 	private TiledMap map;
-	private OrthogonalTiledMapRenderer renderer;
+	private OrthogonalTiledMapRenderer renderer; // dibuja el mapa
 	
 	
 	public PantallaJuego(Main game) {
