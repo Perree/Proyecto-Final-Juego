@@ -3,7 +3,6 @@ package com.garaperree.guazo;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
 	public static final int V_WIDTH = 400;
@@ -21,7 +20,7 @@ public class Main extends Game {
 
 	@Override
 	public void render () {
-		super.render();
+		super.render(); // delegar el metodo de render para la pantalla del juego
 		
 	}
 	
@@ -31,6 +30,5 @@ public class Main extends Game {
 
 	@Override
 	public void dispose () {
-		Render.batch.dispose();
 	}
 }
