@@ -7,6 +7,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
@@ -14,28 +21,51 @@ import com.garaperree.guazo.escenas.Hud;
 
 public class PantallaJuego implements Screen{
 
+	//Referenciar a nuestro Juego, para setear las pantallas
 	private Main game; 
+	
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	public Hud hud;
 	
-	//*** Para el mapa
+	// Variables del Tiled map
 	private TmxMapLoader maploader;
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer; // dibuja el mapa
 	
+	//Variables de Box2d
+	private World world;
+	private Box2DDebugRenderer b2dr;
+	
 	
 	public PantallaJuego(Main game) {
 		this.game = game;
-		gamecam = new OrthographicCamera(); // Crea una camara para seguir al personaje a travez del mundo
+		
+		// Crea una camara para seguir al personaje a travez del mundo
+		gamecam = new OrthographicCamera(); 
+		
+		// Crea un FitViewport para mantenar el aspecto virtual
 		gamePort = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, gamecam);
-		hud = new Hud(game.batch); // Crea una hud para puntos/tiempos/niveles
+		
+		// Crea una hud para puntos/tiempos/niveles
+		hud = new Hud(game.batch); 
 		
 		//cargando el mapa
 		maploader = new TmxMapLoader();
-		map = maploader.load("MapaNivel1.tmx");
+		map = maploader.load("MapaPrueba.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+		
+		world = new World(new Vector2(0, 0 ), true);
+		b2dr = new Box2DDebugRenderer();
+		
+		BodyDef bdef = new BodyDef();
+		PolygonShape shape = new PolygonShape();
+		FixtureDef fdef = new FixtureDef();
+		Body body;
+		
+		for(MapObject object : map.get )
+		
 	}
 	
 	@Override
@@ -44,6 +74,7 @@ public class PantallaJuego implements Screen{
 		
 	}
 	
+	//mover la posicion de la camara hacia la derecha
 	private void handleInput(float dt) {
 		if(Gdx.input.isTouched())
 			gamecam.position.x += 100 * dt;
@@ -53,6 +84,8 @@ public class PantallaJuego implements Screen{
 		handleInput(dt);
 		
 		gamecam.update();
+		
+		//renderiza lo que la camara puede ver
 		renderer.setView(gamecam);
 	}
 
@@ -78,6 +111,7 @@ public class PantallaJuego implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
+		//actualizar nuestro viewport game
 		gamePort.update(width, height);
 		
 	}
