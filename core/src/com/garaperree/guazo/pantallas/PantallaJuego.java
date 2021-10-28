@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -52,19 +55,32 @@ public class PantallaJuego implements Screen{
 		
 		//cargando el mapa
 		maploader = new TmxMapLoader();
-		map = maploader.load("MapaNivel1.tmx");
+		map = maploader.load("nivel1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 		
-//		world = new World(new Vector2(0, 0 ), true);
-//		b2dr = new Box2DDebugRenderer();
-//		
-//		BodyDef bdef = new BodyDef();
-//		PolygonShape shape = new PolygonShape();
-//		FixtureDef fdef = new FixtureDef();
-//		Body body;
-//		
-//		for(MapObject object : map.get )
+		world = new World(new Vector2(0, 0 ), true);
+		b2dr = new Box2DDebugRenderer();
+		
+		BodyDef bdef = new BodyDef();
+		PolygonShape shape = new PolygonShape();
+		FixtureDef fdef = new FixtureDef();
+		Body body;
+		
+		// Crear el piso
+		for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+			
+			Rectangle rect = ((RectangleMapObject) object).getRectangle();
+			
+			bdef.type = BodyDef.BodyType.StaticBody;
+			bdef.position.set(rect.getX() + rect.getWidth()/2, rect.getY() + rect.getHeight()/2);
+			
+			body = world.createBody(bdef);
+			
+			shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
+			fdef.shape = shape;
+			body.createFixture(fdef);
+		}
 		
 	}
 	
@@ -98,8 +114,11 @@ public class PantallaJuego implements Screen{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 
 		
-		
+		//renderizar el mapa del juego
 		renderer.render();
+		
+		//renderizar Box2DDebugRenderer
+		b2dr.render(world, gamecam.combined);
 		
 		//Fijar el batch para dibujar el hud
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
