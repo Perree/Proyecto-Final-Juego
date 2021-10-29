@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="40">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="41">
  <tileset firstgid="1" source="Tileset.tsx"/>
  <layer id="1" name="background" width="32" height="24">
   <data encoding="csv">
@@ -48,8 +48,8 @@
 23,43,43,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
 23,43,43,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
 23,43,43,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
-23,43,43,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
-23,43,43,23,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
+23,43,43,23,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
+23,43,43,23,0,31,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,23,43,43,23,
 23,43,43,23,23,23,23,23,23,23,23,0,0,0,23,23,23,23,23,0,0,0,0,23,23,23,23,23,23,43,43,23,
 23,43,43,43,43,43,43,43,43,43,23,0,0,0,23,43,43,43,23,0,0,0,0,23,43,43,43,43,43,43,43,23,
 23,43,43,43,43,43,43,43,43,43,23,5,5,5,23,43,43,43,23,5,5,5,5,23,43,43,43,43,43,43,43,23,
@@ -86,5 +86,8 @@
  <objectgroup id="5" name="lava">
   <object id="37" x="352" y="672" width="96" height="32"/>
   <object id="38" x="608" y="672" width="128" height="32"/>
+ </objectgroup>
+ <objectgroup id="6" name="meta">
+  <object id="40" x="160" y="544" width="32" height="64"/>
  </objectgroup>
 </map>

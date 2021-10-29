@@ -82,6 +82,52 @@ public class PantallaJuego implements Screen{
 			body.createFixture(fdef);
 		}
 		
+		// Crear los pinches
+		for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+			
+			Rectangle rect = ((RectangleMapObject) object).getRectangle();
+			
+			bdef.type = BodyDef.BodyType.StaticBody;
+			bdef.position.set(rect.getX() + rect.getWidth()/2, rect.getY() + rect.getHeight()/2);
+			
+			body = world.createBody(bdef);
+			
+			shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
+			fdef.shape = shape;
+			body.createFixture(fdef);
+		}
+		// Crear lava
+		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
+			
+			Rectangle rect = ((RectangleMapObject) object).getRectangle();
+			
+			bdef.type = BodyDef.BodyType.StaticBody;
+			bdef.position.set(rect.getX() + rect.getWidth()/2, rect.getY() + rect.getHeight()/2);
+			
+			body = world.createBody(bdef);
+			
+			shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
+			fdef.shape = shape;
+			body.createFixture(fdef);
+		}
+		
+		// Crear meta
+		for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+			
+			Rectangle rect = ((RectangleMapObject) object).getRectangle();
+			
+			bdef.type = BodyDef.BodyType.StaticBody;
+			bdef.position.set(rect.getX() + rect.getWidth()/2, rect.getY() + rect.getHeight()/2);
+			
+			body = world.createBody(bdef);
+			
+			shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
+			fdef.shape = shape;
+			body.createFixture(fdef);
+		}
+				
+				
+		
 	}
 	
 	@Override
@@ -98,6 +144,8 @@ public class PantallaJuego implements Screen{
 	
 	public void update(float dt) {
 		handleInput(dt);
+		
+		world.step(1/60f, 6, 2);
 		
 		gamecam.update();
 		
