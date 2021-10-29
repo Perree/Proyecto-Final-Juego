@@ -5,24 +5,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
+import com.garaperree.guazo.utiles.B2WorldCreator;
 
 public class PantallaJuego implements Screen{
 
@@ -42,7 +36,7 @@ public class PantallaJuego implements Screen{
 	private World world;
 	private Box2DDebugRenderer b2dr;
 	
-	//
+	//Referenciar a nuestro personaje principal
 	private Fumiko fumiko;
 	
 	public PantallaJuego(Main game) {
@@ -68,73 +62,9 @@ public class PantallaJuego implements Screen{
 		world = new World(new Vector2(0, -10), true);
 		b2dr = new Box2DDebugRenderer();
 		
-		BodyDef bdef = new BodyDef();
-		PolygonShape shape = new PolygonShape();
-		FixtureDef fdef = new FixtureDef();
-		Body body;
+		new B2WorldCreator(world, map);
 		
 		fumiko = new Fumiko(world);
-		
-		// Crear el piso
-		for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
-		
-		// Crear los pinches
-		for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
-		// Crear lava
-		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
-		
-		// Crear meta
-		for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
-				
-				
 		
 	}
 	
