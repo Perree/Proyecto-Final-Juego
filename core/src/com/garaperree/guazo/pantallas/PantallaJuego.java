@@ -149,8 +149,11 @@ public class PantallaJuego implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		map.dispose();
+		renderer.dispose();
+		world.dispose();
+		b2dr.dispose();
+		hud.dispose();
 	}
 	
 	

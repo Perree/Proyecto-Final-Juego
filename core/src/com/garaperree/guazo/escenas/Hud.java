@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
-public class Hud {
+public class Hud implements Disposable{
 	public Stage stage; // Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
 	private Viewport viewport; // Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
 	
@@ -54,6 +55,12 @@ public class Hud {
 		table.add(countdownLabel).expand();		
 		
 		stage.addActor(table);
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
 		
 	}
 	
