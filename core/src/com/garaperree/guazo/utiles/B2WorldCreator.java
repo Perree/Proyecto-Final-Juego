@@ -10,9 +10,12 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.sprites.Pinches;
 
 public class B2WorldCreator {
 	public B2WorldCreator(World world, TiledMap map) {
+		
+		// Crear variables del body y fixture
 		BodyDef bdef = new BodyDef();
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fdef = new FixtureDef();
@@ -38,14 +41,7 @@ public class B2WorldCreator {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
+			new Pinches(world, map, rect);
 		}
 		// Crear lava
 		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {

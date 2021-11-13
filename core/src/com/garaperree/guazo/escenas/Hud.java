@@ -13,21 +13,28 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
 public class Hud implements Disposable{
-	public Stage stage; // Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
-	private Viewport viewport; // Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
 	
+	// Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
+	public Stage stage; 
+	// Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
+	private Viewport viewport; 
+	
+	// Marcadores y tiempos
 	private Integer worldTimer;
 	private float timeCount;
 	private Integer score;
 	
-	Label countdownLabel;
-	Label scoreLabel;
-	Label timeLabel;
-	Label levelLabel;
-	Label worldLabel;
-	Label marioLabel;
+	// Scene2d widgets
+	private Label countdownLabel;
+	private Label scoreLabel;
+	private Label timeLabel;
+	private Label levelLabel;
+	private Label worldLabel;
+	private Label marioLabel;
 	
 	public Hud(SpriteBatch sb) {
+		
+		// Variables
 		worldTimer = 300;
 		timeCount = 0;
 		score = 0;
@@ -46,14 +53,17 @@ public class Hud implements Disposable{
 		worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		marioLabel = new Label("MARIO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
+		// agregar los labels, padding top
 		table.add(marioLabel).expandX().padTop(10);
 		table.add(worldLabel).expandX().padTop(10);
 		table.add(timeLabel).expandX().padTop(10);
+		// agrega una segundo fila
 		table.row();
 		table.add(scoreLabel).expandX();
 		table.add(levelLabel).expandX();
 		table.add(countdownLabel).expand();		
 		
+		//agrega tabla al stage
 		stage.addActor(table);
 		
 	}
@@ -61,6 +71,7 @@ public class Hud implements Disposable{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		stage.dispose();
 		
 	}
 	
