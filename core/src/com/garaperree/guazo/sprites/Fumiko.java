@@ -27,7 +27,7 @@ public class Fumiko extends Sprite{
 	
 	
 	public Fumiko(World world, PantallaJuego pantalla) {
-		super(pantalla.getAtlas().findRegion("Biker_idle"));
+		super(pantalla.getAtlas().findRegion("Liitle_Biker"));
 		this.world = world;
 		currentState = State.STANDING;
 		previusState = State.STANDING;
@@ -35,17 +35,18 @@ public class Fumiko extends Sprite{
 		runningRight = true;
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
-		for (int i = 1; i < 4; i++) {
+		
+		for (int i = 0; i < 6; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
 			fumikoRun = new Animation(0.1f, frames);
 			frames.clear();
-		}
 		
-		for (int i = 0; i < 4; i++) {
+		
+		for (int i = 5; i < 9; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
 			fumikoJump = new Animation(0.1f, frames);
 			frames.clear();
-		}
+		
 		
 		fumikoStand = new TextureRegion(getTexture(), 0, 0, 48, 48);
 		
