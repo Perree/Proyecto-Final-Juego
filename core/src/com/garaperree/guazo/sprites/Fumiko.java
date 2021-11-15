@@ -16,7 +16,7 @@ public class Fumiko extends Sprite{
 	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING};
 	public State currentState;
-	public State previusState;
+	public State previousState;
 	public World world;
 	public Body b2body;
 	private TextureRegion fumikoStand;
@@ -27,10 +27,10 @@ public class Fumiko extends Sprite{
 	
 	
 	public Fumiko(World world, PantallaJuego pantalla) {
-		super(pantalla.getAtlas().findRegion("Liitle_Biker"));
+		super(pantalla.getAtlas().findRegion("Little_Fumiko"));
 		this.world = world;
 		currentState = State.STANDING;
-		previusState = State.STANDING;
+		previousState = State.STANDING;
 		stateTimer = 0;
 		runningRight = true;
 		
@@ -87,14 +87,14 @@ public class Fumiko extends Sprite{
 			runningRight = true;
 		}
 		
-		stateTimer = currentState == previusState ? stateTimer + dt : 0;
-		previusState = currentState;
+		stateTimer = currentState == previousState ? stateTimer + dt : 0;
+		previousState = currentState;
 		return region;
 		
 	}
 	
 	public State getState() {
-		if(b2body.getLinearVelocity().y>0 || b2body.getLinearVelocity().y<0 && previusState == State.JUMPING) {
+		if(b2body.getLinearVelocity().y>0 || b2body.getLinearVelocity().y<0 && previousState == State.JUMPING) {
 			return State.JUMPING;
 		}else if(b2body.getLinearVelocity().y<0) {
 			return State.FALLING;

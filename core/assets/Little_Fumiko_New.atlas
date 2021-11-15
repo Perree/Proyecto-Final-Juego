@@ -1,0 +1,27 @@
+
+Little_Fumiko_New.png
+size: 802, 42
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Biker
+  rotate: false
+  xy: 2, 4
+  size: 163, 34
+  orig: 192, 48
+  offset: 4, 0
+  index: 1
+Biker
+  rotate: false
+  xy: 268, 4
+  size: 264, 32
+  orig: 288, 48
+  offset: 3, 0
+  index: 2
+Biker
+  rotate: false
+  xy: 534, 4
+  size: 170, 36
+  orig: 192, 48
+  offset: 3, 0
+  index: 3
