@@ -104,8 +104,6 @@ public class Fumiko extends Sprite{
 			return State.STANDING;
 		}
 		
-			
-		
 	}
 
 
