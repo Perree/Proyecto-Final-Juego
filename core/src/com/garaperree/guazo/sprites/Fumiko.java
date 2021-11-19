@@ -14,12 +14,14 @@ import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Fumiko extends Sprite{
 	
+	//TODO arreglar animaciones de fumiko
+	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING};
 	public State currentState;
 	public State previousState;
 	public World world;
 	public Body b2body;
-	private TextureRegion fumikoStand;
+	private Animation fumikoStand;
 	private Animation fumikoRun;
 	private Animation fumikoJump;
 	private float stateTimer;
@@ -37,22 +39,24 @@ public class Fumiko extends Sprite{
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		
 		for (int i = 0; i < 6; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 24, 0, 24, 24));
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
 			fumikoRun = new Animation(0.1f, frames);
 			frames.clear();
 		
 		
-		for (int i = 5; i < 9; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 24, 0, 24, 24));
+		for (int i = 6; i < 10; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
 			fumikoJump = new Animation(0.1f, frames);
 			frames.clear();
 		
-		
-		fumikoStand = new TextureRegion(getTexture(), 0, 0, 24, 24);
+		for (int i = 10; i < 14; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));	
+			fumikoStand = new Animation(0.1f, frames);
+			frames.clear();
 		
 		defineFumiko();
 		setBounds(0, 0, 48 / Main.PPM, 48 / Main.PPM);
-		setRegion(fumikoStand);
+//		setRegion(fumikoStand);
 	}
 	
 	
@@ -75,7 +79,7 @@ public class Fumiko extends Sprite{
 		case FALLING:
 		case STANDING:
 		default:
-			region = fumikoStand;
+			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
 			break;
 		}
 		
@@ -120,7 +124,6 @@ public class Fumiko extends Sprite{
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
-	
 	}
 
 }

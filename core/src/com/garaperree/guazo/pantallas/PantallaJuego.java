@@ -43,7 +43,7 @@ public class PantallaJuego implements Screen{
 	
 	public PantallaJuego(Main game) {
 		
-		atlas = new TextureAtlas("fumiko.atlas");
+		atlas = new TextureAtlas("personaje.atlas");
 		
 		this.game = game;
 		
