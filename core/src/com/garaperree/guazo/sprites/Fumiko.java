@@ -3,9 +3,11 @@ package com.garaperree.guazo.sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -14,7 +16,7 @@ import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Fumiko extends Sprite{
 	
-	//TODO arreglar animaciones de fumiko
+	//TODO arreglar animaciones de fumiko mirar video 11
 	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING};
 	public State currentState;
@@ -124,6 +126,13 @@ public class Fumiko extends Sprite{
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
+		
+		EdgeShape head = new EdgeShape();
+		head.set(new Vector2(-2/ Main.PPM, 6/Main.PPM), new Vector2(2/ Main.PPM, 6/Main.PPM));
+		fdef.shape = head;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("head");
 	}
 
 }

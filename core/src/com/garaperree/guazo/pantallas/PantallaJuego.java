@@ -18,6 +18,7 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.utiles.B2WorldCreator;
+import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
 
@@ -73,6 +74,8 @@ public class PantallaJuego implements Screen{
 		
 		// crear Fumiko en nuestro juego
 		fumiko = new Fumiko(world, this);
+		
+		world.setContactListener(new WorldContactListener());
 		
 	}
 	
