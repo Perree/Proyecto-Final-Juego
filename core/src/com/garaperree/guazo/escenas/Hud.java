@@ -21,9 +21,13 @@ public class Hud implements Disposable{
 	
 	// Marcadores y tiempos
 	private Integer worldTimer;
+	private Integer score;
+	private float timeCount;
+	
 	
 	// Scene2d widgets
 	private Label countdownLabel;
+	private Label scoreLabel;
 	private Label timeLabel;
 	private Label levelLabel;
 	private Label worldLabel;
@@ -34,6 +38,8 @@ public class Hud implements Disposable{
 		
 		// Variables
 		worldTimer = 300;
+		timeCount = 0;
+		score = 0;
 
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, sb); 
@@ -61,6 +67,21 @@ public class Hud implements Disposable{
 		//agrega tabla al stage
 		stage.addActor(table);
 		
+	}
+	
+	public void update(float dt) {
+		// Disminuyendo el tiempo
+		timeCount += dt;
+		if(timeCount>= 1) {
+			worldTimer--;
+			countdownLabel.setText(String.format("%03d",worldTimer));
+			timeCount = 0;
+		}
+	}
+	
+	public void addScore(int value){
+		score += value;
+		scoreLabel.setText(null);
 	}
 
 	@Override

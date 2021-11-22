@@ -123,6 +123,8 @@ public class Fumiko extends Sprite{
 		CircleShape shape = new CircleShape();
 		//cuan grande es el circulo
 		shape.setRadius(6/Main.PPM);
+		fdef.filter.categoryBits = Main.FUMIKO_BIT;
+		fdef.filter.maskBits = Main.DEFAULT_BIT | Main.META_BIT | Main.PINCHES_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);

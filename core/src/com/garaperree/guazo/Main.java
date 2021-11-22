@@ -11,6 +11,11 @@ public class Main extends Game {
 	public static final int V_HEIGHT = 768;
 	public static final float PPM = 100;
 	
+	public static final short DEFAULT_BIT = 1;
+	public static final short FUMIKO_BIT = 2;
+	public static final short META_BIT = 4;
+	public static final short PINCHES_BIT = 8;
+	public static final short DESTROYED_BIT = 12;	
 	public SpriteBatch batch;
 	
 	@Override
@@ -27,14 +32,5 @@ public class Main extends Game {
 		// delegar el metodo de render para la pantalla del juego
 		super.render(); 
 		
-	}
-	
-	private void update() {
-	
-		}
-
-	@Override
-	public void dispose () {
-		batch.dispose();
 	}
 }

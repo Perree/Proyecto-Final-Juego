@@ -109,6 +109,7 @@ public class PantallaJuego implements Screen{
 		world.step(1/60f, 6, 2);
 		
 		fumiko.update(dt);
+		hud.update(dt);
 		
 		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
