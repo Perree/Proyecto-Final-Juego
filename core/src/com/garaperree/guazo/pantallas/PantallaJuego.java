@@ -103,8 +103,10 @@ public class PantallaJuego implements Screen{
 		// controlar a nuestro jugador mediante impulsos
 		if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
 			fumiko.b2body.applyLinearImpulse(new Vector2(0, 4f), fumiko.b2body.getWorldCenter(), true);
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && fumiko.b2body.getLinearVelocity().x <=2)
 			fumiko.b2body.applyLinearImpulse(new Vector2(0.1f, 0),fumiko.b2body.getWorldCenter(), true);
+		
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && fumiko.b2body.getLinearVelocity().x >=-2)
 			fumiko.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),fumiko.b2body.getWorldCenter(), true);
 	}

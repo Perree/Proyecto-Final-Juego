@@ -33,31 +33,31 @@ public class Fumiko extends Sprite{
 	public Fumiko(World world, PantallaJuego pantalla) {
 		super(pantalla.getAtlas().findRegion("fumiko"));
 		this.world = world;
-		currentState = State.STANDING;
-		previousState = State.STANDING;
+//		currentState = State.STANDING;
+//		previousState = State.STANDING;
 		stateTimer = 0;
 		runningRight = true;
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		
 		for (int i = 0; i < 6; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
 			fumikoRun = new Animation(0.1f, frames);
 			frames.clear();
 		
 		
 		for (int i = 6; i < 10; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
 			fumikoJump = new Animation(0.1f, frames);
 			frames.clear();
 		
 		for (int i = 10; i < 14; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 48, 48));	
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));	
 			fumikoStand = new Animation(0.1f, frames);
 			frames.clear();
 		
 		defineFumiko();
-		setBounds(0, 0, 48 / Main.PPM, 48 / Main.PPM);
+		setBounds(0, 0, 52 / Main.PPM, 52 / Main.PPM);
 //		setRegion(fumikoStand);
 	}
 	
@@ -75,11 +75,14 @@ public class Fumiko extends Sprite{
 		case JUMPING:
 			region = (TextureRegion) fumikoJump.getKeyFrame(stateTimer);
 			break;
+			
 		case RUNNING:
 			region = (TextureRegion) fumikoRun.getKeyFrame(stateTimer, true);
 			break;
+			
 		case FALLING:
 		case STANDING:
+			
 		default:
 			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
 			break;
@@ -88,7 +91,8 @@ public class Fumiko extends Sprite{
 		if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
 			region.flip(true, false);
 			runningRight = false;
-		}else if((b2body.getLinearVelocity().x > 0 || runningRight) && !region.isFlipX()){
+		}
+		else if((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()){
 			region.flip(true, false);
 			runningRight = true;
 		}
@@ -100,16 +104,17 @@ public class Fumiko extends Sprite{
 	}
 	
 	public State getState() {
-		if(b2body.getLinearVelocity().y>0 || b2body.getLinearVelocity().y<0 && previousState == State.JUMPING) {
+		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
 			return State.JUMPING;
-		}else if(b2body.getLinearVelocity().y<0) {
-			return State.FALLING;
-		}else if(b2body.getLinearVelocity().x!=0) {
-			return State.RUNNING;
-		}else{
-			return State.STANDING;
-		}
 		
+		else if(b2body.getLinearVelocity().y < 0) 
+			return State.FALLING;
+		
+		else if(b2body.getLinearVelocity().x != 0)
+			return State.RUNNING;
+		
+		else
+			return State.STANDING;
 	}
 
 
@@ -121,7 +126,8 @@ public class Fumiko extends Sprite{
 		
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
-		//cuan grande es el circulo
+		
+		// Cuan grande es el circulo
 		shape.setRadius(6/Main.PPM);
 		fdef.filter.categoryBits = Main.FUMIKO_BIT;
 		fdef.filter.maskBits = Main.DEFAULT_BIT | Main.META_BIT | Main.PINCHES_BIT;
