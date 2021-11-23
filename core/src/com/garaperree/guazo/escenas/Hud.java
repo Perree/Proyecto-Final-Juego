@@ -21,15 +21,14 @@ public class Hud implements Disposable{
 	
 	// Marcadores y tiempos
 	private Integer worldTimer;
-	private Integer score;
+	private Integer nivel;
 	private float timeCount;
 	
 	
 	// Scene2d widgets
 	private Label countdownLabel;
-	private Label scoreLabel;
 	private Label timeLabel;
-	private Label levelLabel;
+	private Label nivelLabel;
 	private Label worldLabel;
 	
 	public Hud(SpriteBatch sb) {
@@ -39,7 +38,7 @@ public class Hud implements Disposable{
 		// Variables
 		worldTimer = 300;
 		timeCount = 0;
-		score = 0;
+		nivel = 1;
 
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, sb); 
@@ -52,7 +51,7 @@ public class Hud implements Disposable{
 		
 		countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-		levelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+		nivelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		worldLabel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
 		// agregar los labels, padding top
@@ -61,7 +60,7 @@ public class Hud implements Disposable{
 		
 		// agrega una segundo fila
 		table.row();
-		table.add(levelLabel).expandX();
+		table.add(nivelLabel).expandX();
 		table.add(countdownLabel).expandX();		
 		
 		//agrega tabla al stage
@@ -79,9 +78,9 @@ public class Hud implements Disposable{
 		}
 	}
 	
-	public void addScore(int value){
-		score += value;
-		scoreLabel.setText(null);
+	public void pasaNivel(int value){
+		nivel += value;
+		nivelLabel.setText(null);
 	}
 
 	@Override

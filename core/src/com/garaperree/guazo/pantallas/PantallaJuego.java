@@ -3,6 +3,7 @@ package com.garaperree.guazo.pantallas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -42,6 +43,8 @@ public class PantallaJuego implements Screen{
 	//Referenciar a nuestro personaje principal (sprites)
 	private Fumiko fumiko;
 	
+	private Music music;
+	
 	public PantallaJuego(Main game) {
 		
 		atlas = new TextureAtlas("personaje.atlas");
@@ -66,7 +69,8 @@ public class PantallaJuego implements Screen{
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 		
 		// Crea el box2d world, sin gravedad en el eje x, -10 en el eje, permitiendo que los cuerpos descansen
-		world = new World(new Vector2(0, -10), true);
+		world = new World(new Vector2(0, -15), true);
+		
 		// Permite hacer los debugs de nuestro box2d world
 		b2dr = new Box2DDebugRenderer();
 		
@@ -76,6 +80,10 @@ public class PantallaJuego implements Screen{
 		fumiko = new Fumiko(world, this);
 		
 		world.setContactListener(new WorldContactListener());
+		
+		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+		music.setLooping(true);
+		music.play();
 		
 	}
 	

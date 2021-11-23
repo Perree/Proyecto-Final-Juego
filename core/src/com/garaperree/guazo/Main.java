@@ -1,10 +1,11 @@
 package com.garaperree.guazo;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.garaperree.guazo.pantallas.PantallaCarga;
 import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.sprites.Render;
 
 public class Main extends Game {
 	public static final int V_WIDTH = 1024;
@@ -16,21 +17,31 @@ public class Main extends Game {
 	public static final short META_BIT = 4;
 	public static final short PINCHES_BIT = 8;
 	public static final short DESTROYED_BIT = 12;	
+	
 	public SpriteBatch batch;
+	
+	public static AssetManager manager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		manager = new AssetManager();
+		manager.load("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		manager.load("audio/sfx/muere.wav", Sound.class);
+//		manager.load("audio/sfx/next_level.wav", Sound.class);
+		manager.finishLoading();
+		
 //		this.setScreen(new PantallaCarga());
 		setScreen(new PantallaJuego(this));
-		
-
 	}
 
+	
+	
+	
 	@Override
 	public void render () {
 		// delegar el metodo de render para la pantalla del juego
 		super.render(); 
-		
+
 	}
 }
