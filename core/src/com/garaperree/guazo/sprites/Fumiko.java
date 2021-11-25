@@ -61,7 +61,8 @@ public class Fumiko extends Sprite{
 //		setRegion(fumikoStand);
 	}
 	
-	
+
+
 	public void update(float dt) {
 		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
 		setRegion(getFrame(dt));
@@ -126,11 +127,10 @@ public class Fumiko extends Sprite{
 		
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
-		
 		// Cuan grande es el circulo
 		shape.setRadius(6/Main.PPM);
 		fdef.filter.categoryBits = Main.FUMIKO_BIT;
-		fdef.filter.maskBits = Main.DEFAULT_BIT | Main.META_BIT | Main.PINCHES_BIT;
+		fdef.filter.maskBits = Main.DEFAULT_BIT | Main.META_BIT | Main.PINCHES_BIT | Main.LAVA_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
