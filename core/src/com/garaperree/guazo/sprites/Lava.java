@@ -1,5 +1,6 @@
 package com.garaperree.guazo.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,12 +11,12 @@ public class Lava extends ObjetosInteractivos {
 
 	public Lava(World world, TiledMap map, Rectangle bounds) {
 		super(world, map, bounds);
-		// TODO Auto-generated constructor stub
+		fixture.setUserData(this);
 	}
 
 	@Override
 	public void onHeadHit() {
-		// TODO Auto-generated method stub
+		Gdx.app.log("Lava", "Collision");
 		
 		//sonido
 		//Main.manager.load("audio/sfx/muere.wav", Sound.class);

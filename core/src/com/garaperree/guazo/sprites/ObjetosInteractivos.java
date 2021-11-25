@@ -42,6 +42,7 @@ public abstract class ObjetosInteractivos {
 	}
 	
 	public abstract void onHeadHit();
+	
 	public void setCategoryFilter(short filterBit) {
 		Filter filter = new Filter();
 		filter.categoryBits = filterBit;
