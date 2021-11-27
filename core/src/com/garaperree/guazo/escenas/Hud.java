@@ -21,14 +21,14 @@ public class Hud implements Disposable{
 	
 	// Marcadores y tiempos
 	private Integer worldTimer;
-	private Integer nivel;
+	private static Integer nivel;
 	private float timeCount;
 	
 	
 	// Scene2d widgets
 	private Label countdownLabel;
 	private Label timeLabel;
-	private Label nivelLabel;
+	private static Label nivelLabel;
 	private Label worldLabel;
 	
 	public Hud(SpriteBatch sb) {
@@ -51,7 +51,7 @@ public class Hud implements Disposable{
 		
 		countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-		nivelLabel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+		nivelLabel = new Label(String.format("%02d",nivel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		worldLabel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
 		// agregar los labels, padding top
@@ -78,9 +78,11 @@ public class Hud implements Disposable{
 		}
 	}
 	
-	public void pasaNivel(int value){
+	public static void pasaNivel(int value){
+		//TODO agregar este metodo al momento de que el jugar llegue a la meta y cambie de mapa
+
 		nivel += value;
-		nivelLabel.setText(null);
+		nivelLabel.setText(String.format("%02d",nivel));
 	}
 
 	@Override

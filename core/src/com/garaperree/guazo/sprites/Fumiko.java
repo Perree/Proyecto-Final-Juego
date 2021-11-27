@@ -27,12 +27,15 @@ public class Fumiko extends Sprite{
 	private Animation fumikoRun;
 	private Animation fumikoJump;
 	private float stateTimer;
+	private boolean marioIsDead;
 	private boolean runningRight;
 	
 	
-	public Fumiko(World world, PantallaJuego pantalla) {
-		super(pantalla.getAtlas().findRegion("fumiko"));
-		this.world = world;
+	public Fumiko(PantallaJuego screen) {
+		super(screen.getAtlas().findRegion("fumiko"));
+		
+		// variables
+		this.world = screen.getWorld();
 //		currentState = State.STANDING;
 //		previousState = State.STANDING;
 		stateTimer = 0;
@@ -141,6 +144,14 @@ public class Fumiko extends Sprite{
 		fdef.isSensor = true;
 		
 		b2body.createFixture(fdef).setUserData("head");
+	}
+	
+	public boolean isDead() {
+		return marioIsDead;
+	}
+	
+	public float getStateTimer() {
+		return stateTimer;
 	}
 
 }

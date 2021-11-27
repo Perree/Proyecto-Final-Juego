@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public abstract class ObjetosInteractivos {
 	protected World world;
@@ -21,9 +22,9 @@ public abstract class ObjetosInteractivos {
 	protected Fixture fixture;
 	
 	
-	public ObjetosInteractivos(World world, TiledMap map, Rectangle bounds) {
-		this.world = world;
-		this.map = map;
+	public ObjetosInteractivos(PantallaJuego screen, Rectangle bounds) {
+		this.world = screen.getWorld();
+		this.map = screen.getMap();
 		this.bounds = bounds;
 		
 		BodyDef bdef = new BodyDef();

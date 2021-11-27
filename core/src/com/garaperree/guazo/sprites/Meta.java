@@ -5,11 +5,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Meta extends ObjetosInteractivos{
 
-	public Meta(World world, TiledMap map, Rectangle bounds) {
-		super(world, map, bounds);
+	public Meta(PantallaJuego screen, Rectangle bounds) {
+		super(screen, bounds);
 		fixture.setUserData(this);
 		setCategoryFilter(Main.META_BIT);
 	}

@@ -10,12 +10,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.pantallas.PantallaJuego;
 import com.garaperree.guazo.sprites.Lava;
 import com.garaperree.guazo.sprites.Meta;
 import com.garaperree.guazo.sprites.Pinches;
 
 public class B2WorldCreator {
-	public B2WorldCreator(World world, TiledMap map) {
+	public B2WorldCreator(PantallaJuego screen) {
+		
+		World world = screen.getWorld();
+		TiledMap map = screen.getMap();
 		
 		// Crear variables del body y fixture
 		BodyDef bdef = new BodyDef();
@@ -43,14 +47,14 @@ public class B2WorldCreator {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			new Pinches(world, map, rect);
+			new Pinches(screen, rect);
 		}
 		// Crear lava
 		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			new Lava(world, map, rect);
+			new Lava(screen, rect);
 		}
 		
 		// Crear meta
@@ -58,7 +62,7 @@ public class B2WorldCreator {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			new Meta(world, map, rect);;
+			new Meta(screen, rect);;
 		}
 	}
 }

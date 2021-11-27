@@ -74,10 +74,10 @@ public class PantallaJuego implements Screen{
 		// Permite hacer los debugs de nuestro box2d world
 		b2dr = new Box2DDebugRenderer();
 		
-		new B2WorldCreator(world, map);
+		new B2WorldCreator(this);
 		
 		// crear Fumiko en nuestro juego
-		fumiko = new Fumiko(world, this);
+		fumiko = new Fumiko(this);
 		
 		world.setContactListener(new WorldContactListener());
 		
@@ -121,7 +121,8 @@ public class PantallaJuego implements Screen{
 		fumiko.update(dt);
 		hud.update(dt);
 		
-		gamecam.position.x = fumiko.b2body.getPosition().x;
+		//Sigue la camara del jugador (no lo necesitamos)
+//		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
 		//actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
 		gamecam.update();
@@ -155,12 +156,24 @@ public class PantallaJuego implements Screen{
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
 	}
+	
+//	public boolean finJuego() {
+//		if(fumiko.getStateTimer())
+//	}
 
 	@Override
 	public void resize(int width, int height) {
 		//actualizar nuestro viewport game
 		gamePort.update(width, height);
 		
+	}
+	
+	public TiledMap getMap() {
+		return map;
+	}
+	
+	public World getWorld() {
+		return world;
 	}
 
 	@Override
