@@ -1,13 +1,13 @@
 
 personaje.png
-size: 684, 56
+size: 875, 36
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-fumiko
+personaje
   rotate: false
-  xy: 2, 2
-  size: 680, 52
-  orig: 680, 52
+  xy: 0, 0
+  size: 875, 36
+  orig: 875, 36
   offset: 0, 0
   index: -1

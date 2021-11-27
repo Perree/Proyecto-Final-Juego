@@ -18,12 +18,13 @@ public class Fumiko extends Sprite{
 	
 	//TODO arreglar animaciones de fumiko mirar video 11
 	
-	public enum State { FALLING, JUMPING, STANDING, RUNNING};
+	public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD};
 	public State currentState;
 	public State previousState;
 	public World world;
 	public Body b2body;
 	private Animation fumikoStand;
+	private Animation fumikoDead;
 	private Animation fumikoRun;
 	private Animation fumikoJump;
 	private float stateTimer;
@@ -32,7 +33,7 @@ public class Fumiko extends Sprite{
 	
 	
 	public Fumiko(PantallaJuego screen) {
-		super(screen.getAtlas().findRegion("fumiko"));
+		super(screen.getAtlas().findRegion("personaje"));
 		
 		// variables
 		this.world = screen.getWorld();
@@ -43,20 +44,28 @@ public class Fumiko extends Sprite{
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		
-		for (int i = 0; i < 6; i++) 
+		//animacion Correr
+		for (int i = 6; i < 11; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
 			fumikoRun = new Animation(0.1f, frames);
 			frames.clear();
 		
-		
-		for (int i = 6; i < 10; i++) 
+		//animacion Saltar
+		for (int i = 11; i < 17; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
 			fumikoJump = new Animation(0.1f, frames);
 			frames.clear();
 		
-		for (int i = 10; i < 14; i++) 
+			//animacion Parado
+		for (int i = 17; i < 20; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));	
 			fumikoStand = new Animation(0.1f, frames);
+			frames.clear();
+			
+		//animacion Morir
+		for (int i = 0; i < 6; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));	
+			fumikoDead = new Animation(0.1f, frames);
 			frames.clear();
 		
 		defineFumiko();
@@ -86,6 +95,10 @@ public class Fumiko extends Sprite{
 			
 		case FALLING:
 		case STANDING:
+			
+		case DEAD:
+			region = (TextureRegion) fumikoDead.getKeyFrame(stateTimer);
+			break;
 			
 		default:
 			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
@@ -124,7 +137,7 @@ public class Fumiko extends Sprite{
 
 	private void defineFumiko() {
 		BodyDef bdef = new BodyDef();
-		bdef.position.set(512/Main.PPM, 512/Main.PPM);
+		bdef.position.set(128/Main.PPM, 512/Main.PPM);
 		bdef.type = BodyDef.BodyType.DynamicBody;
 		b2body = world.createBody(bdef);
 		
