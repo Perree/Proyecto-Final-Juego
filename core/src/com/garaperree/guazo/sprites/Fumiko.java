@@ -16,24 +16,20 @@ import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Fumiko extends Sprite{
 	
-	//TODO arreglar animaciones de fumiko mirar video 11
-	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD};
 	public State currentState;
 	public State previousState;
 	public World world;
 	public Body b2body;
-	private Animation fumikoStand;
-	private Animation fumikoDead;
-	private Animation fumikoRun;
-	private Animation fumikoJump;
+	private Animation<?> fumikoStand;
+	private Animation<?> fumikoRun;
+	private Animation<?> fumikoJump;
 	private float stateTimer;
-	private boolean marioIsDead;
 	private boolean runningRight;
 	
 	
 	public Fumiko(PantallaJuego screen) {
-		super(screen.getAtlas().findRegion("personaje"));
+		super(screen.getAtlas().findRegion("fumiko"));
 		
 		// variables
 		this.world = screen.getWorld();
@@ -42,30 +38,25 @@ public class Fumiko extends Sprite{
 		stateTimer = 0;
 		runningRight = true;
 		
+		// metemos los frames de la animacion a un array
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		
 		//animacion Correr
-		for (int i = 6; i < 11; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
-			fumikoRun = new Animation(0.1f, frames);
+		for (int i = 0; i < 6; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));
+			fumikoRun = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
 		//animacion Saltar
-		for (int i = 11; i < 17; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));
-			fumikoJump = new Animation(0.1f, frames);
+		for (int i = 6; i < 10; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));
+			fumikoJump = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
-			//animacion Parado
-		for (int i = 17; i < 20; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));	
-			fumikoStand = new Animation(0.1f, frames);
-			frames.clear();
-			
-		//animacion Morir
-		for (int i = 0; i < 6; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 0, 52, 52));	
-			fumikoDead = new Animation(0.1f, frames);
+		//animacion Parado
+		for (int i = 10; i < 14; i++) 
+			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));	
+			fumikoStand = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
 		defineFumiko();
@@ -77,9 +68,11 @@ public class Fumiko extends Sprite{
 
 	public void update(float dt) {
 		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
+		this.setOriginCenter();
 		setRegion(getFrame(dt));
 	}
 	
+	// con este metodo obtenemos el frame exacto dependiendo lo que el jugador este haciendo
 	public TextureRegion getFrame(float dt) {
 		currentState = getState();
 		
@@ -96,15 +89,12 @@ public class Fumiko extends Sprite{
 		case FALLING:
 		case STANDING:
 			
-		case DEAD:
-			region = (TextureRegion) fumikoDead.getKeyFrame(stateTimer);
-			break;
-			
 		default:
 			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
 			break;
 		}
 		
+		// Controlar los lados del jugador 
 		if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
 			region.flip(true, false);
 			runningRight = false;
@@ -120,6 +110,7 @@ public class Fumiko extends Sprite{
 		
 	}
 	
+	// con este metodo sabemos que esta haciendo el jugador (correr, saltar, etc)
 	public State getState() {
 		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
 			return State.JUMPING;
@@ -151,6 +142,7 @@ public class Fumiko extends Sprite{
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
 		
+		// colisiones
 		EdgeShape head = new EdgeShape();
 		head.set(new Vector2(-2/ Main.PPM, 6/Main.PPM), new Vector2(2/ Main.PPM, 6/Main.PPM));
 		fdef.shape = head;
@@ -159,8 +151,8 @@ public class Fumiko extends Sprite{
 		b2body.createFixture(fdef).setUserData("head");
 	}
 	
-	public boolean isDead() {
-		return marioIsDead;
+	public void hit() {
+		System.out.println("Me dieroon!");
 	}
 	
 	public float getStateTimer() {
