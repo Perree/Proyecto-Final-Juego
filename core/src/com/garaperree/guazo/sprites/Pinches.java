@@ -16,7 +16,7 @@ public class Pinches extends ObjetosInteractivos{
 	@Override
 	public void onHeadHit() {
 		Gdx.app.log("Pinches", "Collision");
-		
+		setCategoryFilter(Main.DESTROYED_BIT);
 		
 		//sonido
 		//Main.manager.load("audio/sfx/muere.wav", Sound.class);

@@ -43,19 +43,19 @@ public class Fumiko extends Sprite{
 		
 		//animacion Correr
 		for (int i = 0; i < 6; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));
+			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));
 			fumikoRun = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
 		//animacion Saltar
 		for (int i = 6; i < 10; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));
+			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));
 			fumikoJump = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
 		//animacion Parado
 		for (int i = 10; i < 14; i++) 
-			frames.add(new TextureRegion(getTexture(), i * 48, 18, 52, 52));	
+			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));	
 			fumikoStand = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
@@ -135,20 +135,36 @@ public class Fumiko extends Sprite{
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
 		// Cuan grande es el circulo
-		shape.setRadius(6/Main.PPM);
+		shape.setRadius(12/Main.PPM);
 		fdef.filter.categoryBits = Main.FUMIKO_BIT;
 		fdef.filter.maskBits = Main.DEFAULT_BIT | Main.META_BIT | Main.PINCHES_BIT | Main.LAVA_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
 		
-		// colisiones
-		EdgeShape head = new EdgeShape();
-		head.set(new Vector2(-2/ Main.PPM, 6/Main.PPM), new Vector2(2/ Main.PPM, 6/Main.PPM));
-		fdef.shape = head;
+//		// colision derecha
+//		EdgeShape head1 = new EdgeShape();
+//		head1.set(new Vector2(11/ Main.PPM, -10/Main.PPM), new Vector2(11/ Main.PPM, 10/Main.PPM));
+//		fdef.shape = head1;
+//		fdef.isSensor = true;
+//		
+//		b2body.createFixture(fdef).setUserData("head1");
+//		
+//		// colision izquierda
+//		EdgeShape head2 = new EdgeShape();
+//		head2.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), new Vector2(-11/ Main.PPM, -10/Main.PPM));
+//		fdef.shape = head2;
+//		fdef.isSensor = true;
+//		
+//		b2body.createFixture(fdef).setUserData("head2");
+		
+		// colision abajo
+		EdgeShape abajo = new EdgeShape();
+		abajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), new Vector2(2/ Main.PPM, -12/Main.PPM));
+		fdef.shape = abajo;
 		fdef.isSensor = true;
 		
-		b2body.createFixture(fdef).setUserData("head");
+		b2body.createFixture(fdef).setUserData("abajo");
 	}
 	
 	public void hit() {

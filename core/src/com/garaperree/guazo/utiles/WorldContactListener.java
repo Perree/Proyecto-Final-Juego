@@ -17,9 +17,32 @@ public class WorldContactListener implements ContactListener {
 		Fixture fixA = contact.getFixtureA();
 		Fixture fixB = contact.getFixtureB();
 		
-		if(fixA.getUserData() == "head" || fixB.getUserData() == "head") {
-			Fixture head = fixA.getUserData() == "head" ? fixA : fixB;
-			Fixture object = head == fixA ? fixB : fixA;
+		//derecha
+		if((fixA.getUserData() == "head1" || fixB.getUserData() == "head1")) {
+			Fixture head1 = fixA.getUserData() == "head1" ? fixA : fixB;
+			Fixture object = head1 == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
+				((ObjetosInteractivos) object.getUserData()).onHeadHit();
+			}
+			
+		}
+		
+		//izquierda
+		if((fixA.getUserData() == "head2" || fixB.getUserData() == "head2")) {
+			Fixture head2 = fixA.getUserData() == "head2" ? fixA : fixB;
+			Fixture object = head2 == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
+				((ObjetosInteractivos) object.getUserData()).onHeadHit();
+			}
+			
+		}
+		
+		//abajo
+		if((fixA.getUserData() == "abajo" || fixB.getUserData() == "abajo")) {
+			Fixture abajo = fixA.getUserData() == "abajo" ? fixA : fixB;
+			Fixture object = abajo == fixA ? fixB : fixA;
 			
 			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
 				((ObjetosInteractivos) object.getUserData()).onHeadHit();
