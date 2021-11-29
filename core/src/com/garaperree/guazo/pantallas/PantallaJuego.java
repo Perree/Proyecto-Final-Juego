@@ -157,9 +157,9 @@ public class PantallaJuego implements Screen{
 		hud.stage.draw();
 	}
 	
-//	public boolean finJuego() {
-//		if(fumiko.getStateTimer())
-//	}
+	public boolean finJuego() {
+		if(fumiko.currentState == Main.)
+	}
 
 	@Override
 	public void resize(int width, int height) {

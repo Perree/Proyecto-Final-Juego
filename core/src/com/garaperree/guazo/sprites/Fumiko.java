@@ -26,6 +26,7 @@ public class Fumiko extends Sprite{
 	private Animation<?> fumikoJump;
 	private float stateTimer;
 	private boolean runningRight;
+	private boolean fumikoIsDead;
 	
 	
 	public Fumiko(PantallaJuego screen) {
@@ -142,21 +143,21 @@ public class Fumiko extends Sprite{
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
 		
-//		// colision derecha
-//		EdgeShape head1 = new EdgeShape();
-//		head1.set(new Vector2(11/ Main.PPM, -10/Main.PPM), new Vector2(11/ Main.PPM, 10/Main.PPM));
-//		fdef.shape = head1;
-//		fdef.isSensor = true;
-//		
-//		b2body.createFixture(fdef).setUserData("head1");
-//		
-//		// colision izquierda
-//		EdgeShape head2 = new EdgeShape();
-//		head2.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), new Vector2(-11/ Main.PPM, -10/Main.PPM));
-//		fdef.shape = head2;
-//		fdef.isSensor = true;
-//		
-//		b2body.createFixture(fdef).setUserData("head2");
+		// colision derecha
+		EdgeShape head1 = new EdgeShape();
+		head1.set(new Vector2(11/ Main.PPM, -10/Main.PPM), new Vector2(11/ Main.PPM, 10/Main.PPM));
+		fdef.shape = head1;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("head1");
+		
+		// colision izquierda
+		EdgeShape head2 = new EdgeShape();
+		head2.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), new Vector2(-11/ Main.PPM, -10/Main.PPM));
+		fdef.shape = head2;
+		fdef.isSensor = true;
+		
+		b2body.createFixture(fdef).setUserData("head2");
 		
 		// colision abajo
 		EdgeShape abajo = new EdgeShape();
@@ -167,8 +168,9 @@ public class Fumiko extends Sprite{
 		b2body.createFixture(fdef).setUserData("abajo");
 	}
 	
-	public void hit() {
+	public boolean isDeadFumiko() {
 		System.out.println("Me dieroon!");
+		return fumikoIsDead;
 	}
 	
 	public float getStateTimer() {
