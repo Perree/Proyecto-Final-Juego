@@ -1,6 +1,7 @@
 package com.garaperree.guazo.sprites;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -155,14 +156,10 @@ public class Fumiko extends Sprite{
 	}
 	
 	public void hit(){
-        die();
-    }
-
-	private void die() {
 		if (!isDeadFumiko()) {
-
+			System.out.println("Puto!");
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//            Main.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+//          Main.manager.get("audio/sounds/muere.wav", Sound.class).play();
             fumikoIsDead = true;
             Filter filter = new Filter();
             filter.maskBits = Main.NOTHING_BIT;
@@ -172,7 +169,7 @@ public class Fumiko extends Sprite{
             }
             b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
         }
-	}
+    }
 	
 	public void jump(){
         if ( currentState != State.JUMPING ) {

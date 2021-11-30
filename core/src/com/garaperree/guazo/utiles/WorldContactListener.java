@@ -6,7 +6,10 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.garaperree.guazo.Main;
+import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.ObjetosInteractivos;
+import com.garaperree.guazo.sprites.Pinches;
 
 public class WorldContactListener implements ContactListener {
 
@@ -21,53 +24,13 @@ public class WorldContactListener implements ContactListener {
 		
 		
 //		switch (cDef){
-//        case Main.MARIO_HEAD_BIT | MarioBros.COIN_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.MARIO_HEAD_BIT)
-//                ((InteractiveTileObject) fixB.getUserData()).onHeadHit((Mario) fixA.getUserData());
-//            else
-//                ((InteractiveTileObject) fixA.getUserData()).onHeadHit((Mario) fixB.getUserData());
-//            break;
-//        case MarioBros.ENEMY_HEAD_BIT | MarioBros.MARIO_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.ENEMY_HEAD_BIT)
-//                ((Enemy)fixA.getUserData()).hitOnHead((Mario) fixB.getUserData());
-//            else
-//                ((Enemy)fixB.getUserData()).hitOnHead((Mario) fixA.getUserData());
-//            break;
-//        case MarioBros.ENEMY_BIT | MarioBros.OBJECT_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.ENEMY_BIT)
-//                ((Enemy)fixA.getUserData()).reverseVelocity(true, false);
-//            else
-//                ((Enemy)fixB.getUserData()).reverseVelocity(true, false);
-//            break;
-//        case MarioBros.MARIO_BIT | MarioBros.ENEMY_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.MARIO_BIT)
-//                ((Mario) fixA.getUserData()).hit((Enemy)fixB.getUserData());
-//            else
-//                ((Mario) fixB.getUserData()).hit((Enemy)fixA.getUserData());
-//            break;
-//        case MarioBros.ENEMY_BIT | MarioBros.ENEMY_BIT:
-//            ((Enemy)fixA.getUserData()).hitByEnemy((Enemy)fixB.getUserData());
-//            ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
-//            break;
-//        case MarioBros.ITEM_BIT | MarioBros.OBJECT_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.ITEM_BIT)
-//                ((Item)fixA.getUserData()).reverseVelocity(true, false);
-//            else
-//                ((Item)fixB.getUserData()).reverseVelocity(true, false);
-//            break;
-//        case MarioBros.ITEM_BIT | MarioBros.MARIO_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.ITEM_BIT)
-//                ((Item)fixA.getUserData()).use((Mario) fixB.getUserData());
-//            else
-//                ((Item)fixB.getUserData()).use((Mario) fixA.getUserData());
-//            break;
-//        case MarioBros.FIREBALL_BIT | MarioBros.OBJECT_BIT:
-//            if(fixA.getFilterData().categoryBits == MarioBros.FIREBALL_BIT)
-//                ((FireBall)fixA.getUserData()).setToDestroy();
-//            else
-//                ((FireBall)fixB.getUserData()).setToDestroy();
-//            break;
-//    }
+//	        case Main.FUMIKO_BIT | Main.PINCHES_BIT:
+//	            if(fixA.getFilterData().categoryBits == Main.FUMIKO_BIT)
+//	                ((Fumiko)fixA.getUserData()).hit();
+//	            else
+//	                ((Fumiko)fixB.getUserData()).hit();
+//	            break;
+//		}
 		
 			//derecha
 			if((fixA.getUserData() == "head1" || fixB.getUserData() == "head1")) {
@@ -75,7 +38,7 @@ public class WorldContactListener implements ContactListener {
 				Fixture object = head1 == fixA ? fixB : fixA;
 				
 				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).onHeadHit();
+					((Fumiko) object.getUserData()).hit();
 				}
 				
 			}
@@ -97,7 +60,7 @@ public class WorldContactListener implements ContactListener {
 				Fixture object = abajo == fixA ? fixB : fixA;
 				
 				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).onHeadHit();
+					((Fumiko) object.getUserData()).hit();
 				}
 				
 			}

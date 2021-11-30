@@ -38,7 +38,7 @@ public class Hud implements Disposable{
 		//TODO como hacer para que el hud se quede quieto
 		
 		// Variables
-		worldTimer = 2;
+		worldTimer = 50;
 		timeCount = 0;
 		nivel = 1;
 

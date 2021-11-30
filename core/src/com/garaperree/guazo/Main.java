@@ -3,6 +3,7 @@ package com.garaperree.guazo;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
