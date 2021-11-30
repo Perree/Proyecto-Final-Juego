@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.pantallas.FinDelJuego;
+import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Hud implements Disposable{
 	
@@ -36,7 +38,7 @@ public class Hud implements Disposable{
 		//TODO como hacer para que el hud se quede quieto
 		
 		// Variables
-		worldTimer = 300;
+		worldTimer = 2;
 		timeCount = 0;
 		nivel = 1;
 
@@ -73,11 +75,11 @@ public class Hud implements Disposable{
 		timeCount += dt;
 		if(timeCount>= 1) {
 			worldTimer--;
-			countdownLabel.setText(String.format("%03d",worldTimer));
+			countdownLabel.setText(String.format("%02d",worldTimer));
 			timeCount = 0;
 		}
 	}
-	
+
 	public static void pasaNivel(int value){
 		//TODO agregar este metodo al momento de que el jugar llegue a la meta y cambie de mapa
 
@@ -90,6 +92,10 @@ public class Hud implements Disposable{
 		// TODO Auto-generated method stub
 		stage.dispose();
 		
+	}
+
+	public Integer getWorldTimer() {
+		return worldTimer;
 	}
 	
 }

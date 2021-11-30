@@ -35,9 +35,10 @@ public class FinDelJuego implements Screen{
 		table.setFillParent(true);
 		
 		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-		Label juegarDeNuevoLabel = new Label("Jugar de vuelta", font);
+		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
 		
 		table.add(finJuegoLabel).expandX();
+		table.row();
 		table.row();
 		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
 		

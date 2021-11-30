@@ -167,9 +167,13 @@ public class PantallaJuego implements Screen{
 	}
 	
 	public boolean finJuego() {
-		if(fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 3) {
-			return true;
-		}
+		//TODO falta finalizar el juego cuando fumiko se muere
+		
+//		if(fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 3) {
+			if(hud.getWorldTimer()==0) {
+				return true;
+			}
+//		}
 		return false;
 	}
 
