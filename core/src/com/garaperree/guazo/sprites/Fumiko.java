@@ -1,5 +1,6 @@
 package com.garaperree.guazo.sprites;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,25 +9,38 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.pantallas.FinDelJuego;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Fumiko extends Sprite{
 	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD};
+	
+	private TextureRegion fumikoDead;
+	
 	public State currentState;
 	public State previousState;
+	
 	public World world;
 	public Body b2body;
+	
 	private Animation<?> fumikoStand;
 	private Animation<?> fumikoRun;
 	private Animation<?> fumikoJump;
+	
 	private float stateTimer;
+	
 	private boolean runningRight;
 	private boolean fumikoIsDead;
+	private boolean caca = false;
+	
+	private FinDelJuego screen;
 	
 	
 	public Fumiko(PantallaJuego screen) {
@@ -59,8 +73,18 @@ public class Fumiko extends Sprite{
 			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));	
 			fumikoStand = new Animation<Object>(0.1f, frames);
 			frames.clear();
+			
+		//muere Fumiko
+			fumikoDead = new TextureRegion(screen.getAtlas().findRegion("fumiko"), 96, 0, 52, 52);
+			caca = true;
+			if(caca) {
+				System.out.println("Funca");
+			}
 		
+		// definimos a fumiko en box2d
 		defineFumiko();
+		
+		//seteamos los valores de posicion para fumiko
 		setBounds(0, 0, 52 / Main.PPM, 52 / Main.PPM);
 //		setRegion(fumikoStand);
 	}
@@ -79,6 +103,9 @@ public class Fumiko extends Sprite{
 		
 		TextureRegion region;
 		switch(currentState) {
+		case DEAD:
+            region = fumikoDead;
+            break;
 		case JUMPING:
 			region = (TextureRegion) fumikoJump.getKeyFrame(stateTimer);
 			break;
@@ -111,9 +138,11 @@ public class Fumiko extends Sprite{
 		
 	}
 	
-	// con este metodo sabemos que esta haciendo el jugador (correr, saltar, etc)
+	// Con este metodo sabemos que esta haciendo el jugador (correr, saltar, etc)
 	public State getState() {
-		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+		if(fumikoIsDead)
+	        return State.DEAD;
+		else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
 			return State.JUMPING;
 		
 		else if(b2body.getLinearVelocity().y < 0) 
@@ -121,11 +150,36 @@ public class Fumiko extends Sprite{
 		
 		else if(b2body.getLinearVelocity().x != 0)
 			return State.RUNNING;
-		
 		else
 			return State.STANDING;
 	}
+	
+	public void hit(){
+        die();
+    }
 
+	private void die() {
+		if (!isDeadFumiko()) {
+
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//            Main.manager.get("audio/sounds/mariodie.wav", Sound.class).play();
+            fumikoIsDead = true;
+            Filter filter = new Filter();
+            filter.maskBits = Main.NOTHING_BIT;
+
+            for (Fixture fixture : b2body.getFixtureList()) {
+                fixture.setFilterData(filter);
+            }
+            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+        }
+	}
+	
+	public void jump(){
+        if ( currentState != State.JUMPING ) {
+            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+            currentState = State.JUMPING;
+        }
+    }
 
 	private void defineFumiko() {
 		BodyDef bdef = new BodyDef();

@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
+import com.garaperree.guazo.sprites.Fumiko.State;
 import com.garaperree.guazo.utiles.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
@@ -101,14 +102,17 @@ public class PantallaJuego implements Screen{
 	private void handleInput(float dt) {
 		
 		// controlar a nuestro jugador mediante impulsos
-		if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-			fumiko.b2body.applyLinearImpulse(new Vector2(0, 4f), fumiko.b2body.getWorldCenter(), true);
+		if(fumiko.currentState != Fumiko.State.DEAD) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+				fumiko.jump();
+			
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && fumiko.b2body.getLinearVelocity().x <=2)
+				fumiko.b2body.applyLinearImpulse(new Vector2(0.1f, 0),fumiko.b2body.getWorldCenter(), true);
+			
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && fumiko.b2body.getLinearVelocity().x >=-2)
+				fumiko.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),fumiko.b2body.getWorldCenter(), true);
+		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && fumiko.b2body.getLinearVelocity().x <=2)
-			fumiko.b2body.applyLinearImpulse(new Vector2(0.1f, 0),fumiko.b2body.getWorldCenter(), true);
-		
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && fumiko.b2body.getLinearVelocity().x >=-2)
-			fumiko.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),fumiko.b2body.getWorldCenter(), true);
 	}
 	
 	public void update(float dt) {
@@ -155,10 +159,18 @@ public class PantallaJuego implements Screen{
 		// setea el batch para dibujar el hud
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
+		
+		if(finJuego()) {
+			game.setScreen(new FinDelJuego(game));
+			dispose();
+		}
 	}
 	
 	public boolean finJuego() {
-		if(fumiko.currentState == Main.)
+		if(fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 3) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
