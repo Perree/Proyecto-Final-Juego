@@ -1,4 +1,4 @@
-package com.garaperree.guazo.sprites;
+package com.garaperree.guazo.utiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;

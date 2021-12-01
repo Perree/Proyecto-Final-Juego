@@ -8,8 +8,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.sprites.ObjetosInteractivos;
-import com.garaperree.guazo.sprites.Pinches;
+import com.garaperree.guazo.sprites.Objetos.ObjetosInteractivos;
+import com.garaperree.guazo.sprites.Objetos.Pinches;
 
 public class WorldContactListener implements ContactListener {
 
@@ -38,7 +38,7 @@ public class WorldContactListener implements ContactListener {
 				Fixture object = head1 == fixA ? fixB : fixA;
 				
 				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((Fumiko) object.getUserData()).hit();
+					((ObjetosInteractivos) object.getUserData()).contactColision();
 				}
 				
 			}
@@ -49,7 +49,7 @@ public class WorldContactListener implements ContactListener {
 				Fixture object = head2 == fixA ? fixB : fixA;
 				
 				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).onHeadHit();
+					((ObjetosInteractivos) object.getUserData()).contactColision();
 				}
 				
 			}
@@ -60,7 +60,7 @@ public class WorldContactListener implements ContactListener {
 				Fixture object = abajo == fixA ? fixB : fixA;
 				
 				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((Fumiko) object.getUserData()).hit();
+					((ObjetosInteractivos) object.getUserData()).contactColision();
 				}
 				
 			}

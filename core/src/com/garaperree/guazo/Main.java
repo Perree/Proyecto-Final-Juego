@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Main extends Game {
+
 	// Dimensiones pixeles por metros
 	public static final int V_WIDTH = 1024;
 	public static final int V_HEIGHT = 768;
@@ -49,5 +50,13 @@ public class Main extends Game {
 		// delegar el metodo de render para la pantalla del juego
 		super.render(); 
 
+	}
+	
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		super.dispose();
+		manager.dispose();
+		batch.dispose();
 	}
 }

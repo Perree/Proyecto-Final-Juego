@@ -3,9 +3,9 @@ package com.garaperree.guazo.pantallas;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.Main;
-import com.garaperree.guazo.sprites.Imagen;
-import com.garaperree.guazo.sprites.Render;
+import com.garaperree.guazo.utiles.Imagen;
 import com.garaperree.guazo.utiles.Recursos;
+import com.garaperree.guazo.utiles.Render;
 
 public class PantallaCarga implements Screen{
 	

@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.sprites.Fumiko.State;
+import com.garaperree.guazo.sprites.Objetos.Meta;
 import com.garaperree.guazo.utiles.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
@@ -48,7 +48,7 @@ public class PantallaJuego implements Screen{
 	
 	public PantallaJuego(Main game) {
 		
-		atlas = new TextureAtlas("personaje.atlas");
+		atlas = new TextureAtlas("fumiko/personaje.atlas");
 		
 		this.game = game;
 		
@@ -63,7 +63,7 @@ public class PantallaJuego implements Screen{
 		
 		//cargando el mapa
 		maploader = new TmxMapLoader();
-		map = maploader.load("nivel1.tmx");
+		map = maploader.load("mapas/nivel1/nivel1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);
 		
 		// inicializando la camara del juego para poder estar centrado al comienzo
@@ -167,13 +167,10 @@ public class PantallaJuego implements Screen{
 	}
 	
 	public boolean finJuego() {
-		//TODO falta finalizar el juego cuando fumiko se muere
-		
-//		if(fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 3) {
-			if(hud.getWorldTimer()==0) {
+		//TODO falta finalizar el juego cuando fumiko se muere y llegue a la meta
+			if(hud.getWorldTimer()==0 || fumiko.currentState == Fumiko.State.DEAD) {
 				return true;
 			}
-//		}
 		return false;
 	}
 
