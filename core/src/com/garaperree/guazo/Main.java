@@ -36,10 +36,10 @@ public class Main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		manager = new AssetManager();
-		manager.load("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		manager.load("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
 //		manager.load("audio/sfx/muere.wav", Sound.class);
 //		manager.load("audio/sfx/next_level.wav", Sound.class);
-		manager.finishLoading();
+//		manager.finishLoading();
 		
 //		this.setScreen(new PantallaCarga());
 		setScreen(new PantallaJuego(this));
@@ -54,7 +54,6 @@ public class Main extends Game {
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		super.dispose();
 		manager.dispose();
 		batch.dispose();
