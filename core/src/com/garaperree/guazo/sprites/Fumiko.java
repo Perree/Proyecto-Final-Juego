@@ -93,6 +93,11 @@ public class Fumiko extends Sprite{
 
 
 	public void update(float dt) {
+		
+		if (screen.getHud().isTimeUp() && !isDeadFumiko()) {
+			die();
+		}
+		
 		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
 		this.setOriginCenter();
 		setRegion(getFrame(dt));
