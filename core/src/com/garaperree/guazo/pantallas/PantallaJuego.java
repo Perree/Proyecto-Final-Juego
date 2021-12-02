@@ -230,6 +230,10 @@ public class PantallaJuego implements Screen{
 		hud.dispose();
 	}
 	
+	public Hud getHud() {
+		return hud;
+	}
+	
 	
 }
 

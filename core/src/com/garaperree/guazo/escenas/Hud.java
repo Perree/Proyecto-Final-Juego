@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
-import com.garaperree.guazo.pantallas.FinDelJuego;
-import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Hud implements Disposable{
 	
@@ -23,6 +21,7 @@ public class Hud implements Disposable{
 	
 	// Marcadores y tiempos
 	private Integer worldTimer;
+	private boolean timeUp;
 	private static Integer nivel;
 	private float timeCount;
 	
@@ -73,16 +72,20 @@ public class Hud implements Disposable{
 	public void update(float dt) {
 		// Disminuyendo el tiempo
 		timeCount += dt;
-		if(timeCount>= 1) {
-			worldTimer--;
-			countdownLabel.setText(String.format("%02d",worldTimer));
-			timeCount = 0;
-		}
+        if(timeCount >= 1){
+            if (worldTimer > 0) {
+                worldTimer--;
+            } else {
+                timeUp = true;
+            }
+            countdownLabel.setText(String.format("%02d", worldTimer));
+            timeCount = 0;
+        }
 	}
 
 	public static void pasaNivel(int value){
 		//TODO agregar este metodo al momento de que el jugar llegue a la meta y cambie de mapa
-
+		
 		nivel += value;
 		nivelLabel.setText(String.format("%02d",nivel));
 	}
@@ -90,8 +93,11 @@ public class Hud implements Disposable{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		stage.dispose();
-		
+		stage.dispose();	
+	}
+	
+	public boolean isTimeUp() { 
+		return timeUp;
 	}
 
 	public Integer getWorldTimer() {

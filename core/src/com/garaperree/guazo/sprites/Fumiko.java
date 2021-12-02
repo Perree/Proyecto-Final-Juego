@@ -1,7 +1,6 @@
 package com.garaperree.guazo.sprites;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.garaperree.guazo.Main;
-import com.garaperree.guazo.pantallas.FinDelJuego;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Fumiko extends Sprite{
@@ -41,10 +39,9 @@ public class Fumiko extends Sprite{
 	
 	private boolean runningRight;
 	private boolean fumikoIsDead;
-	private boolean caca = false;
-	
-	private FinDelJuego screen;
-	
+//	private boolean caca = false;
+
+	private PantallaJuego screen;
 	
 	public Fumiko(PantallaJuego screen) {
 		super(screen.getAtlas().findRegion("fumiko"));
@@ -77,12 +74,12 @@ public class Fumiko extends Sprite{
 			fumikoStand = new Animation<Object>(0.1f, frames);
 			frames.clear();
 			
-		//muere Fumiko
-			fumikoDead = new TextureRegion(screen.getAtlas().findRegion("fumiko"), 96, 0, 52, 52);
-			caca = true;
-			if(caca) {
-				System.out.println("Funca");
-			}
+//		//muere Fumiko
+//			fumikoDead = new TextureRegion(screen.getAtlas().findRegion("fumiko"), 96, 0, 52, 52);
+//			caca = true;
+//			if(caca) {
+//				System.out.println("Funca");
+//			}
 		
 		// definimos a fumiko en box2d
 		defineFumiko();
@@ -162,7 +159,7 @@ public class Fumiko extends Sprite{
 			return State.STANDING;
 	}
 	
-	public void hit(){
+	public void die(){
 		if (!isDeadFumiko()) {
 			System.out.println("Puto!");
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
@@ -179,7 +176,7 @@ public class Fumiko extends Sprite{
     }
 	
 	public void jump(){
-        if ( currentState != State.JUMPING ) {
+        if (currentState != State.JUMPING) {
             b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
             currentState = State.JUMPING;
         }
@@ -193,6 +190,7 @@ public class Fumiko extends Sprite{
 		
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
+		
 		// Cuan grande es el circulo
 		shape.setRadius(12/Main.PPM);
 		fdef.filter.categoryBits = Main.FUMIKO_BIT;
@@ -206,7 +204,6 @@ public class Fumiko extends Sprite{
 		head1.set(new Vector2(11/ Main.PPM, -10/Main.PPM), new Vector2(11/ Main.PPM, 10/Main.PPM));
 		fdef.shape = head1;
 		fdef.isSensor = true;
-		
 		b2body.createFixture(fdef).setUserData("head1");
 		
 		// colision izquierda
@@ -214,7 +211,6 @@ public class Fumiko extends Sprite{
 		head2.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), new Vector2(-11/ Main.PPM, -10/Main.PPM));
 		fdef.shape = head2;
 		fdef.isSensor = true;
-		
 		b2body.createFixture(fdef).setUserData("head2");
 		
 		// colision abajo
@@ -222,7 +218,6 @@ public class Fumiko extends Sprite{
 		abajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), new Vector2(2/ Main.PPM, -12/Main.PPM));
 		fdef.shape = abajo;
 		fdef.isSensor = true;
-		
 		b2body.createFixture(fdef).setUserData("abajo");
 	}
 	
