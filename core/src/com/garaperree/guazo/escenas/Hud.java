@@ -21,7 +21,6 @@ public class Hud implements Disposable{
 	
 	// Marcadores y tiempos
 	private Integer worldTimer;
-	private boolean timeUp;
 	private static Integer nivel;
 	private float timeCount;
 	
@@ -75,8 +74,6 @@ public class Hud implements Disposable{
         if(timeCount >= 1){
             if (worldTimer > 0) {
                 worldTimer--;
-            } else {
-                timeUp = true;
             }
             countdownLabel.setText(String.format("%02d", worldTimer));
             timeCount = 0;
@@ -94,10 +91,6 @@ public class Hud implements Disposable{
 	public void dispose() {
 		// TODO Auto-generated method stub
 		stage.dispose();	
-	}
-	
-	public boolean isTimeUp() { 
-		return timeUp;
 	}
 
 	public Integer getWorldTimer() {

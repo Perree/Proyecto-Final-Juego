@@ -47,34 +47,14 @@ public class B2WorldCreator {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			fdef.filter.categoryBits = Main.OBJECT_BIT;
-			body.createFixture(fdef);
-			
-//			new Pinches(screen, rect);
+			new Pinches(screen, rect);
 		}
 		// Crear lava
 		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			fdef.filter.categoryBits = Main.OBJECT_BIT;
-			body.createFixture(fdef);
-			
-//			new Lava(screen, rect);
+			new Lava(screen, rect);
 		}
 		
 		// Crear meta
@@ -82,17 +62,7 @@ public class B2WorldCreator {
 			
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth()/2)/Main.PPM, (rect.getY() + rect.getHeight()/2)/Main.PPM);
-			
-			body = world.createBody(bdef);
-			
-			shape.setAsBox(rect.getWidth()/2/Main.PPM, rect.getHeight()/2/Main.PPM);
-			fdef.shape = shape;
-			fdef.filter.categoryBits = Main.OBJECT_BIT;
-			body.createFixture(fdef);
-			
-//			new Meta(screen, rect);
+			new Meta(screen, rect);
 		}
 	}
 }

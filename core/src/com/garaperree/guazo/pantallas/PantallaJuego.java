@@ -125,14 +125,6 @@ public class PantallaJuego implements Screen{
 		fumiko.update(dt);
 		hud.update(dt);
 		
-		if (fumiko.getY() < 0) {
-			fumiko.currentState = Fumiko.State.DEAD;
-		}
-		
-		if (fumiko.getX() > 512.88f) {
-			fumiko.llegoSalida();
-		}
-		
 		//Sigue la camara del jugador (no lo necesitamos)
 //		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
@@ -168,24 +160,16 @@ public class PantallaJuego implements Screen{
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
 		
-		if(finJuego()) {
-			game.setScreen(new FinDelJuego(game));
-			dispose();
-		}
-		
-		if(fumiko.isPuedeSalir()) {
-			game.setScreen(new FinDelJuego(game));
-			dispose();
+		// si el tiempo se acaba, se termina el juego
+		if(hud.getWorldTimer()==0) {
+			finishing();
 		}
 
 	}
 	
-	public boolean finJuego() {
-		//TODO falta finalizar el juego cuando fumiko se muere y llegue a la meta
-			if(hud.getWorldTimer()==0 || fumiko.currentState == Fumiko.State.DEAD) {
-				return true;
-			}
-		return false;
+	public void finishing() {
+		game.setScreen(new FinDelJuego(game));
+		dispose();
 	}
 
 	@Override

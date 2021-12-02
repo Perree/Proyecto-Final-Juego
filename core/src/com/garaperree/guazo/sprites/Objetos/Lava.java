@@ -1,9 +1,7 @@
 package com.garaperree.guazo.sprites.Objetos;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 

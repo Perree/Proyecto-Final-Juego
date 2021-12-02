@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.Objetos.ObjetosInteractivos;
-import com.garaperree.guazo.sprites.Objetos.Pinches;
 
 public class WorldContactListener implements ContactListener {
 
@@ -22,49 +21,47 @@ public class WorldContactListener implements ContactListener {
 		
 		int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 		
-		
-//		switch (cDef){
-//	        case Main.FUMIKO_BIT | Main.PINCHES_BIT:
-//	            if(fixA.getFilterData().categoryBits == Main.FUMIKO_BIT)
-//	                ((Fumiko)fixA.getUserData()).hit();
-//	            else
-//	                ((Fumiko)fixB.getUserData()).hit();
-//	            break;
-//		}
-		
-			//derecha
-			if((fixA.getUserData() == "head1" || fixB.getUserData() == "head1")) {
-				Fixture head1 = fixA.getUserData() == "head1" ? fixA : fixB;
-				Fixture object = head1 == fixA ? fixB : fixA;
-				
-				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).contactColision();
-				}
-				
+		//derecha
+		if((fixA.getUserData() == "derecha" || fixB.getUserData() == "derecha")) {
+			Fixture derecha = fixA.getUserData() == "derecha" ? fixA : fixB;
+			Fixture object = derecha == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
+				((ObjetosInteractivos) object.getUserData()).contactColision();
 			}
 			
-			//izquierda
-			if((fixA.getUserData() == "head2" || fixB.getUserData() == "head2")) {
-				Fixture head2 = fixA.getUserData() == "head2" ? fixA : fixB;
-				Fixture object = head2 == fixA ? fixB : fixA;
-				
-				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).contactColision();
-				}
-				
+		}
+		
+		//izquierda
+		if((fixA.getUserData() == "izquierda" || fixB.getUserData() == "izquierda")) {
+			Fixture izquierda = fixA.getUserData() == "izquierda" ? fixA : fixB;
+			Fixture object = izquierda == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
+				((ObjetosInteractivos) object.getUserData()).contactColision();
 			}
 			
-			//abajo
-			if((fixA.getUserData() == "abajo" || fixB.getUserData() == "abajo")) {
-				Fixture abajo = fixA.getUserData() == "abajo" ? fixA : fixB;
-				Fixture object = abajo == fixA ? fixB : fixA;
-				
-				if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-					((ObjetosInteractivos) object.getUserData()).contactColision();
-				}
-				
-			}
+		}
 		
+		//porDeBajo
+		if((fixA.getUserData() == "porDeBajo" || fixB.getUserData() == "porDeBajo")) {
+			Fixture porDeBajo = fixA.getUserData() == "porDeBajo" ? fixA : fixB;
+			Fixture object = porDeBajo == fixA ? fixB : fixA;
+			
+			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
+				((ObjetosInteractivos) object.getUserData()).contactColision();
+			}
+			
+		}
+		
+		switch (cDef){
+	        case Main.FUMIKO_BIT | Main.META_BIT:
+	            if(fixA.getFilterData().categoryBits == Main.FUMIKO_BIT)
+	                ((Fumiko)fixA.getUserData()).termino();
+	            else
+	                ((Fumiko)fixB.getUserData()).termino();
+	            break;
+		}
 	}
 
 	@Override
@@ -74,13 +71,11 @@ public class WorldContactListener implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
 
 	}
 
