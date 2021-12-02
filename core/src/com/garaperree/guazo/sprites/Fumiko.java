@@ -23,6 +23,8 @@ public class Fumiko extends Sprite{
 	
 	public enum State { FALLING, JUMPING, STANDING, RUNNING, DEAD};
 	
+	public boolean fin = false;
+	
 	private TextureRegion fumikoDead;
 	
 	public State currentState;
@@ -224,8 +226,16 @@ public class Fumiko extends Sprite{
 		return fumikoIsDead;
 	}
 	
+	public void llegoSalida() {
+		fin = true;
+	}
+	
 	public float getStateTimer() {
 		return stateTimer;
+	}
+	
+	public Boolean isPuedeSalir() {
+		return fin;
 	}
 
 }

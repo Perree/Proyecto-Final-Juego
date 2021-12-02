@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.sprites.Objetos.Meta;
 import com.garaperree.guazo.utiles.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
@@ -84,6 +83,7 @@ public class PantallaJuego implements Screen{
 		
 		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
 		music.setLooping(true);
+		music.setVolume(0.3f);
 		music.play();
 		
 	}
@@ -125,6 +125,14 @@ public class PantallaJuego implements Screen{
 		fumiko.update(dt);
 		hud.update(dt);
 		
+		if (fumiko.getY() < 0) {
+			fumiko.currentState = Fumiko.State.DEAD;
+		}
+		
+		if (fumiko.getX() > 512.88f) {
+			fumiko.llegoSalida();
+		}
+		
 		//Sigue la camara del jugador (no lo necesitamos)
 //		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
@@ -164,6 +172,12 @@ public class PantallaJuego implements Screen{
 			game.setScreen(new FinDelJuego(game));
 			dispose();
 		}
+		
+		if(fumiko.isPuedeSalir()) {
+			game.setScreen(new FinDelJuego(game));
+			dispose();
+		}
+
 	}
 	
 	public boolean finJuego() {
