@@ -44,25 +44,16 @@ public class B2WorldCreator {
 		
 		// Crear los pinches
 		for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			new Pinches(screen, rect);
+			new Pinches(screen, object);
 		}
 		// Crear lava
 		for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			new Lava(screen, rect);
+			new Lava(screen, object);
 		}
 		
 		// Crear meta
 		for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
-			
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-			
-			new Meta(screen, rect);
+			new Meta(screen, object);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.garaperree.guazo.sprites.Objetos;
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
@@ -25,11 +26,12 @@ public abstract class ObjetosInteractivos {
 	protected MapObject object;
 	
 	
-	public ObjetosInteractivos(PantallaJuego screen, Rectangle bounds) {
+	public ObjetosInteractivos(PantallaJuego screen, MapObject object) {
+		this.object = object;
         this.screen = screen;
 		this.world = screen.getWorld();
 		this.map = screen.getMap();
-		this.bounds = bounds;
+		this.bounds = ((RectangleMapObject) object).getRectangle();
 		
 		
 		

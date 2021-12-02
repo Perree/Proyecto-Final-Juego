@@ -1,14 +1,14 @@
 package com.garaperree.guazo.sprites.Objetos;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.maps.MapObject;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
 public class Lava extends ObjetosInteractivos {
 
-	public Lava(PantallaJuego screen, Rectangle bounds) {
-		super(screen, bounds);
+	public Lava(PantallaJuego screen, MapObject object) {
+		super(screen, object);
 		fixture.setUserData(this);
 		setCategoryFilter(Main.LAVA_BIT);
 	}
