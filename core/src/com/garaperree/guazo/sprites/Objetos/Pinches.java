@@ -7,12 +7,6 @@ import com.garaperree.guazo.pantallas.PantallaJuego;
 import com.garaperree.guazo.sprites.Fumiko;
 
 public class Pinches extends ObjetosInteractivos{
-	
-	private boolean x=false;
-
-	public boolean getX() {
-		return x;
-	}
 
 	public Pinches(PantallaJuego screen, MapObject object) {
 		super(screen, object);
@@ -24,7 +18,6 @@ public class Pinches extends ObjetosInteractivos{
 	public void contactColision(Fumiko fumiko) {
 		Gdx.app.log("Pinches", "Collision");
 		setCategoryFilter(Main.DESTROYED_BIT);
-		x=true;
 		
 		//sonido
 		//Main.manager.load("audio/sfx/muere.wav", Sound.class);

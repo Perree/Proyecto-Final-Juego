@@ -33,6 +33,7 @@ public class Fumiko extends Sprite{
 	private float stateTimer;
 	
 	private boolean runningRight;
+	private boolean fumikoIsDead;
 	
 	public Fumiko(PantallaJuego screen) {
 		super(screen.getAtlas().findRegion("fumiko"));
@@ -121,6 +122,9 @@ public class Fumiko extends Sprite{
 	
 	// Con este metodo sabemos que esta haciendo el jugador (correr, saltar, etc)
 	public State getState() {
+		if(fumikoIsDead) 
+			return State.DEAD;
+		
 		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
 			return State.JUMPING;
 		
@@ -195,5 +199,17 @@ public class Fumiko extends Sprite{
 	
 	public float getStateTimer() {
 		return stateTimer;
+	}
+	
+	public void llegoSalida() {
+		fin = true;
+	}
+	
+	public Boolean isPuedeSalir() {
+		return fin;
+	}
+	
+	public boolean isDead() {
+		return fumikoIsDead;
 	}
 }

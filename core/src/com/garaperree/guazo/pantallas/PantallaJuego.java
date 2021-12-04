@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.sprites.Objetos.Pinches;
 import com.garaperree.guazo.utiles.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
@@ -43,8 +42,6 @@ public class PantallaJuego implements Screen{
 	
 	//Referenciar a nuestro personaje principal (sprites)
 	private Fumiko fumiko;
-	
-	private Pinches pinches;
 	
 	private Music music;
 	
@@ -128,6 +125,22 @@ public class PantallaJuego implements Screen{
 		fumiko.update(dt);
 		hud.update(dt);
 		
+		//Cuando el personaje se cae en la lava
+		if (fumiko.getY() < 0) {
+			fumiko.currentState = Fumiko.State.DEAD;
+		}
+		
+		//usamos la ubicacion del personaje para poder determinar la meta
+		if ((fumiko.getX() <= 1.649973 && fumiko.getY() <= 1.4649998)) {
+			fumiko.llegoSalida();
+			System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
+		}
+		//X: 1.5608116Y: 1.4649998
+		//X: 1.649973Y: 1.4649998
+		//X: 1.3461664Y: 1.465
+
+
+		
 		//Sigue la camara del jugador (no lo necesitamos)
 //		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
@@ -168,8 +181,13 @@ public class PantallaJuego implements Screen{
 			finishing();
 		}
 		
-		if(pinches.getX()) {
-			System.out.println("sos putoooooo");
+		// Llego a la meta GANO!
+		if(fumiko.isPuedeSalir()) {
+			finishing();
+		}
+		
+		//El personaje perdio
+		if(FinJuego()) {
 			finishing();
 		}
 
@@ -178,6 +196,14 @@ public class PantallaJuego implements Screen{
 	public void finishing() {
 		game.setScreen(new FinDelJuego(game));
 		dispose();
+	}
+	
+	// Se corrobora que si el estado del jugador esta muerto y el tiempo
+	public boolean FinJuego() {
+		if (fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 1) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
