@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
+import com.garaperree.guazo.sprites.Objetos.Pinches;
 import com.garaperree.guazo.utiles.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
@@ -42,6 +43,8 @@ public class PantallaJuego implements Screen{
 	
 	//Referenciar a nuestro personaje principal (sprites)
 	private Fumiko fumiko;
+	
+	private Pinches pinches;
 	
 	private Music music;
 	
@@ -162,6 +165,11 @@ public class PantallaJuego implements Screen{
 		
 		// si el tiempo se acaba, se termina el juego
 		if(hud.getWorldTimer()==0) {
+			finishing();
+		}
+		
+		if(pinches.getX()) {
+			System.out.println("sos putoooooo");
 			finishing();
 		}
 

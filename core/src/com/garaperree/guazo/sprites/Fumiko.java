@@ -20,8 +20,6 @@ public class Fumiko extends Sprite{
 	
 	public boolean fin = false;
 	
-	private TextureRegion fumikoDead;
-	
 	public State currentState;
 	public State previousState;
 	
@@ -35,8 +33,6 @@ public class Fumiko extends Sprite{
 	private float stateTimer;
 	
 	private boolean runningRight;
-	
-	private PantallaJuego pantalla;
 	
 	public Fumiko(PantallaJuego screen) {
 		super(screen.getAtlas().findRegion("fumiko"));
@@ -166,40 +162,38 @@ public class Fumiko extends Sprite{
 				Main.OBJECT_BIT;
 		
 		fdef.shape = shape;
-		b2body.createFixture(fdef);
+		b2body.createFixture(fdef).setUserData(this);
 		
 		// colision derecha
 		EdgeShape derecha = new EdgeShape();
 		derecha.set(new Vector2(11/ Main.PPM, -10/Main.PPM), 
 				new Vector2(11/ Main.PPM, 10/Main.PPM));
+		fdef.filter.categoryBits = Main.DERECHA_BIT;
 		fdef.shape = derecha;
 		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData("derecha");
+		b2body.createFixture(fdef).setUserData(this);
 		
 		// colision izquierda
 		EdgeShape izquierda = new EdgeShape();
 		izquierda.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), 
 				new Vector2(-11/ Main.PPM, -10/Main.PPM));
+		fdef.filter.categoryBits = Main.IZQUIERDA_BIT;
 		fdef.shape = izquierda;
 		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData("izquierda");
+		b2body.createFixture(fdef).setUserData(this);
 		
 		// colision abajo
 		EdgeShape porDeBajo = new EdgeShape();
 		porDeBajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), 
 				new Vector2(2/ Main.PPM, -12/Main.PPM));
+		fdef.filter.categoryBits = Main.POR_DEBAJO_BIT;
 		fdef.shape = porDeBajo;
 		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData("porDeBajo");
+		b2body.createFixture(fdef).setUserData(this);
 	}
 
 	
 	public float getStateTimer() {
 		return stateTimer;
 	}
-	
-	public void termino() {
-		pantalla.finishing();
-	}
-
 }

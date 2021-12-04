@@ -3,7 +3,6 @@ package com.garaperree.guazo;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
@@ -23,9 +22,9 @@ public class Main extends Game {
 	public static final short LAVA_BIT = 16;
 	public static final short DESTROYED_BIT = 32;
 	public static final short OBJECT_BIT = 64;
-	public static final short FUMIKO_DERECHA_BIT = 128;
-	public static final short FUMIKO_IZQUIERDA_BIT = 256;
-	public static final short FUMIKO_ABAJO_BIT = 512;
+	public static final short DERECHA_BIT = 128;
+	public static final short IZQUIERDA_BIT = 256;
+	public static final short POR_DEBAJO_BIT = 512;
 	
 	
 	public SpriteBatch batch;

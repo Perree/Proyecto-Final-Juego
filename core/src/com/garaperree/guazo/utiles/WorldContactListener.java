@@ -11,8 +11,6 @@ import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.Objetos.ObjetosInteractivos;
 
 public class WorldContactListener implements ContactListener {
-
-	//TODO revisar el video 12
 	
 	@Override
 	public void beginContact(Contact contact) {
@@ -21,45 +19,30 @@ public class WorldContactListener implements ContactListener {
 		
 		int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 		
-		//derecha
-		if((fixA.getUserData() == "derecha" || fixB.getUserData() == "derecha")) {
-			Fixture derecha = fixA.getUserData() == "derecha" ? fixA : fixB;
-			Fixture object = derecha == fixA ? fixB : fixA;
-			
-			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-				((ObjetosInteractivos) object.getUserData()).contactColision();
-			}
-			
-		}
-		
-		//izquierda
-		if((fixA.getUserData() == "izquierda" || fixB.getUserData() == "izquierda")) {
-			Fixture izquierda = fixA.getUserData() == "izquierda" ? fixA : fixB;
-			Fixture object = izquierda == fixA ? fixB : fixA;
-			
-			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-				((ObjetosInteractivos) object.getUserData()).contactColision();
-			}
-			
-		}
-		
-		//porDeBajo
-		if((fixA.getUserData() == "porDeBajo" || fixB.getUserData() == "porDeBajo")) {
-			Fixture porDeBajo = fixA.getUserData() == "porDeBajo" ? fixA : fixB;
-			Fixture object = porDeBajo == fixA ? fixB : fixA;
-			
-			if(object.getUserData() != null && ObjetosInteractivos.class.isAssignableFrom(object.getUserData().getClass())) {
-				((ObjetosInteractivos) object.getUserData()).contactColision();
-			}
-			
-		}
-		
 		switch (cDef){
-	        case Main.FUMIKO_BIT | Main.META_BIT:
-	            if(fixA.getFilterData().categoryBits == Main.FUMIKO_BIT)
-	                ((Fumiko)fixA.getUserData()).termino();
+	        case Main.POR_DEBAJO_BIT | Main.META_BIT:
+	        case Main.POR_DEBAJO_BIT | Main.PINCHES_BIT:
+	        case Main.POR_DEBAJO_BIT | Main.LAVA_BIT:
+	        	if(fixA.getFilterData().categoryBits == Main.POR_DEBAJO_BIT)
+	        		((ObjetosInteractivos) fixB.getUserData()).contactColision((Fumiko) fixA.getUserData());
 	            else
-	                ((Fumiko)fixB.getUserData()).termino();
+	            	((ObjetosInteractivos) fixA.getUserData()).contactColision((Fumiko) fixB.getUserData());
+	            break;
+	        case Main.DERECHA_BIT| Main.META_BIT:
+	        case Main.DERECHA_BIT| Main.PINCHES_BIT:
+	        case Main.DERECHA_BIT| Main.LAVA_BIT: 
+	        	if(fixA.getFilterData().categoryBits == Main.DERECHA_BIT)
+	        		((ObjetosInteractivos) fixB.getUserData()).contactColision((Fumiko) fixA.getUserData());
+	            else
+	            	((ObjetosInteractivos) fixA.getUserData()).contactColision((Fumiko) fixB.getUserData());
+	            break;
+	        case Main.IZQUIERDA_BIT | Main.META_BIT:
+	        case Main.IZQUIERDA_BIT | Main.PINCHES_BIT:
+	        case Main.IZQUIERDA_BIT | Main.LAVA_BIT:
+	            if(fixA.getFilterData().categoryBits == Main.IZQUIERDA_BIT)
+	            	((ObjetosInteractivos) fixB.getUserData()).contactColision((Fumiko) fixA.getUserData());
+	            else
+	            	((ObjetosInteractivos) fixA.getUserData()).contactColision((Fumiko) fixB.getUserData());
 	            break;
 		}
 	}

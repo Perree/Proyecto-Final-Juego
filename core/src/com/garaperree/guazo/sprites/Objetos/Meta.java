@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.pantallas.PantallaJuego;
+import com.garaperree.guazo.sprites.Fumiko;
 
 public class Meta extends ObjetosInteractivos{
 
@@ -14,7 +15,7 @@ public class Meta extends ObjetosInteractivos{
 	}
 
 	@Override
-	public void contactColision() {
+	public void contactColision(Fumiko fumiko) {
 		Gdx.app.log("Meta", "Collision");
 		setCategoryFilter(Main.DESTROYED_BIT);
 		//sonido

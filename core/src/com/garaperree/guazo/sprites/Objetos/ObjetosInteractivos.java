@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.pantallas.PantallaJuego;
+import com.garaperree.guazo.sprites.Fumiko;
 
 public abstract class ObjetosInteractivos {
 	protected World world;
@@ -50,7 +51,7 @@ public abstract class ObjetosInteractivos {
 		
 	}
 	
-	public abstract void contactColision();
+	public abstract void contactColision(Fumiko fumiko);
 	
 	public void setCategoryFilter(short filterBit) {
 		Filter filter = new Filter();
