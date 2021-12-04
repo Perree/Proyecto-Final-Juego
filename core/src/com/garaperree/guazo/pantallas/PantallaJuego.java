@@ -81,10 +81,10 @@ public class PantallaJuego implements Screen{
 		
 		world.setContactListener(new WorldContactListener());
 		
-		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-		music.setLooping(true);
-		music.setVolume(0.3f);
-		music.play();
+//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		music.setLooping(true);
+//		music.setVolume(0.3f);
+//		music.play();
 		
 	}
 	
@@ -130,16 +130,47 @@ public class PantallaJuego implements Screen{
 			fumiko.currentState = Fumiko.State.DEAD;
 		}
 		
-		//usamos la ubicacion del personaje para poder determinar la meta
-		if ((fumiko.getX() <= 1.649973 && fumiko.getY() <= 1.4649998)) {
+		// Pinches 1
+		if((fumiko.getX() >= 2.42f && fumiko.getY() >= 4.98f) && 
+				(fumiko.getX() <= 2.81f && fumiko.getY() <= 4.984f)) {
+			fumiko.currentState = Fumiko.State.DEAD;
+		}
+		
+		// Pinches 2
+		if((fumiko.getX() >= 4.9895763 && fumiko.getY() >= 4.98f) && 
+				(fumiko.getX() <= 6.335001 && fumiko.getY() <= 4.99f)) {
+			fumiko.currentState = Fumiko.State.DEAD;
+		}
+		
+		// Pinches 3
+		if((fumiko.getX() >= 5.12f && fumiko.getY() <= 1.5f) && 
+				(fumiko.getX() <= 5.55f && fumiko.getY() >= 1.46f)) {
+			fumiko.currentState = Fumiko.State.DEAD;
+		}
+
+		System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
+		// Usamos la ubicacion del personaje para poder determinar la meta
+		if ((fumiko.getX() <= 1.64f && fumiko.getY() >= 1.46f) &&
+				(fumiko.getX() >= 1.32f && fumiko.getY() <= 1.6f)) {
 			fumiko.llegoSalida();
 			System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
 		}
-		//X: 1.5608116Y: 1.4649998
+		
+		//Meta
 		//X: 1.649973Y: 1.4649998
 		//X: 1.3461664Y: 1.465
+		
+		//Pinches 1
+		//X: 2.4297383Y: 4.9849987
+		//X: 2.8150024Y: 4.984998
+		
+		//Pinches 2
+		//X: 4.9849987 Y: 4.9849997
+		//X: 6.335001 Y: 4.9849997
 
-
+		//Pinches 3
+		//X: 5.1250024Y: 4.9849987
+		//X: 5.5542116Y: 1.4649998
 		
 		//Sigue la camara del jugador (no lo necesitamos)
 //		gamecam.position.x = fumiko.b2body.getPosition().x;
@@ -200,7 +231,7 @@ public class PantallaJuego implements Screen{
 	
 	// Se corrobora que si el estado del jugador esta muerto y el tiempo
 	public boolean FinJuego() {
-		if (fumiko.currentState == Fumiko.State.DEAD && fumiko.getStateTimer() > 1) {
+		if (fumiko.currentState == Fumiko.State.DEAD) {
 			return true;
 		}
 		return false;
