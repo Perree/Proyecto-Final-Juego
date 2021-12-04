@@ -1,0 +1,23 @@
+{
+  "name": "proyecto-final-juego",
+  "version": "1.0.0",
+  "description": "Trabajo realizado por Facundo Garavagno y Matías Perrée",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Perree/Proyecto-Final-Juego.git"
+  },
+  "author": "Matías Perrée",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Perree/Proyecto-Final-Juego/issues"
+  },
+  "homepage": "https://github.com/Perree/Proyecto-Final-Juego#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.4.0"
+  }
+}

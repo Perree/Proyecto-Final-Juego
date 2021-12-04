@@ -1,5 +1,7 @@
 package com.garaperree.guazo;
 
+import java.net.Socket;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -28,8 +30,10 @@ public class Main extends Game {
 	
 	
 	public SpriteBatch batch;
-	
+
 	public static AssetManager manager;
+	
+	private Socket socket;
 	
 	@Override
 	public void create () {
@@ -40,8 +44,20 @@ public class Main extends Game {
 //		manager.load("audio/sfx/next_level.wav", Sound.class);
 		manager.finishLoading();
 		
+		connectSocket();
+		
 //		this.setScreen(new PantallaCarga());
 		setScreen(new PantallaJuego(this));
+	}
+
+	private void connectSocket() {
+		try {
+			socket = IO.socket("https://localhost:8080");
+			socket.connect();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 	}
 
 	@Override
