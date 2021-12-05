@@ -19,6 +19,7 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.utiles.B2WorldCreator;
+import com.garaperree.guazo.utiles.Utiles;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
@@ -41,11 +42,13 @@ public class PantallaJuego implements Screen{
 	private Box2DDebugRenderer b2dr;
 	
 	//Referenciar a nuestro personaje principal (sprites)
-	private Fumiko fumiko;
+	private Fumiko jugador1, jugador2;
 	
 	private Music music;
 	
 	private boolean mapaCambia = false;
+	
+	private String nombre1, nombre2;
 	
 	public PantallaJuego(Main game) {
 		
@@ -63,20 +66,10 @@ public class PantallaJuego implements Screen{
 		hud = new Hud(game.batch); 
 		
 		//cargando el mapa
-		do{
-			//cargando el mapa
-			maploader = new TmxMapLoader();
-			map = maploader.load("mapas/nivel1/nivel1.tmx");
-			renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);	
-		}while(!mapaCambia);
-			
-		if(mapaCambia) { 
-			maploader = new TmxMapLoader();
-			map = maploader.load("mapas/nivel2/nivel2.tmx");
-			renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);
-		}
-		
-		
+		maploader = new TmxMapLoader();
+		map = maploader.load("mapas/nivel1/nivel1.tmx");
+		renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);	
+	
 		// inicializando la camara del juego para poder estar centrado al comienzo
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 		
@@ -88,8 +81,13 @@ public class PantallaJuego implements Screen{
 		
 		new B2WorldCreator(this);
 		
-		// crear Fumiko en nuestro juego
-		fumiko = new Fumiko(this);
+		
+		
+		
+		// crear personajes en nuestro juego
+		jugador1 = new Fumiko(this, nombre1);
+		
+		jugador2 = new Fumiko(this, nombre2);
 		
 		world.setContactListener(new WorldContactListener());
 		
@@ -114,15 +112,26 @@ public class PantallaJuego implements Screen{
 	private void handleInput(float dt) {
 		
 		// controlar a nuestro jugador mediante impulsos
-		if(fumiko.currentState != Fumiko.State.DEAD) {
+		if(jugador1.currentState != Fumiko.State.DEAD) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-				fumiko.jump();
+				jugador1.jump();
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && fumiko.b2body.getLinearVelocity().x <=2)
-				fumiko.b2body.applyLinearImpulse(new Vector2(0.1f, 0),fumiko.b2body.getWorldCenter(), true);
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2)
+				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && fumiko.b2body.getLinearVelocity().x >=-2)
-				fumiko.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),fumiko.b2body.getWorldCenter(), true);
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2)
+				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+		}
+		
+		if(jugador2.currentState != Fumiko.State.DEAD) {
+			if(Gdx.input.isKeyJustPressed(Input.Keys.W))
+				jugador2.jump();
+			
+			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2)
+				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+			
+			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2)
+				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
 		}
 		
 	}
@@ -134,40 +143,77 @@ public class PantallaJuego implements Screen{
 		// toma 1 paso en fisicas (60 veces por segundo)
 		world.step(1/60f, 6, 2);
 		
-		fumiko.update(dt);
+		jugador1.update(dt);
+		jugador2.update(dt);
 		hud.update(dt);
 		
+		//jugador 1
+		
 		//Cuando el personaje se cae en la lava
-		if (fumiko.getY() < 0) {
-			fumiko.currentState = Fumiko.State.DEAD;
+		if (jugador1.getY() < 0) {
+			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 1
-		if((fumiko.getX() > 2.42f && fumiko.getY() >= 4.50f) && 
-				(fumiko.getX() <= 2.81f && fumiko.getY() <= 5.15f)) {
-			fumiko.currentState = Fumiko.State.DEAD;
+		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
+				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
+			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
-		if((fumiko.getX() >= 4.9895763 && fumiko.getY() >= 4.98f) && 
-				(fumiko.getX() <= 6.335001 && fumiko.getY() <= 4.99f)) {
-			fumiko.currentState = Fumiko.State.DEAD;
+		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
+				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
+			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 3
-		if((fumiko.getX() >= 5.12f && fumiko.getY() <= 1.5f) && 
-				(fumiko.getX() <= 5.55f && fumiko.getY() >= 1.46f)) {
-			fumiko.currentState = Fumiko.State.DEAD;
+		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
+				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
+			jugador1.currentState = Fumiko.State.DEAD;
 		}
 
-		System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
+		System.out.println("X: "+ jugador1.getX()+"Y: "+jugador1.getY());
 		
 		// Usamos la ubicacion del personaje para poder determinar la meta
-		if ((fumiko.getX() <= 1.64f && fumiko.getY() >= 1.46f) &&
-				(fumiko.getX() >= 1.32f && fumiko.getY() <= 1.6f)) {
-			fumiko.llegoSalida();
+		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
+				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
+			jugador1.llegoSalida();
 			mapaCambia=true;
 			
+		}
+		
+		//jugador 2
+		
+		//Cuando el personaje se cae en la lava
+		if (jugador2.getY() < 0) {
+			jugador2.currentState = Fumiko.State.DEAD;
+		}
+		
+		// Pinches 1
+		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
+				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
+			jugador2.currentState = Fumiko.State.DEAD;
+		}
+		
+		// Pinches 2
+		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
+				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
+			jugador2.currentState = Fumiko.State.DEAD;
+		}
+		
+		// Pinches 3
+		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
+				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
+			jugador2.currentState = Fumiko.State.DEAD;
+		}
+
+		System.out.println("X: "+ jugador2.getX()+"Y: "+jugador2.getY());
+		
+		// Usamos la ubicacion del personaje para poder determinar la meta
+		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
+				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
+			jugador2.llegoSalida();
+			mapaCambia=true;
 		}
 		
 		//Meta
@@ -214,7 +260,8 @@ public class PantallaJuego implements Screen{
 		
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
-		fumiko.draw(game.batch);
+		jugador1.draw(game.batch);
+		jugador2.draw(game.batch);
 		game.batch.end();
 		
 		// setea el batch para dibujar el hud
@@ -227,7 +274,12 @@ public class PantallaJuego implements Screen{
 		}
 		
 		// Llego a la meta GANO!
-		if(fumiko.isPuedeSalir()) {
+		if(jugador1.isPuedeSalir()) {
+			finishing();
+		}
+		
+		// Llego a la meta GANO!
+		if(jugador2.isPuedeSalir()) {
 			finishing();
 		}
 		
@@ -235,9 +287,8 @@ public class PantallaJuego implements Screen{
 		if(FinJuego()) {
 			finishing();
 		}
-
 	}
-	
+
 	public void finishing() {
 		game.setScreen(new FinDelJuego(game));
 		dispose();
@@ -245,7 +296,9 @@ public class PantallaJuego implements Screen{
 	
 	// Se corrobora que si el estado del jugador esta muerto y el tiempo
 	public boolean FinJuego() {
-		if (fumiko.currentState == Fumiko.State.DEAD) {
+		if (jugador1.currentState == Fumiko.State.DEAD) {
+			return true;
+		}else if (jugador2.currentState == Fumiko.State.DEAD){
 			return true;
 		}
 		return false;

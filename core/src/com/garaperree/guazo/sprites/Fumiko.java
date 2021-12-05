@@ -35,10 +35,13 @@ public class Fumiko extends Sprite{
 	private boolean runningRight;
 	private boolean fumikoIsDead;
 	
-	public Fumiko(PantallaJuego screen) {
+	private String nombre;
+	
+	public Fumiko(PantallaJuego screen, String nombre) {
 		super(screen.getAtlas().findRegion("fumiko"));
 		
 		// variables
+		this.nombre = nombre;
 		this.world = screen.getWorld();
 //		currentState = State.STANDING;
 //		previousState = State.STANDING;

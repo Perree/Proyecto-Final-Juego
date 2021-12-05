@@ -19,7 +19,7 @@ public class FinDelJuego implements Screen{
 	private Viewport viewport;
 	private Stage stage;
 	
-	private Game game;
+	private Game game; 
 	
 	
 	
@@ -35,10 +35,12 @@ public class FinDelJuego implements Screen{
 		table.setFillParent(true);
 		
 		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
+		Label quienGano = new Label("El jugador "+"nombre "+"ha ganado!", font);
 		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
 		
 		table.add(finJuegoLabel).expandX();
 		table.row();
+		table.add(quienGano).expandX().padTop(10f);
 		table.row();
 		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
 		
