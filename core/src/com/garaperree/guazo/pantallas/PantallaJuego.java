@@ -45,6 +45,8 @@ public class PantallaJuego implements Screen{
 	
 	private Music music;
 	
+	private boolean mapaCambia = false;
+	
 	public PantallaJuego(Main game) {
 		
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
@@ -61,9 +63,19 @@ public class PantallaJuego implements Screen{
 		hud = new Hud(game.batch); 
 		
 		//cargando el mapa
-		maploader = new TmxMapLoader();
-		map = maploader.load("mapas/nivel1/nivel1.tmx");
-		renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);
+		do{
+			//cargando el mapa
+			maploader = new TmxMapLoader();
+			map = maploader.load("mapas/nivel1/nivel1.tmx");
+			renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);	
+		}while(!mapaCambia);
+			
+		if(mapaCambia) { 
+			maploader = new TmxMapLoader();
+			map = maploader.load("mapas/nivel2/nivel2.tmx");
+			renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);
+		}
+		
 		
 		// inicializando la camara del juego para poder estar centrado al comienzo
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
@@ -81,10 +93,10 @@ public class PantallaJuego implements Screen{
 		
 		world.setContactListener(new WorldContactListener());
 		
-		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-		music.setLooping(true);
-		music.setVolume(0.3f);
-		music.play();
+//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		music.setLooping(true);
+//		music.setVolume(0.3f);
+//		music.play();
 		
 	}
 	
@@ -131,8 +143,8 @@ public class PantallaJuego implements Screen{
 		}
 		
 		// Pinches 1
-		if((fumiko.getX() >= 2.42f && fumiko.getY() >= 4.98f) && 
-				(fumiko.getX() <= 2.81f && fumiko.getY() <= 4.984f)) {
+		if((fumiko.getX() > 2.42f && fumiko.getY() >= 4.50f) && 
+				(fumiko.getX() <= 2.81f && fumiko.getY() <= 5.15f)) {
 			fumiko.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -149,11 +161,13 @@ public class PantallaJuego implements Screen{
 		}
 
 		System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
+		
 		// Usamos la ubicacion del personaje para poder determinar la meta
 		if ((fumiko.getX() <= 1.64f && fumiko.getY() >= 1.46f) &&
 				(fumiko.getX() >= 1.32f && fumiko.getY() <= 1.6f)) {
 			fumiko.llegoSalida();
-			System.out.println("X: "+ fumiko.getX()+"Y: "+fumiko.getY());
+			mapaCambia=true;
+			
 		}
 		
 		//Meta
