@@ -19,7 +19,6 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.utiles.B2WorldCreator;
-import com.garaperree.guazo.utiles.Utiles;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
@@ -45,10 +44,6 @@ public class PantallaJuego implements Screen{
 	private Fumiko jugador1, jugador2;
 	
 	private Music music;
-	
-	private boolean mapaCambia = false;
-	
-	private String nombre1, nombre2;
 	
 	public PantallaJuego(Main game) {
 		
@@ -81,13 +76,10 @@ public class PantallaJuego implements Screen{
 		
 		new B2WorldCreator(this);
 		
-		
-		
-		
 		// crear personajes en nuestro juego
-		jugador1 = new Fumiko(this, nombre1);
+		jugador1 = new Fumiko(this);
 		
-		jugador2 = new Fumiko(this, nombre2);
+		jugador2 = new Fumiko(this);
 		
 		world.setContactListener(new WorldContactListener());
 		
@@ -178,7 +170,6 @@ public class PantallaJuego implements Screen{
 		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
 				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
 			jugador1.llegoSalida();
-			mapaCambia=true;
 			
 		}
 		
@@ -213,7 +204,6 @@ public class PantallaJuego implements Screen{
 		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
 				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
 			jugador2.llegoSalida();
-			mapaCambia=true;
 		}
 		
 		//Meta
@@ -275,12 +265,14 @@ public class PantallaJuego implements Screen{
 		
 		// Llego a la meta GANO!
 		if(jugador1.isPuedeSalir()) {
-			finishing();
+			String nombre = "Jugador 1";
+			finishing(nombre);
 		}
 		
 		// Llego a la meta GANO!
 		if(jugador2.isPuedeSalir()) {
-			finishing();
+			String nombre = "Jugador 2";
+			finishing(nombre);
 		}
 		
 		//El personaje perdio
@@ -294,6 +286,11 @@ public class PantallaJuego implements Screen{
 		dispose();
 	}
 	
+	public void finishing(String nombre) {
+		game.setScreen(new FinDelJuego(game, nombre));
+		dispose();
+	}
+	
 	// Se corrobora que si el estado del jugador esta muerto y el tiempo
 	public boolean FinJuego() {
 		if (jugador1.currentState == Fumiko.State.DEAD) {
@@ -303,7 +300,7 @@ public class PantallaJuego implements Screen{
 		}
 		return false;
 	}
-
+	
 	@Override
 	public void resize(int width, int height) {
 		//actualizar nuestro viewport game

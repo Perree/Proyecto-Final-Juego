@@ -23,6 +23,30 @@ public class FinDelJuego implements Screen{
 	
 	
 	
+	public FinDelJuego(Game game, String nombre) {
+		this.game = game;
+		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
+		stage = new Stage(viewport, ((Main) game).batch);
+		
+		Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+		
+		Table table = new Table();
+		table.center();
+		table.setFillParent(true);
+		
+		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
+		Label quienGano = new Label("El jugador "+nombre+" ha ganado!", font);
+		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
+		
+		table.add(finJuegoLabel).expandX();
+		table.row();
+		table.add(quienGano).expandX().padTop(10f);
+		table.row();
+		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
+		
+		stage.addActor(table);
+	}
+	
 	public FinDelJuego(Game game) {
 		this.game = game;
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
@@ -35,12 +59,10 @@ public class FinDelJuego implements Screen{
 		table.setFillParent(true);
 		
 		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-		Label quienGano = new Label("El jugador "+"nombre "+"ha ganado!", font);
 		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
 		
 		table.add(finJuegoLabel).expandX();
 		table.row();
-		table.add(quienGano).expandX().padTop(10f);
 		table.row();
 		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
 		
