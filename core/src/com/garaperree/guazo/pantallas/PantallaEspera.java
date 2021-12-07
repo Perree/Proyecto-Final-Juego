@@ -14,15 +14,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
-public class FinDelJuego implements Screen{
-
+public class PantallaEspera implements Screen{
+	
 	private Viewport viewport;
 	private Stage stage;
 	private Game game;
 	
 	
-	
-	public FinDelJuego(Game game, String nombre) {
+
+	public PantallaEspera(Game game) {
 		this.game = game;
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, ((Main) game).batch);
@@ -33,37 +33,10 @@ public class FinDelJuego implements Screen{
 		table.center();
 		table.setFillParent(true);
 		
-		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-		Label quienGano = new Label("El jugador "+nombre+" ha ganado!", font);
-		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
+		Label esperandoConexion = new Label("Esperando a que hayan 2 jugadores", font);
 		
-		table.add(finJuegoLabel).expandX();
+		table.add(esperandoConexion).expandX();
 		table.row();
-		table.add(quienGano).expandX().padTop(10f);
-		table.row();
-		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
-		
-		stage.addActor(table);
-	}
-	
-	public FinDelJuego(Game game) {
-		this.game = game;
-		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
-		stage = new Stage(viewport, ((Main) game).batch);
-		
-		Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-		
-		Table table = new Table();
-		table.center();
-		table.setFillParent(true);
-		
-		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
-		
-		table.add(finJuegoLabel).expandX();
-		table.row();
-		table.row();
-		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
 		
 		stage.addActor(table);
 	}
@@ -75,10 +48,10 @@ public class FinDelJuego implements Screen{
 
 	@Override
 	public void render(float delta) {
-		if(Gdx.input.justTouched()) {
-			game.setScreen(new PantallaJuego((Main) game));
-			dispose();
-		}
+//		if(Gdx.input.justTouched()) {
+//			game.setScreen(new PantallaJuego((Main) game));
+//			dispose();
+//		}
 			
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -88,25 +61,21 @@ public class FinDelJuego implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 		
 	}
 

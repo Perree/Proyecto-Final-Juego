@@ -89,10 +89,10 @@ public class PantallaJuego implements Screen{
 		
 		world.setContactListener(new WorldContactListener());
 		
-		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-		music.setLooping(true);
-		music.setVolume(-0.3f);
-		music.play();
+//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		music.setLooping(true);
+//		music.setVolume(0.1f);
+////		music.play();
 		
 	}
 
@@ -152,7 +152,7 @@ public class PantallaJuego implements Screen{
 		if (jugador1.getY() < 0) {
 			//sonido
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -160,7 +160,7 @@ public class PantallaJuego implements Screen{
 		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
 				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -168,7 +168,7 @@ public class PantallaJuego implements Screen{
 		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
 				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -176,7 +176,7 @@ public class PantallaJuego implements Screen{
 		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
 				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 
@@ -186,7 +186,7 @@ public class PantallaJuego implements Screen{
 		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
 				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
+//			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador1.llegoSalida();
 			
 		}
@@ -196,7 +196,7 @@ public class PantallaJuego implements Screen{
 		//Cuando el personaje se cae en la lava
 		if (jugador2.getY() < 0) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -204,7 +204,7 @@ public class PantallaJuego implements Screen{
 		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
 				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -212,7 +212,7 @@ public class PantallaJuego implements Screen{
 		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
 				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
@@ -220,7 +220,7 @@ public class PantallaJuego implements Screen{
 		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
 				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.load("audio/sfx/muere.wav", Sound.class);
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 
@@ -231,7 +231,7 @@ public class PantallaJuego implements Screen{
 				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
 			//sonido
 			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
+//			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador2.llegoSalida();
 		}
 		
