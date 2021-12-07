@@ -28,8 +28,8 @@ public class HiloServidor extends Thread{
 			ipDestino = InetAddress.getByName("192.168.1.50");
 			DatagramPacket dp = new DatagramPacket(data, data.length, puerto);
 			conexion.send(dp);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -48,16 +48,18 @@ public class HiloServidor extends Thread{
 	}
 
 	private void procesarMensaje(DatagramPacket dp) {
-		String msg = new String(dp.getData()).trim(); 
+		String msg = dp.getData().toString().trim(); 
 		if(msg.equals("Conexion")) {
 			if(cantClientes<2) {
-				clientes[cantClientes++] = new DireccionRed(dp.getAddress(), dp.getPort());
+				clientes[cantClientes] = new DireccionRed(dp.getAddress(), dp.getPort());
 				enviarMensaje("Ok", clientes[cantClientes].getIp(), clientes[cantClientes++].getPuerto());
-			} else if(cantClientes==2) {
+			} 
+			if(cantClientes==2) {
 				for(int i = 0; i < clientes.length; i++) {
 					enviarMensaje("Empieza", clientes[i].getIp(), clientes[i].getPuerto());
 				}
 			}
 		}		
 	}
+	
 }

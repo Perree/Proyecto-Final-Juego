@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -19,6 +21,10 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.utiles.B2WorldCreator;
+import com.garaperree.guazo.utiles.Global;
+import com.garaperree.guazo.utiles.Recursos;
+import com.garaperree.guazo.utiles.Render;
+import com.garaperree.guazo.utiles.Texto;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
@@ -83,12 +89,13 @@ public class PantallaJuego implements Screen{
 		
 		world.setContactListener(new WorldContactListener());
 		
-//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-//		music.setLooping(true);
-//		music.setVolume(0.3f);
-//		music.play();
+		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+		music.setLooping(true);
+		music.setVolume(-0.3f);
+		music.play();
 		
 	}
+
 	
 	public TextureAtlas getAtlas() {
 		return atlas;
@@ -143,24 +150,33 @@ public class PantallaJuego implements Screen{
 		
 		//Cuando el personaje se cae en la lava
 		if (jugador1.getY() < 0) {
+			//sonido
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 1
 		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
 				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
 		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
 				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 3
 		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
 				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 
@@ -169,6 +185,8 @@ public class PantallaJuego implements Screen{
 		// Usamos la ubicacion del personaje para poder determinar la meta
 		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
 				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador1.llegoSalida();
 			
 		}
@@ -177,24 +195,32 @@ public class PantallaJuego implements Screen{
 		
 		//Cuando el personaje se cae en la lava
 		if (jugador2.getY() < 0) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 1
 		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
 				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
 		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
 				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 3
 		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
 				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.load("audio/sfx/muere.wav", Sound.class);
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 
@@ -203,6 +229,9 @@ public class PantallaJuego implements Screen{
 		// Usamos la ubicacion del personaje para poder determinar la meta
 		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
 				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
+			//sonido
+			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador2.llegoSalida();
 		}
 		
@@ -235,6 +264,7 @@ public class PantallaJuego implements Screen{
 
 	@Override
 	public void render(float delta) {
+		
 		//separa la actualizacion logica del renderizado
 		update(delta);
 		

@@ -9,8 +9,9 @@ public class Render {
 	
 	public static SpriteBatch batch;
 	public static Main app;
-	public static void limpiarPantalla(float r, float g, float b){
-		Gdx.gl.glClearColor(r,g,b, 1);
+	
+	public static void limpiarPantalla(){
+		Gdx.gl.glClearColor(1,1,1,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 }

@@ -18,9 +18,6 @@ public class Pinches extends ObjetosInteractivos{
 	public void contactColision(Fumiko fumiko) {
 		Gdx.app.log("Pinches", "Collision");
 		setCategoryFilter(Main.DESTROYED_BIT);
-		
-		//sonido
-		//Main.manager.load("audio/sfx/muere.wav", Sound.class);
 	}
 
 }

@@ -24,7 +24,7 @@ public class PantallaCarga implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Render.limpiarPantalla(0, 0, 0);
+		Render.limpiarPantalla();
 
 		b.begin();
 		fondo.dibujar();

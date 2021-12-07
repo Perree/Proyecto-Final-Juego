@@ -18,8 +18,6 @@ public class Meta extends ObjetosInteractivos{
 	public void contactColision(Fumiko fumiko) {
 		Gdx.app.log("Meta", "Collision");
 		setCategoryFilter(Main.DESTROYED_BIT);
-		//sonido
-//		Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 	}
 
 }
