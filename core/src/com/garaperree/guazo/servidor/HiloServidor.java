@@ -9,11 +9,8 @@ import java.net.SocketException;
 public class HiloServidor extends Thread{
 	
 	private DatagramSocket conexion;
-	
 	private boolean fin = false;
-	
 	private DireccionRed[] clientes = new DireccionRed[2];
-	
 	private int cantClientes = 0;
 	
 	public HiloServidor() {
@@ -24,18 +21,30 @@ public class HiloServidor extends Thread{
 		} 
 	}
 	
+	public void enviarMensaje(String msg, InetAddress ip, int puerto) {
+		byte[] data = msg.getBytes();
+		InetAddress ipDestino;
+		try {
+			ipDestino = InetAddress.getByName("192.168.1.50");
+			DatagramPacket dp = new DatagramPacket(data, data.length, puerto);
+			conexion.send(dp);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void run() {
-		while(!fin) {
-			byte[] datos = new byte[1024];
-			DatagramPacket dp = new DatagramPacket(datos, datos.length);
+		do {
+			byte[] data = new byte[1024];
+			DatagramPacket dp = new DatagramPacket(data, data.length);
 			try {
 				conexion.receive(dp);
-				procesarMensaje(dp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+			procesarMensaje(dp);
+		} while(!fin);
 	}
 
 	private void procesarMensaje(DatagramPacket dp) {
@@ -50,17 +59,5 @@ public class HiloServidor extends Thread{
 				}
 			}
 		}		
-	}
-	
-	public void enviarMensaje(String msg, InetAddress ip, int puerto) {
-		byte[] data = msg.getBytes();
-		InetAddress ipDestino;
-		try {
-			ipDestino = InetAddress.getByName("192.168.1.50");
-			DatagramPacket dp = new DatagramPacket(data, data.length, puerto);
-			conexion.send(dp);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 	}
 }
