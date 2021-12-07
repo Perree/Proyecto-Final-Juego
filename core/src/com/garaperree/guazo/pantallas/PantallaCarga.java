@@ -57,7 +57,7 @@ public class PantallaCarga implements Screen{
 		if(termina) {
 			contTiempoTermina += 0.04f;
 			if(contTiempoTermina>tiempoTermina) {
-				Render.app.setScreen(new PantallaMenu());
+				Render.app.setScreen(new PantallaJuego(null));
 			}
 		}
 	}
