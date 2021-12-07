@@ -82,7 +82,7 @@ public class Entradas implements InputProcessor {
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
 		mouseX = screenX;
-		mouseY = (int) (Config.SCREEN_HEIGHT - screenY);
+		mouseY = Config.ALTO - screenY;
 		return false;
 	} 
 

@@ -11,6 +11,8 @@ import com.garaperree.guazo.utiles.Imagen;
 import com.garaperree.guazo.utiles.Recursos;
 import com.garaperree.guazo.utiles.Render;
 import com.garaperree.guazo.utiles.Texto;
+import com.garaperree.guazo.utiles.*;
+
 
 public class PantallaMenu extends InputAdapter implements Screen {
 	Imagen fondo;
@@ -97,9 +99,9 @@ public class PantallaMenu extends InputAdapter implements Screen {
 		}
 		
 		if(cont>0) {
-			mosueArriba = true;
+			mouseArriba = true;
 		}else {
-			mosueArriba = false;
+			mouseArriba = false;
 		}
 		
 		for (int i = 0; i < opciones.length; i++) {
@@ -119,10 +121,7 @@ public class PantallaMenu extends InputAdapter implements Screen {
 			}
 		}
 		
-		
-		
-		
-		
+			
 	}
 	
 	@Override

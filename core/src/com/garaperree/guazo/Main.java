@@ -13,7 +13,7 @@ public class Main extends Game {
 	public static final int V_HEIGHT = 768;
 	public static final float PPM = 100;
 	
-	//Box2D Collision Bits
+	//Box2D Collision Bitsj
 	public static final short NOTHING_BIT = 0;
 	public static final short DEFAULT_BIT = 1;
 	public static final short FUMIKO_BIT = 2;

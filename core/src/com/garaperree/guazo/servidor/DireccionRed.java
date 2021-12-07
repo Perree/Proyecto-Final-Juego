@@ -10,7 +10,6 @@ public class DireccionRed {
 		this.ip = ip;
 		this.puerto = puerto;
 	}
-
 	public InetAddress getIp() {
 		return ip;
 	}
@@ -19,5 +18,4 @@ public class DireccionRed {
 		return puerto;
 	}
 
-	
 }
