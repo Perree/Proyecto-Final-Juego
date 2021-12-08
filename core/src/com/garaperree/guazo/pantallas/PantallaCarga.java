@@ -18,7 +18,6 @@ public class PantallaCarga implements Screen{
 	@Override
 	public void show() {
 		fondo = new Imagen(Recursos.LOGO);
-		b = Render.batch;
 		fondo.setTransparencia(0);
 	}
 
@@ -57,7 +56,7 @@ public class PantallaCarga implements Screen{
 		if(termina) {
 			contTiempoTermina += 0.04f;
 			if(contTiempoTermina>tiempoTermina) {
-				Render.app.setScreen(new PantallaJuego(null));
+				setScreen(new PantallaJuego(null));
 			}
 		}
 	}
