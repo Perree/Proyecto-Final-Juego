@@ -18,7 +18,7 @@ public class HiloCliente extends Thread {
 	
 	public HiloCliente() {
 		try {
-			ipServer = InetAddress.getByName("255.255.255.255");
+			ipServer = InetAddress.getByName("192.168.0.47");
 			conexion = new DatagramSocket();
 		} catch (SocketException | UnknownHostException e) {
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class HiloCliente extends Thread {
 		byte[] data = msg.getBytes();
 		DatagramPacket dp = new DatagramPacket(data, data.length, ipServer, puerto);
 		try {
-//			ipServer = InetAddress.getByName("192.168.1.50");
+//			ipServer = InetAddress.getByName("192.168.0.47");
 			conexion.send(dp);
 		} catch (IOException e) {
 			e.printStackTrace();
