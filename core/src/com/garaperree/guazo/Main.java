@@ -48,7 +48,7 @@ public class Main extends Game {
 	@Override
 	public void render () {
 		Render.limpiarPantalla();
-		if(!Global.empieza) {
+		if(Global.empieza) {
 //			Render.batch.begin();
 			System.out.println("Esperando jugador...");
 //			Render.batch.end();

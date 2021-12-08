@@ -225,7 +225,7 @@ public class PantallaJuego implements Screen{
 		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
 				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
 			//sonido
-			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
 //			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador2.llegoSalida();
 		}
