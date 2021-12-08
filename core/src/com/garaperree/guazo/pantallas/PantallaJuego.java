@@ -84,10 +84,10 @@ public class PantallaJuego implements Screen{
 		
 		world.setContactListener(new WorldContactListener());
 		
-		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-		music.setLooping(true);
-		music.setVolume(0.1f);
-		music.play();
+//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
+//		music.setLooping(true);
+//		music.setVolume(0.1f);
+//		music.play();
 		
 	}
 
