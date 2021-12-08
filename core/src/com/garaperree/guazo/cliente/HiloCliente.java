@@ -30,7 +30,7 @@ public class HiloCliente extends Thread {
 		byte[] data = msg.getBytes();
 		DatagramPacket dp = new DatagramPacket(data, data.length, ipServer, puerto);
 		try {
-//			ipServer = InetAddress.getByName("192.168.0.47");
+			System.out.println("Enviando Mensaje "+ msg + " ip " + ipServer + " puerto " + puerto);
 			conexion.send(dp);
 		} catch (IOException e) {
 			e.printStackTrace();

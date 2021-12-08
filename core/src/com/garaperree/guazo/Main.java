@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.garaperree.guazo.cliente.HiloCliente;
 import com.garaperree.guazo.diseños.Config;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.diseños.Texto;
@@ -38,6 +39,8 @@ public class Main extends Game {
 	
 	private Texto espera;
 	
+	private HiloCliente hc;
+	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -45,6 +48,10 @@ public class Main extends Game {
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
 		espera.setTexto("Esperando jugadores...");
 		espera.setPosition((Config.ANCHO/2)-(espera.getAncho()/2), (Config.ALTO/2)+(espera.getAlto()/2));
+		
+		//hilo cliente
+		hc = new HiloCliente();
+		hc.start();
 		
 		manager = new AssetManager();
 		manager.load("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
