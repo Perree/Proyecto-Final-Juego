@@ -35,7 +35,7 @@ public class PantallaMenu extends InputAdapter implements Screen {
 			
 		fondo = new Imagen(Recursos.FONDOMENU);
 		fondo.setSize(Config.ANCHO, Config.ALTO);
-		b = Render.batch;
+		b = Render.sb;
 		
 		
 		Gdx.input.setInputProcessor(entradas);
@@ -44,9 +44,9 @@ public class PantallaMenu extends InputAdapter implements Screen {
 		
 
 		for (int i = 0; i < opciones.length; i++) {
-			opciones[i] = new Texto(Recursos.FUENTEMENU, 60, Color.WHITE, true);
+			opciones[i] = new Texto(Recursos.FUENTE, 60, Color.WHITE, true);
 			opciones[i].setTexto(textos[i]);
-			opciones[i].setPosition((Config.ANCHO / 2) - (opciones[i].getAncho() / 2),
+			opciones[i].setPosition((Config. / 2) - (opciones[i].getAncho() / 2),
 					((Config.ALTO / 2) + (opciones[0].getAlto() / 2)) - ((opciones[i].getAlto()+(avance * i))));
 		}
 		
@@ -115,7 +115,7 @@ public class PantallaMenu extends InputAdapter implements Screen {
 		
 		if(entradas.isEnter() || (entradas.isClick())) {
 			if(((opc==1) && (entradas.isEnter())) || ((opc==1) && (entradas.isClick())&&(mouseArriba))) {
-				Render.app.setScreen(new PantallaJuego());
+				Render.sb.setScreen(new PantallaJuego());
 			}else if(((opc==4) && (entradas.isEnter())) || ((opc==4) && (entradas.isClick())&&(mouseArriba))) {
 				Gdx.app.exit();
 			}
