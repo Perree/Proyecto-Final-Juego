@@ -5,12 +5,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.garaperree.guazo.diseños.Config;
+import com.garaperree.guazo.diseños.Recursos;
+import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.utiles.Config;
 import com.garaperree.guazo.utiles.Global;
-import com.garaperree.guazo.utiles.Recursos;
 import com.garaperree.guazo.utiles.Render;
-import com.garaperree.guazo.utiles.Texto;
 
 public class Main extends Game {
 

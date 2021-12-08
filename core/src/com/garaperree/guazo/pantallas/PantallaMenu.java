@@ -6,11 +6,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch.Config;
-import com.garaperree.guazo.utiles.Entradas;
-import com.garaperree.guazo.utiles.Imagen;
-import com.garaperree.guazo.utiles.Recursos;
-import com.garaperree.guazo.utiles.Render;
-import com.garaperree.guazo.utiles.Texto;
+import com.garaperree.guazo.diseño.Imagen;
+import com.garaperree.guazo.diseño.Texto;
+import com.garaperree.guazo.diseños.Recursos;
+import com.garaperree.guazo.io.Entradas;
 import com.garaperree.guazo.utiles.*;
 
 

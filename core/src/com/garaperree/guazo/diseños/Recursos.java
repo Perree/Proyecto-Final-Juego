@@ -1,4 +1,4 @@
-package com.garaperree.guazo.utiles;
+package com.garaperree.guazo.diseños;
 
 public class Recursos {
 	public static final String LOGO = "fondos/fondo.jpg";

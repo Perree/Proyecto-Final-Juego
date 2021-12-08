@@ -1,7 +1,8 @@
-package com.garaperree.guazo.utiles;
+package com.garaperree.guazo.diseños;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.garaperree.guazo.utiles.Render;
 
 public class Imagen {
 	private Texture tex;
