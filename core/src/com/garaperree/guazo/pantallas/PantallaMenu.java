@@ -1,19 +1,18 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch.Config;
-import com.garaperree.guazo.diseño.Imagen;
-import com.garaperree.guazo.diseño.Texto;
+import com.garaperree.guazo.diseños.Config;
+import com.garaperree.guazo.diseños.Imagen;
 import com.garaperree.guazo.diseños.Recursos;
+import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.io.Entradas;
-import com.garaperree.guazo.utiles.*;
+import com.garaperree.guazo.utiles.Render;
 
 
-public class PantallaMenu extends InputAdapter implements Screen {
+public class PantallaMenu implements Screen {
 	Imagen fondo;
 	SpriteBatch b;
 	
@@ -25,7 +24,6 @@ public class PantallaMenu extends InputAdapter implements Screen {
 	boolean mouseArriba = false;
 	public float tiempo = 0;
 	
-
 
 	Entradas entradas = new Entradas(this);
 	
@@ -114,7 +112,7 @@ public class PantallaMenu extends InputAdapter implements Screen {
 		
 		if(entradas.isEnter() || (entradas.isClick())) {
 			if(((opc==1) && (entradas.isEnter())) || ((opc==1) && (entradas.isClick())&&(mouseArriba))) {
-				Render.sb.setScreen(new PantallaJuego());
+				Render.app.setScreen(new PantallaJuego());
 			}else if(((opc==4) && (entradas.isEnter())) || ((opc==4) && (entradas.isClick())&&(mouseArriba))) {
 				Gdx.app.exit();
 			}
@@ -125,7 +123,7 @@ public class PantallaMenu extends InputAdapter implements Screen {
 	
 	@Override
 	public void resize(int width, int height) {
-		gamePort.update(width, height);
+//		gamePort.update(width, height);
 //		stage.getViewport().update(width, height, true); //se actualiza el stage si el userinterface cambia de tamaño
 	}
 

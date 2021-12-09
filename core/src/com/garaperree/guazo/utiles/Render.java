@@ -9,6 +9,7 @@ public class Render {
 	
 	public static SpriteBatch sb = new SpriteBatch();
 	public static ShapeRenderer sr = new ShapeRenderer();
+
 	
 	public static void limpiarPantalla() {
 		Gdx.gl.glClearColor(0,0,0,1);
