@@ -139,12 +139,12 @@ public class Fumiko extends Sprite{
 			return State.STANDING;
 	}
 	
-//	public void jump(){
-//        if (currentState != State.JUMPING) {
-//            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-//            currentState = State.JUMPING;
-//        }
-//    }
+	public void jump(){
+        if (currentState != State.JUMPING) {
+            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+            currentState = State.JUMPING;
+        }
+    }
 
 	private void defineFumiko() {
 		BodyDef bdef = new BodyDef();
@@ -158,43 +158,43 @@ public class Fumiko extends Sprite{
 		// Cuan grande es el circulo
 		shape.setRadius(12/Main.PPM);
 		
-		fdef.filter.categoryBits = Main.FUMIKO_BIT;
-		fdef.filter.maskBits = 
-				Main.DEFAULT_BIT | 
-				Main.META_BIT | 
-				Main.PINCHES_BIT | 
-				Main.LAVA_BIT | 
-				Main.OBJECT_BIT;
+//		fdef.filter.categoryBits = Main.FUMIKO_BIT;
+//		fdef.filter.maskBits = 
+//				Main.DEFAULT_BIT | 
+//				Main.META_BIT | 
+//				Main.PINCHES_BIT | 
+//				Main.LAVA_BIT | 
+//				Main.OBJECT_BIT;
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef).setUserData(this);
 		
-		// colision derecha
-		EdgeShape derecha = new EdgeShape();
-		derecha.set(new Vector2(11/ Main.PPM, -10/Main.PPM), 
-				new Vector2(11/ Main.PPM, 10/Main.PPM));
-		fdef.filter.categoryBits = Main.DERECHA_BIT;
-		fdef.shape = derecha;
-		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData(this);
-		
-		// colision izquierda
-		EdgeShape izquierda = new EdgeShape();
-		izquierda.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), 
-				new Vector2(-11/ Main.PPM, -10/Main.PPM));
-		fdef.filter.categoryBits = Main.IZQUIERDA_BIT;
-		fdef.shape = izquierda;
-		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData(this);
-		
-		// colision abajo
-		EdgeShape porDeBajo = new EdgeShape();
-		porDeBajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), 
-				new Vector2(2/ Main.PPM, -12/Main.PPM));
-		fdef.filter.categoryBits = Main.POR_DEBAJO_BIT;
-		fdef.shape = porDeBajo;
-		fdef.isSensor = true;
-		b2body.createFixture(fdef).setUserData(this);
+//		// colision derecha
+//		EdgeShape derecha = new EdgeShape();
+//		derecha.set(new Vector2(11/ Main.PPM, -10/Main.PPM), 
+//				new Vector2(11/ Main.PPM, 10/Main.PPM));
+//		fdef.filter.categoryBits = Main.DERECHA_BIT;
+//		fdef.shape = derecha;
+//		fdef.isSensor = true;
+//		b2body.createFixture(fdef).setUserData(this);
+//		
+//		// colision izquierda
+//		EdgeShape izquierda = new EdgeShape();
+//		izquierda.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), 
+//				new Vector2(-11/ Main.PPM, -10/Main.PPM));
+//		fdef.filter.categoryBits = Main.IZQUIERDA_BIT;
+//		fdef.shape = izquierda;
+//		fdef.isSensor = true;
+//		b2body.createFixture(fdef).setUserData(this);
+//		
+//		// colision abajo
+//		EdgeShape porDeBajo = new EdgeShape();
+//		porDeBajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), 
+//				new Vector2(2/ Main.PPM, -12/Main.PPM));
+//		fdef.filter.categoryBits = Main.POR_DEBAJO_BIT;
+//		fdef.shape = porDeBajo;
+//		fdef.isSensor = true;
+//		b2body.createFixture(fdef).setUserData(this);
 	}
 
 	

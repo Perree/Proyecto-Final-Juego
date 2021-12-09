@@ -108,34 +108,73 @@ public class PantallaJuego implements Screen{
 	//mover la posicion de la camara hacia la derecha
 	private void handleInput(float dt) {
 		
-		// controlar a nuestro jugador mediante impulsos
-		if(jugador1.currentState != Fumiko.State.DEAD) {
+
 			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 				hc.enviarMensaje("ApreteArriba");
-//				jugador1.jump();
-			}	
-				
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2) {
-//				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
-				hc.enviarMensaje("ApreteDerecha");
-			}	
-			
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2) {
-				hc.enviarMensaje("ApreteIzquierda");
-//				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+			} else {
+				hc.enviarMensaje("NoApreteArriba");
 			}
-				
-		}
+			
+			// getLinearVelocity es para que fumiko no se mueva mas rapido del limite de velocidad que le ponga 
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2 && jugador2.b2body.getLinearVelocity().x <=2) {
+				hc.enviarMensaje("ApreteDerecha");
+			} else {
+				hc.enviarMensaje("NoApreteDerecha");
+			}
+			
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2 && jugador2.b2body.getLinearVelocity().x >=-2) {
+				hc.enviarMensaje("ApreteIzquierda");
+			} else {
+				hc.enviarMensaje("NoApreteIzquierda");
+			}
 		
+		// controlar a nuestro jugador mediante impulsos
+//		if(jugador1.currentState != Fumiko.State.DEAD) {
+//			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+//				hc.enviarMensaje("ApreteArriba");
+////				jugador1.jump();
+//			} else {
+//				hc.enviarMensaje("NoApreteArriba");
+//			}
+//				
+//			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2) {
+////				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+//				hc.enviarMensaje("ApreteDerecha");
+//			} else {
+//				hc.enviarMensaje("NoApreteDerecha");
+//			}
+//			
+//			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2) {
+//				hc.enviarMensaje("ApreteIzquierda");
+////				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+//			} else {
+//				hc.enviarMensaje("NoApreteIzquierda");
+//			}
+//				
+//		}
+//		
 //		if(jugador2.currentState != Fumiko.State.DEAD) {
-//			if(Gdx.input.isKeyJustPressed(Input.Keys.W))
-//				jugador2.jump();
+//			if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+//				hc.enviarMensaje("ApreteArriba");
+////				jugador2.jump();
+//			} else {
+//				hc.enviarMensaje("NoApreteArriba");
+//			}
+//				
 //			
-//			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2)
-//				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-//			
-//			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2)
-//				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2) {
+//				hc.enviarMensaje("ApreteDerecha");
+////				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//			} else {
+//				hc.enviarMensaje("NoApreteDerecha");
+//			}
+//				
+//			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2) {
+//				hc.enviarMensaje("ApreteIzquierda");
+////				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//			} else {
+//				hc.enviarMensaje("NoApreteIzquierda");
+//			}
 //		}
 		
 	}
@@ -200,7 +239,7 @@ public class PantallaJuego implements Screen{
 		
 		//Cuando el personaje se cae en la lava
 		if (jugador2.getY() < 0) {
-			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
 //			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
@@ -208,15 +247,15 @@ public class PantallaJuego implements Screen{
 		// Pinches 1
 		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
 				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
-			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
+//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
 		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
 				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
-			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
 //			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
@@ -224,7 +263,7 @@ public class PantallaJuego implements Screen{
 		// Pinches 3
 		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
 				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
-			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
+//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
 //			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}

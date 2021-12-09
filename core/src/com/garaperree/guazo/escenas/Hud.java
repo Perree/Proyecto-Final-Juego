@@ -33,8 +33,6 @@ public class Hud implements Disposable{
 	
 	public Hud(SpriteBatch sb) {
 		
-		//TODO como hacer para que el hud se quede quieto
-		
 		// Variables
 		worldTimer = 50;
 		timeCount = 0;
@@ -47,14 +45,14 @@ public class Hud implements Disposable{
 		table.top();
 		table.setFillParent(true);
 		
-		//TODO boton de salir y boton de pausa
+
 		
 		countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		nivelLabel = new Label(String.format("%02d",nivel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		worldLabel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
-		// agregar los labels, padding top
+		// agrega los labels, padding top
 		table.add(worldLabel).expandX().padTop(10);
 		table.add(timeLabel).expandX().padTop(10);
 		
