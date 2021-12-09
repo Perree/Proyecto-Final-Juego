@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.cliente.HiloCliente;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.utiles.B2WorldCreator;
@@ -45,6 +46,8 @@ public class PantallaJuego implements Screen{
 	private Fumiko jugador1, jugador2;
 	
 	private Music music;
+	
+	private HiloCliente hc;
 	
 	public PantallaJuego(Main game) {
 		
@@ -108,14 +111,17 @@ public class PantallaJuego implements Screen{
 		// controlar a nuestro jugador mediante impulsos
 		if(jugador1.currentState != Fumiko.State.DEAD) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+				hc.enviarMensaje("ApreteArriba");
 //				jugador1.jump();
 			}	
 				
 			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2) {
 //				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+				hc.enviarMensaje("ApreteDerecha");
 			}	
 			
 			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2) {
+				hc.enviarMensaje("ApreteIzquierda");
 //				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
 			}
 				

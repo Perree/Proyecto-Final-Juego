@@ -139,12 +139,12 @@ public class Fumiko extends Sprite{
 			return State.STANDING;
 	}
 	
-	public void jump(){
-        if (currentState != State.JUMPING) {
-            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-            currentState = State.JUMPING;
-        }
-    }
+//	public void jump(){
+//        if (currentState != State.JUMPING) {
+//            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+//            currentState = State.JUMPING;
+//        }
+//    }
 
 	private void defineFumiko() {
 		BodyDef bdef = new BodyDef();
