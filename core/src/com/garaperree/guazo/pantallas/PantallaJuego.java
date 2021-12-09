@@ -107,26 +107,30 @@ public class PantallaJuego implements Screen{
 		
 		// controlar a nuestro jugador mediante impulsos
 		if(jugador1.currentState != Fumiko.State.DEAD) {
-			if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
-				jugador1.jump();
+			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+//				jugador1.jump();
+			}	
+				
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2) {
+//				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+			}	
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2)
-				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
-			
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2)
-				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2) {
+//				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+			}
+				
 		}
 		
-		if(jugador2.currentState != Fumiko.State.DEAD) {
-			if(Gdx.input.isKeyJustPressed(Input.Keys.W))
-				jugador2.jump();
-			
-			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2)
-				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-			
-			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2)
-				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-		}
+//		if(jugador2.currentState != Fumiko.State.DEAD) {
+//			if(Gdx.input.isKeyJustPressed(Input.Keys.W))
+//				jugador2.jump();
+//			
+//			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2)
+//				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//			
+//			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2)
+//				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//		}
 		
 	}
 	
@@ -141,9 +145,9 @@ public class PantallaJuego implements Screen{
 		jugador2.update(dt);
 		hud.update(dt);
 		
-		//jugador 1
+		// jugador 1
 		
-		//Cuando el personaje se cae en la lava
+		// Cuando el personaje se cae en la lava
 		if (jugador1.getY() < 0) {
 			//sonido
 //			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
