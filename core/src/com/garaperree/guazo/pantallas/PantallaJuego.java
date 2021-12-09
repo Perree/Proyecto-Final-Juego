@@ -186,8 +186,8 @@ public class PantallaJuego implements Screen{
 		// toma 1 paso en fisicas (60 veces por segundo)
 		world.step(1/60f, 6, 2);
 		
-		jugador1.update(dt);
-		jugador2.update(dt);
+//		jugador1.update(dt);
+//		jugador2.update(dt);
 		hud.update(dt);
 		
 		// jugador 1

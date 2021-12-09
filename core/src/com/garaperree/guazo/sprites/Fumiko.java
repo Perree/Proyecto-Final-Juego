@@ -76,11 +76,11 @@ public class Fumiko extends Sprite{
 	
 
 
-	public void update(float dt) {
-		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
-		this.setOriginCenter();
-		setRegion(getFrame(dt));
-	}
+//	public void update(float dt) {
+//		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
+//		this.setOriginCenter();
+//		setRegion(getFrame(dt));
+//	}
 	
 	// con este metodo obtenemos el frame exacto dependiendo lo que el jugador este haciendo
 	public TextureRegion getFrame(float dt) {
