@@ -1,7 +1,9 @@
 package com.garaperree.guazo.pantallas;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.garaperree.guazo.Main;
 import com.garaperree.guazo.diseños.Imagen;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.utiles.Render;
@@ -14,6 +16,13 @@ public class PantallaCarga implements Screen{
 	float a = 0;
 	float contTiempo = 0, tiempoEspera = 5;
 	float contTiempoTermina = 0, tiempoTermina = 0;
+	private Game game;
+	
+	
+
+	public PantallaCarga(Game game) {
+		this.game = game;
+	}
 
 	@Override
 	public void show() {
@@ -56,7 +65,7 @@ public class PantallaCarga implements Screen{
 		if(termina) {
 			contTiempoTermina += 0.04f;
 			if(contTiempoTermina>tiempoTermina) {
-				setScreen(new PantallaJuego(null));
+				game.setScreen(new PantallaJuego((Main) game));
 			}
 		}
 	}

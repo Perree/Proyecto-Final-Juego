@@ -1,9 +1,11 @@
 package com.garaperree.guazo.pantallas;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.garaperree.guazo.Main;
 import com.garaperree.guazo.diseños.Config;
 import com.garaperree.guazo.diseños.Imagen;
 import com.garaperree.guazo.diseños.Recursos;
@@ -24,6 +26,7 @@ public class PantallaMenu implements Screen {
 	boolean mouseArriba = false;
 	public float tiempo = 0;
 	
+	private Game game;
 
 	Entradas entradas = new Entradas(this);
 	
@@ -112,7 +115,7 @@ public class PantallaMenu implements Screen {
 		
 		if(entradas.isEnter() || (entradas.isClick())) {
 			if(((opc==1) && (entradas.isEnter())) || ((opc==1) && (entradas.isClick())&&(mouseArriba))) {
-				Render.app.setScreen(new PantallaJuego());
+				((Game) Render.sr).setScreen(new PantallaJuego((Main) game)); 
 			}else if(((opc==4) && (entradas.isEnter())) || ((opc==4) && (entradas.isClick())&&(mouseArriba))) {
 				Gdx.app.exit();
 			}
