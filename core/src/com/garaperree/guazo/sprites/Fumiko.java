@@ -75,14 +75,14 @@ public class Fumiko extends Sprite{
 	}
 	
 
-
+	// Se va actualizando la posicion del personaje
 	public void update(float dt) {
 		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
 		this.setOriginCenter();
 		setRegion(getFrame(dt));
 	}
 	
-	// con este metodo obtenemos el frame exacto dependiendo lo que el jugador este haciendo
+	// Obtengo el frame exacto dependiendo lo que el jugador este haciendo
 	public TextureRegion getFrame(float dt) {
 		currentState = getState();
 		
@@ -96,8 +96,8 @@ public class Fumiko extends Sprite{
 			region = (TextureRegion) fumikoRun.getKeyFrame(stateTimer, true);
 			break;
 			
-		case FALLING:
-		case STANDING:
+//		case FALLING:
+//		case STANDING:
 			
 		default:
 			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
@@ -129,8 +129,8 @@ public class Fumiko extends Sprite{
 		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
 			return State.JUMPING;
 		
-		else if(b2body.getLinearVelocity().y < 0) 
-			return State.FALLING;
+//		else if(b2body.getLinearVelocity().y < 0) 
+//			return State.FALLING;
 		
 		else if(b2body.getLinearVelocity().x != 0)
 			return State.RUNNING;
@@ -146,6 +146,7 @@ public class Fumiko extends Sprite{
 //        }
 //    }
 
+	// Definimos el cuerpo, flitros y colisiones
 	private void defineFumiko() {
 		BodyDef bdef = new BodyDef();
 		bdef.position.set(128/Main.PPM, 512/Main.PPM);
@@ -158,6 +159,7 @@ public class Fumiko extends Sprite{
 		// Cuan grande es el circulo
 		shape.setRadius(12/Main.PPM);
 		
+		// Filtros
 		fdef.filter.categoryBits = Main.FUMIKO_BIT;
 		fdef.filter.maskBits = 
 				Main.DEFAULT_BIT | 

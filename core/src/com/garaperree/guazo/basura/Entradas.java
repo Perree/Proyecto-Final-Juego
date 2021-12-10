@@ -1,9 +1,7 @@
-package com.garaperree.guazo.io;
+package com.garaperree.guazo.basura;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.garaperree.guazo.diseños.Config;
-import com.garaperree.guazo.pantallas.PantallaMenu;
 
 public class Entradas implements InputProcessor {
 	private boolean abajo = false, arriba = false;

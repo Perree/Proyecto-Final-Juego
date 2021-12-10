@@ -1,4 +1,4 @@
-package com.garaperree.guazo.utiles;
+package com.garaperree.guazo.sprites.Objetos;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -11,9 +11,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.sprites.Objetos.Lava;
-import com.garaperree.guazo.sprites.Objetos.Meta;
-import com.garaperree.guazo.sprites.Objetos.Pinches;
 
 public class B2WorldCreator {
 	public B2WorldCreator(PantallaJuego screen) {

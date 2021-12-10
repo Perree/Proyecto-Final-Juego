@@ -16,6 +16,7 @@ public class Hud implements Disposable{
 	
 	// Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
 	public Stage stage; 
+	
 	// Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
 	private Viewport viewport; 
 	
@@ -23,7 +24,6 @@ public class Hud implements Disposable{
 	private Integer worldTimer;
 	private static Integer nivel;
 	private float timeCount;
-	
 	
 	// Scene2d widgets
 	private Label countdownLabel;
@@ -41,27 +41,28 @@ public class Hud implements Disposable{
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, sb); 
 		
+		// Creando tabla
 		Table table = new Table(); 
 		table.top();
 		table.setFillParent(true);
 		
 
-		
+		// Creando los labels
 		countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		nivelLabel = new Label(String.format("%02d",nivel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		worldLabel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		
-		// agrega los labels, padding top
+		// Agrega los labels, padding top
 		table.add(worldLabel).expandX().padTop(10);
 		table.add(timeLabel).expandX().padTop(10);
 		
-		// agrega una segundo fila
+		// Agrega una segundo fila
 		table.row();
 		table.add(nivelLabel).expandX();
 		table.add(countdownLabel).expandX();		
 		
-		//agrega tabla al stage
+		// Agrega tabla al stage
 		stage.addActor(table);
 		
 	}
@@ -78,19 +79,12 @@ public class Hud implements Disposable{
         }
 	}
 
-	public static void pasaNivel(int value){
-		//TODO agregar este metodo al momento de que el jugar llegue a la meta y cambie de mapa
-		
-		nivel += value;
-		nivelLabel.setText(String.format("%02d",nivel));
-	}
-
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		stage.dispose();	
 	}
 
+	// Lo utilizo para poder obtener el tiempo 
 	public Integer getWorldTimer() {
 		return worldTimer;
 	}

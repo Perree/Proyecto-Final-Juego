@@ -1,6 +1,5 @@
 package com.garaperree.guazo.utiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -20,6 +19,7 @@ public class WorldContactListener implements ContactListener {
 		int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 		
 		switch (cDef){
+			// El shape que esta debajo del personaje colision con la Meta, Pinches y Lava
 	        case Main.POR_DEBAJO_BIT | Main.META_BIT:
 	        case Main.POR_DEBAJO_BIT | Main.PINCHES_BIT:
 	        case Main.POR_DEBAJO_BIT | Main.LAVA_BIT:
@@ -28,6 +28,8 @@ public class WorldContactListener implements ContactListener {
 	            else
 	            	((ObjetosInteractivos) fixA.getUserData()).contactColision((Fumiko) fixB.getUserData());
 	            break;
+	            
+            // El shape que esta a la derecha del personaje colision con la Meta, Pinches y Lava
 	        case Main.DERECHA_BIT| Main.META_BIT:
 	        case Main.DERECHA_BIT| Main.PINCHES_BIT:
 	        case Main.DERECHA_BIT| Main.LAVA_BIT: 
@@ -36,6 +38,8 @@ public class WorldContactListener implements ContactListener {
 	            else
 	            	((ObjetosInteractivos) fixA.getUserData()).contactColision((Fumiko) fixB.getUserData());
 	            break;
+	            
+	        // El shape que esta a la izquierda del personaje colision con la Meta, Pinches y Lava
 	        case Main.IZQUIERDA_BIT | Main.META_BIT:
 	        case Main.IZQUIERDA_BIT | Main.PINCHES_BIT:
 	        case Main.IZQUIERDA_BIT | Main.LAVA_BIT:
@@ -49,7 +53,6 @@ public class WorldContactListener implements ContactListener {
 
 	@Override
 	public void endContact(Contact contact) {
-		Gdx.app.log("End Contact", "");
 	}
 
 	@Override

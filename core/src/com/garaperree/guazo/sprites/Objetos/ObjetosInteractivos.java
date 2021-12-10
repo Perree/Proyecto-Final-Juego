@@ -26,7 +26,7 @@ public abstract class ObjetosInteractivos {
 	protected PantallaJuego screen;
 	protected MapObject object;
 	
-	
+	// Definimos los objetos con los cuales el personaje va a interactuar
 	public ObjetosInteractivos(PantallaJuego screen, MapObject object) {
 		this.object = object;
         this.screen = screen;
@@ -51,8 +51,10 @@ public abstract class ObjetosInteractivos {
 		
 	}
 	
+	// Metodo que detecta cuando hay colision
 	public abstract void contactColision(Fumiko fumiko);
 	
+	// Seteamos el filtro
 	public void setCategoryFilter(short filterBit) {
 		Filter filter = new Filter();
 		filter.categoryBits = filterBit;

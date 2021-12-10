@@ -1,4 +1,4 @@
-package com.garaperree.guazo.pantallas;
+package com.garaperree.guazo.basura;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -6,11 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.Main;
-import com.garaperree.guazo.diseños.Config;
-import com.garaperree.guazo.diseños.Imagen;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.diseños.Texto;
-import com.garaperree.guazo.io.Entradas;
+import com.garaperree.guazo.pantallas.PantallaJuego;
 import com.garaperree.guazo.utiles.Render;
 
 

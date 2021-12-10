@@ -1,4 +1,4 @@
-package com.garaperree.guazo.diseños;
+package com.garaperree.guazo.basura;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;

@@ -3,7 +3,6 @@ package com.garaperree.guazo.pantallas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -19,40 +18,41 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.cliente.HiloCliente;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.utiles.B2WorldCreator;
+import com.garaperree.guazo.sprites.Objetos.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
-
-	//Referenciar a nuestro Juego, para setear las pantallas
+	// Referenciar a nuestro Juego, para setear las pantallas
 	private Main game;
 	private TextureAtlas atlas;
 	
+	// Red
 	private HiloCliente hc;
 	
+	// Control de camara
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
-	public Hud hud;
+	
+	// Overlays Lo CAMBIE A PRIVADO !!GUARDA!!
+	private Hud hud;
 	
 	// Variables del Tiled map
 	private TmxMapLoader maploader;
 	private TiledMap map;
-	private OrthogonalTiledMapRenderer renderer; // dibuja el mapa
+	private OrthogonalTiledMapRenderer renderer; // Dibuja el mapa
 	
-	//Variables de Box2d
+	// Variables de Box2d
 	private World world;
 	private Box2DDebugRenderer b2dr;
 	
-	//Referenciar a nuestro personaje principal (sprites)
+	// Referenciar a nuestro personaje principal (sprites)
 	private Fumiko jugador1, jugador2;
 	
-	private Music music;
-	
 	public PantallaJuego(Main game, HiloCliente hc) {
-		
 		this.hc = hc;
 		this.game = game;
 		
+		// Carga las texturas del personaje
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
 		
 		// Crea una camara para seguir al personaje a traves del mundo
@@ -61,7 +61,7 @@ public class PantallaJuego implements Screen{
 		// Crea un FitViewport para mantenar el aspecto virtual
 		gamePort = new FitViewport(Main.V_WIDTH/Main.PPM, Main.V_HEIGHT/Main.PPM, gamecam);
 		
-		// Crea una hud para puntos/tiempos/niveles
+		// Crea un hud para puntos/tiempos/niveles
 		hud = new Hud(game.batch); 
 		
 		//cargando el mapa
@@ -69,7 +69,7 @@ public class PantallaJuego implements Screen{
 		map = maploader.load("mapas/nivel1/nivel1.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/Main.PPM);	
 	
-		// inicializando la camara del juego para poder estar centrado al comienzo
+		// Inicializando la camara del juego para poder estar centrado al comienzo
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 		
 		// Crea el box2d world, sin gravedad en el eje x, -10 en el eje, permitiendo que los cuerpos descansen
@@ -78,18 +78,15 @@ public class PantallaJuego implements Screen{
 		// Permite hacer los debugs de nuestro box2d world
 		b2dr = new Box2DDebugRenderer();
 		
+		// Crea los objetos para poder ser colisionados 
 		new B2WorldCreator(this);
 		
-		// crear personajes en nuestro juego
+		// Crear personajes en nuestro juego
 		jugador1 = new Fumiko(this);
 		jugador2 = new Fumiko(this);
 		
+		// Momento al colisionar
 		world.setContactListener(new WorldContactListener());
-		
-//		music = Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-//		music.setLooping(true);
-//		music.setVolume(0.1f);
-//		music.play();
 		
 	}
 
@@ -101,14 +98,13 @@ public class PantallaJuego implements Screen{
 	@Override
 	public void show() {
 		
-		
 	}
 	
 	//mover la posicion de la camara hacia la derecha
 	private void handleInput(float dt) {
 		
-		if(jugador1.currentState != Fumiko.State.DEAD 
-				&& jugador2.currentState != Fumiko.State.DEAD) {
+//		if(jugador1.currentState != Fumiko.State.DEAD 
+//				&& jugador2.currentState != Fumiko.State.DEAD) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 				hc.enviarMensaje("ApreteArriba");
 			} else {
@@ -131,57 +127,36 @@ public class PantallaJuego implements Screen{
 			} else {
 				hc.enviarMensaje("NoApreteIzquierda");
 			}
-		}
+//		}
 		
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
 //			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-//				hc.enviarMensaje("ApreteArriba");
-////				jugador1.jump();
-//			} else {
-//				hc.enviarMensaje("NoApreteArriba");
+//				jugador1.jump();
 //			}
 //				
 //			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2) {
-////				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
-//				hc.enviarMensaje("ApreteDerecha");
-//			} else {
-//				hc.enviarMensaje("NoApreteDerecha");
+//				jugador1.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador1.b2body.getWorldCenter(), true);
 //			}
 //			
 //			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2) {
-//				hc.enviarMensaje("ApreteIzquierda");
-////				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
-//			} else {
-//				hc.enviarMensaje("NoApreteIzquierda");
-//			}
-//				
+//				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
+//			}	
 //		}
 //		
 //		if(jugador2.currentState != Fumiko.State.DEAD) {
 //			if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-//				hc.enviarMensaje("ApreteArriba");
-////				jugador2.jump();
-//			} else {
-//				hc.enviarMensaje("NoApreteArriba");
-//			}
-//				
+//				jugador2.jump();
+//			}	
 //			
 //			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2) {
-//				hc.enviarMensaje("ApreteDerecha");
-////				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-//			} else {
-//				hc.enviarMensaje("NoApreteDerecha");
+//				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
 //			}
 //				
 //			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2) {
-//				hc.enviarMensaje("ApreteIzquierda");
-////				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-//			} else {
-//				hc.enviarMensaje("NoApreteIzquierda");
-//			}
+//				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
+//			} 
 //		}
-		
 	}
 	
 	public void update(float dt) {
@@ -191,123 +166,80 @@ public class PantallaJuego implements Screen{
 		// toma 1 paso en fisicas (60 veces por segundo)
 		world.step(1/60f, 6, 2);
 		
-//		jugador1.update(dt);
-//		jugador2.update(dt);
+		jugador1.update(dt);
+		jugador2.update(dt);
 		hud.update(dt);
 		
-		// jugador 1
+		jugadorGanaMuere();
 		
+		// Sigue la camara del jugador (no lo necesitamos)
+//		gamecam.position.x = fumiko.b2body.getPosition().x;
+		
+		// Actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
+		gamecam.update();
+		
+		// Renderiza lo que la camara puede ver
+		renderer.setView(gamecam);
+	}
+
+	private void jugadorGanaMuere() {
 		// Cuando el personaje se cae en la lava
 		if (jugador1.getY() < 0) {
-			//sonido
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 1
 		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
 				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
 		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
 				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 3
 		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
 				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador1.currentState = Fumiko.State.DEAD;
 		}
-
-		System.out.println("X: "+ jugador1.getX()+"Y: "+jugador1.getY());
 		
 		// Usamos la ubicacion del personaje para poder determinar la meta
 		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
 				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador1.llegoSalida();
-			
 		}
-		
-		//jugador 2
 		
 		//Cuando el personaje se cae en la lava
 		if (jugador2.getY() < 0) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 1
 		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
 				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 2
 		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
 				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
 		
 		// Pinches 3
 		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
 				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sfx/muere.wav", Sound.class).play();
 			jugador2.currentState = Fumiko.State.DEAD;
 		}
-
-		System.out.println("X: "+ jugador2.getX()+"Y: "+jugador2.getY());
 		
 		// Usamos la ubicacion del personaje para poder determinar la meta
 		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
 				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
-			//sonido
-//			Main.manager.get("audio/music/MatWyre_Deep_Dawn.mp3", Music.class).stop();
-//			Main.manager.get("audio/sounds/next_level.wav", Sound.class).play();
 			jugador2.llegoSalida();
 		}
-		
-		//Meta
-		//X: 1.649973Y: 1.4649998
-		//X: 1.3461664Y: 1.465
-		
-		//Pinches 1
-		//X: 2.4297383Y: 4.9849987
-		//X: 2.8150024Y: 4.984998
-		
-		//Pinches 2
-		//X: 4.9849987 Y: 4.9849997
-		//X: 6.335001 Y: 4.9849997
-
-		//Pinches 3
-		//X: 5.1250024Y: 4.9849987
-		//X: 5.5542116Y: 1.4649998
-		
-		//Sigue la camara del jugador (no lo necesitamos)
-//		gamecam.position.x = fumiko.b2body.getPosition().x;
-		
-		//actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
-		gamecam.update();
-		
-		//renderiza lo que la camara puede ver
-		renderer.setView(gamecam);
 	}
 
 

@@ -1,11 +1,9 @@
 package com.garaperree.guazo;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.cliente.HiloCliente;
-import com.garaperree.guazo.diseños.Config;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.pantallas.PantallaJuego;
@@ -33,39 +31,33 @@ public class Main extends Game {
 	public static final short POR_DEBAJO_BIT = 512;
 	
 	public SpriteBatch batch;
-
-	public static AssetManager manager;
 	
+	// Diseños
 	private Texto espera;
 	
+	// Red
 	private HiloCliente hc;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		
+		// Texto para la conexion
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
 		espera.setTexto("Esperando jugadores...");
-		espera.setPosition((Config.ANCHO/2)-(espera.getAncho()/2), (Config.ALTO/2)+(espera.getAlto()/2));
+		espera.setPosition((V_WIDTH/2)-(espera.getAncho()/2), (V_HEIGHT/2)+(espera.getAlto()/2));
 		
-		//hilo cliente
+		// hilo cliente
 		hc = new HiloCliente();
 		hc.start();
-		
-//		manager = new AssetManager();
-//		manager.load("audio/music/MatWyre_Deep_Dawn.mp3", Music.class);
-////		manager.load("audio/sfx/muere.wav", Sound.class);
-////		manager.load("audio/sfx/next_level.wav", Sound.class);
-//		manager.finishLoading();
-		
-//		this.setScreen(new PantallaCarga());
+
 		setScreen(new PantallaJuego(this, hc));
 	}
 
 	@Override
 	public void render () {
 		Render.limpiarPantalla();
-		if(!Global.empieza) {		
+		if(Global.empieza) {		
 			Render.begin();
 			espera.dibujar();
 			Render.end();
@@ -78,7 +70,6 @@ public class Main extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-//		manager.dispose();
 		batch.dispose();
 	}
 }
