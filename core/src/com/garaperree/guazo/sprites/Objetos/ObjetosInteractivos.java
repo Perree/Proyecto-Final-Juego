@@ -34,8 +34,6 @@ public abstract class ObjetosInteractivos {
 		this.map = screen.getMap();
 		this.bounds = ((RectangleMapObject) object).getRectangle();
 		
-		
-		
 		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 		PolygonShape shape = new PolygonShape();
@@ -48,7 +46,6 @@ public abstract class ObjetosInteractivos {
 		shape.setAsBox(bounds.getWidth()/2/Main.PPM, bounds.getHeight()/2/Main.PPM);
 		fdef.shape = shape;
 		fixture = body.createFixture(fdef);
-		
 	}
 	
 	// Metodo que detecta cuando hay colision

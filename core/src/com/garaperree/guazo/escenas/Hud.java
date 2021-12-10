@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
 public class Hud implements Disposable{
-	
 	// Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
 	public Stage stage; 
 	
@@ -31,8 +30,7 @@ public class Hud implements Disposable{
 	private static Label nivelLabel;
 	private Label worldLabel;
 	
-	public Hud(SpriteBatch sb) {
-		
+	public Hud(SpriteBatch sb) {	
 		// Variables
 		worldTimer = 50;
 		timeCount = 0;

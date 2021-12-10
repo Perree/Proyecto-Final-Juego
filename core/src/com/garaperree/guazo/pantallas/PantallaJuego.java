@@ -87,7 +87,6 @@ public class PantallaJuego implements Screen{
 		
 		// Momento al colisionar
 		world.setContactListener(new WorldContactListener());
-		
 	}
 
 	
@@ -97,10 +96,9 @@ public class PantallaJuego implements Screen{
 	
 	@Override
 	public void show() {
-		
 	}
 	
-	//mover la posicion de la camara hacia la derecha
+	// Controlar jugador
 	private void handleInput(float dt) {
 		
 //		if(jugador1.currentState != Fumiko.State.DEAD 
@@ -160,10 +158,10 @@ public class PantallaJuego implements Screen{
 	}
 	
 	public void update(float dt) {
-		// maneja la entradas del usuario
+		// Maneja la entradas del usuario
 		handleInput(dt);
 		 
-		// toma 1 paso en fisicas (60 veces por segundo)
+		// Toma 1 paso en fisicas (60 veces por segundo)
 		world.step(1/60f, 6, 2);
 		
 		jugador1.update(dt);
@@ -246,17 +244,17 @@ public class PantallaJuego implements Screen{
 	@Override
 	public void render(float delta) {
 		
-		//separa la actualizacion logica del renderizado
+		// Separa la actualizacion logica del renderizado
 		update(delta);
 		
-		// Limpear pantalla con negro
+		// Limpiar pantalla con negro
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 
 		
-		//renderizar el mapa del juego
+		// Renderizar el mapa del juego
 		renderer.render();
 		
-		//renderizar Box2DDebugRenderer
+		// Renderizar Box2DDebugRenderer
 		b2dr.render(world, gamecam.combined);
 		
 		game.batch.setProjectionMatrix(gamecam.combined);
@@ -265,11 +263,11 @@ public class PantallaJuego implements Screen{
 		jugador2.draw(game.batch);
 		game.batch.end();
 		
-		// setea el batch para dibujar el hud
+		// Setea el batch para dibujar el hud
 		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
 		
-		// si el tiempo se acaba, se termina el juego
+		// Si el tiempo se acaba, se termina el juego
 		if(hud.getWorldTimer()==0) {
 			finishing();
 		}
@@ -286,7 +284,7 @@ public class PantallaJuego implements Screen{
 			finishing(nombre);
 		}
 		
-		//El personaje perdio
+		// El personaje perdio
 		if(FinJuego()) {
 			finishing();
 		}
@@ -314,9 +312,8 @@ public class PantallaJuego implements Screen{
 	
 	@Override
 	public void resize(int width, int height) {
-		//actualizar nuestro viewport game
+		// Actualizar nuestro viewport game
 		gamePort.update(width, height);
-		
 	}
 	
 	public TiledMap getMap() {

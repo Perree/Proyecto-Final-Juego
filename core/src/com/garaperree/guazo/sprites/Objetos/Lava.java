@@ -17,5 +17,4 @@ public class Lava extends ObjetosInteractivos {
 	public void contactColision(Fumiko fumiko) {
 		setCategoryFilter(Main.DESTROYED_BIT);
 	}
-
 }

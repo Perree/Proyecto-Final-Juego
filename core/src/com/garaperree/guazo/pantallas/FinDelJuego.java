@@ -16,12 +16,10 @@ import com.garaperree.guazo.Main;
 import com.garaperree.guazo.cliente.HiloCliente;
 
 public class FinDelJuego implements Screen{
-
 	private Viewport viewport;
 	private Stage stage;
 	private Game game;
 	private HiloCliente hc;
-	
 	
 	public FinDelJuego(Game game, String nombre) {
 		this.game = game;
@@ -71,7 +69,6 @@ public class FinDelJuego implements Screen{
 
 	@Override
 	public void show() {
-		
 	}
 
 	@Override
@@ -84,33 +81,27 @@ public class FinDelJuego implements Screen{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.draw();
-		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		
 	}
 
 	@Override
 	public void pause() {
-		
 	}
 
 	@Override
 	public void resume() {
-		
 	}
 
 	@Override
 	public void hide() {
-		
 	}
 
 	@Override
 	public void dispose() {
 		stage.dispose();
-		
 	}
 
 }

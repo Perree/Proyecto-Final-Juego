@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Render {
-	
 	public static SpriteBatch sb = new SpriteBatch();
 	public static ShapeRenderer sr = new ShapeRenderer();
 
-	
 	public static void limpiarPantalla() {
 		Gdx.gl.glClearColor(0,0,0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

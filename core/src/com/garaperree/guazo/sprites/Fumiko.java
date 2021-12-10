@@ -38,43 +38,41 @@ public class Fumiko extends Sprite{
 	public Fumiko(PantallaJuego screen) {
 		super(screen.getAtlas().findRegion("fumiko"));
 		
-		// variables
 		this.world = screen.getWorld();
 //		currentState = State.STANDING;
 //		previousState = State.STANDING;
 		stateTimer = 0;
 		runningRight = true;
 		
-		// metemos los frames de la animacion a un array
+		// Metemos los frames de la animacion a un array
 		Array<TextureRegion> frames = new Array<TextureRegion>();
 		
-		//animacion Correr
+		// Animacion Correr
 		for (int i = 0; i < 6; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));
 			fumikoRun = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
-		//animacion Saltar
+		// Animacion Saltar
 		for (int i = 6; i < 10; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));
 			fumikoJump = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
-		//animacion Parado
+		// Animacion Parado
 		for (int i = 10; i < 14; i++) 
 			frames.add(new TextureRegion(getTexture(), i * 48, 14, 52, 52));	
 			fumikoStand = new Animation<Object>(0.1f, frames);
 			frames.clear();
 		
-		// definimos a fumiko en box2d
+		// Definimos a fumiko en box2d
 		defineFumiko();
 		
-		//seteamos los valores de posicion para fumiko
+		// Seteamos los valores de posicion para fumiko
 		setBounds(0, 0, 52 / Main.PPM, 52 / Main.PPM);
 //		setRegion(fumikoStand);
 	}
 	
-
 	// Se va actualizando la posicion del personaje
 	public void update(float dt) {
 		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
@@ -180,7 +178,7 @@ public class Fumiko extends Sprite{
 		fdef.isSensor = true;
 		b2body.createFixture(fdef).setUserData(this);
 		
-		// colision izquierda
+		// Colision izquierda
 		EdgeShape izquierda = new EdgeShape();
 		izquierda.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), 
 				new Vector2(-11/ Main.PPM, -10/Main.PPM));
@@ -189,7 +187,7 @@ public class Fumiko extends Sprite{
 		fdef.isSensor = true;
 		b2body.createFixture(fdef).setUserData(this);
 		
-		// colision abajo
+		// Colision abajo
 		EdgeShape porDeBajo = new EdgeShape();
 		porDeBajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), 
 				new Vector2(2/ Main.PPM, -12/Main.PPM));
@@ -199,7 +197,6 @@ public class Fumiko extends Sprite{
 		b2body.createFixture(fdef).setUserData(this);
 	}
 
-	
 	public float getStateTimer() {
 		return stateTimer;
 	}

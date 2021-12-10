@@ -47,7 +47,7 @@ public class Main extends Game {
 		espera.setTexto("Esperando jugadores...");
 		espera.setPosition((V_WIDTH/2)-(espera.getAncho()/2), (V_HEIGHT/2)+(espera.getAlto()/2));
 		
-		// hilo cliente
+		// Hilo cliente
 		hc = new HiloCliente();
 		hc.start();
 
