@@ -28,6 +28,8 @@ public class PantallaJuego implements Screen{
 	private Main game;
 	private TextureAtlas atlas;
 	
+	private HiloCliente hc;
+	
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	public Hud hud;
@@ -46,15 +48,14 @@ public class PantallaJuego implements Screen{
 	
 	private Music music;
 	
-	private HiloCliente hc;
-	
-	public PantallaJuego(Main game) {
+	public PantallaJuego(Main game, HiloCliente hc) {
+		
+		this.hc = hc;
+		this.game = game;
 		
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
 		
-		this.game = game;
-		
-		// Crea una camara para seguir al personaje a travez del mundo
+		// Crea una camara para seguir al personaje a traves del mundo
 		gamecam = new OrthographicCamera(); 
 		
 		// Crea un FitViewport para mantenar el aspecto virtual
@@ -81,7 +82,6 @@ public class PantallaJuego implements Screen{
 		
 		// crear personajes en nuestro juego
 		jugador1 = new Fumiko(this);
-		
 		jugador2 = new Fumiko(this);
 		
 		world.setContactListener(new WorldContactListener());

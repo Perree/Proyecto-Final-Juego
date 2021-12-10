@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.cliente.HiloCliente;
 import com.garaperree.guazo.diseños.Imagen;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.utiles.Render;
@@ -17,7 +18,7 @@ public class PantallaCarga implements Screen{
 	float contTiempo = 0, tiempoEspera = 5;
 	float contTiempoTermina = 0, tiempoTermina = 0;
 	private Game game;
-	
+	private HiloCliente hc; 
 	
 
 	public PantallaCarga(Game game) {
@@ -65,7 +66,7 @@ public class PantallaCarga implements Screen{
 		if(termina) {
 			contTiempoTermina += 0.04f;
 			if(contTiempoTermina>tiempoTermina) {
-				game.setScreen(new PantallaJuego((Main) game));
+				game.setScreen(new PantallaJuego((Main) game, hc));
 			}
 		}
 	}

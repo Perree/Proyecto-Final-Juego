@@ -59,7 +59,7 @@ public class Main extends Game {
 //		manager.finishLoading();
 		
 //		this.setScreen(new PantallaCarga());
-		setScreen(new PantallaJuego(this));
+		setScreen(new PantallaJuego(this, hc));
 	}
 
 	@Override
