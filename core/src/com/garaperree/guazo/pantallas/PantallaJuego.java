@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -108,7 +107,8 @@ public class PantallaJuego implements Screen{
 	//mover la posicion de la camara hacia la derecha
 	private void handleInput(float dt) {
 		
-
+		if(jugador1.currentState != Fumiko.State.DEAD 
+				&& jugador2.currentState != Fumiko.State.DEAD) {
 			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
 				hc.enviarMensaje("ApreteArriba");
 			} else {
@@ -116,17 +116,22 @@ public class PantallaJuego implements Screen{
 			}
 			
 			// getLinearVelocity es para que fumiko no se mueva mas rapido del limite de velocidad que le ponga 
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && jugador1.b2body.getLinearVelocity().x <=2 && jugador2.b2body.getLinearVelocity().x <=2) {
+			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
+					&& jugador1.b2body.getLinearVelocity().x <=2 
+					&& jugador2.b2body.getLinearVelocity().x <=2) {
 				hc.enviarMensaje("ApreteDerecha");
 			} else {
 				hc.enviarMensaje("NoApreteDerecha");
 			}
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && jugador1.b2body.getLinearVelocity().x >=-2 && jugador2.b2body.getLinearVelocity().x >=-2) {
+			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) 
+					&& jugador1.b2body.getLinearVelocity().x >=-2 
+					&& jugador2.b2body.getLinearVelocity().x >=-2) {
 				hc.enviarMensaje("ApreteIzquierda");
 			} else {
 				hc.enviarMensaje("NoApreteIzquierda");
 			}
+		}
 		
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
