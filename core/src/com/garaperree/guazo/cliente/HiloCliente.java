@@ -14,7 +14,7 @@ public class HiloCliente extends Thread {
 	
 	private DatagramSocket conexion;
 	private InetAddress ipServer;
-	private int puerto = 8080;
+	private int puerto = 8880;
 	boolean fin = false;
 	private PantallaJuego app;
 	
