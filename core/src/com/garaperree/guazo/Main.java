@@ -17,7 +17,7 @@ public class Main extends Game {
 	public static final int V_HEIGHT = 768;
 	public static final float PPM = 100;
 	
-	//Box2D Collision Bitsj
+	//Box2D Collision Bits
 	public static final short NOTHING_BIT = 0;
 	public static final short DEFAULT_BIT = 1;
 	public static final short FUMIKO_BIT = 2;
@@ -38,17 +38,19 @@ public class Main extends Game {
 	// Red
 	private HiloCliente hc;
 	
+	private PantallaJuego app;
+	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		
 		// Texto para la conexion
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
-		espera.setTexto("Esperando jugadores...");
+		espera.setTexto("Conectando...");
 		espera.setPosition((V_WIDTH/2)-(espera.getAncho()/2), (V_HEIGHT/2)+(espera.getAlto()/2));
 		
 		// Hilo cliente
-		hc = new HiloCliente();
+		hc = new HiloCliente(app);
 		hc.start();
 
 		setScreen(new PantallaJuego(this, hc));
@@ -57,7 +59,7 @@ public class Main extends Game {
 	@Override
 	public void render () {
 		Render.limpiarPantalla();
-		if(Global.empieza) {		
+		if(!Global.empieza) {		
 			Render.begin();
 			espera.dibujar();
 			Render.end();

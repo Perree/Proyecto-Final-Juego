@@ -4,8 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.garaperree.guazo.io.JuegoEventListener;
+
 public class Utiles {
 	
+	public static JuegoEventListener listener;
 	public static Random r = new Random();
 	public static Scanner s = new Scanner(System.in);
 	

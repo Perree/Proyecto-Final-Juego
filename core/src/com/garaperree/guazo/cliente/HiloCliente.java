@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import com.garaperree.guazo.pantallas.PantallaJuego;
 import com.garaperree.guazo.utiles.Global;
 
 public class HiloCliente extends Thread {
@@ -15,10 +16,12 @@ public class HiloCliente extends Thread {
 	private InetAddress ipServer;
 	private int puerto = 8080;
 	boolean fin = false;
+	private PantallaJuego app;
 	
-	public HiloCliente() {
+	public HiloCliente(PantallaJuego app) {
+		this.app = app;
 		try {
-			ipServer = InetAddress.getByName("192.168.0.77");
+			ipServer = InetAddress.getByName("192.168.0.47");
 			conexion = new DatagramSocket();
 		} catch (SocketException | UnknownHostException e) {
 			e.printStackTrace();
@@ -53,11 +56,24 @@ public class HiloCliente extends Thread {
 
 	private void procesarMensaje(DatagramPacket dp) {
 		String msg = (new String(dp.getData())).trim();
-		if(msg.equals("Ok")) {
-			ipServer = dp.getAddress();
-		} else if(msg.equals("Empieza")) {
-			System.out.println("Llega EMPIEZA");
-			Global.empieza = true; 
+		
+		String[] msgCompuesto = msg.split("-");
+		
+		if(msgCompuesto.length<2) {
+			if(msg.equals("Ok")) {
+				ipServer = dp.getAddress();
+			} else if(msg.equals("Empieza")) {
+				System.out.println("Llega EMPIEZA");
+				Global.empieza = true; 
+			}
+		} else {
+			if(msgCompuesto[0].equals("Actualizar")) {
+				if(msgCompuesto[1].equals("P1")) {
+					float posY = Float.parseFloat(msgCompuesto[2]);
+					app.getJugador1().setY(posY);
+				}
+			}
 		}
+		
 	}
 }

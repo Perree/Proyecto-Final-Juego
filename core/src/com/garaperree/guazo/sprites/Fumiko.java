@@ -137,12 +137,20 @@ public class Fumiko extends Sprite{
 			return State.STANDING;
 	}
 	
-//	public void jump(){
-//        if (currentState != State.JUMPING) {
-//            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-//            currentState = State.JUMPING;
-//        }
-//    }
+	public void jump(){
+        if (currentState != State.JUMPING) {
+            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
+            currentState = State.JUMPING;
+        }
+    }
+	
+	public void right(){
+		b2body.applyLinearImpulse(new Vector2(0.1f, 0),b2body.getWorldCenter(), true);
+    }
+	
+	public void left(){
+		b2body.applyLinearImpulse(new Vector2(-0.1f, 0),b2body.getWorldCenter(), true);
+    }
 
 	// Definimos el cuerpo, flitros y colisiones
 	private void defineFumiko() {

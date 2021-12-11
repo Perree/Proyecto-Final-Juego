@@ -1,7 +1,6 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.cliente.HiloCliente;
 import com.garaperree.guazo.escenas.Hud;
+import com.garaperree.guazo.io.KeyListener;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.Objetos.B2WorldCreator;
 import com.garaperree.guazo.utiles.WorldContactListener;
@@ -28,6 +28,9 @@ public class PantallaJuego implements Screen{
 	
 	// Red
 	private HiloCliente hc;
+	
+	// Control de las teclas
+	private KeyListener teclas;
 	
 	// Control de camara
 	private OrthographicCamera gamecam;
@@ -51,6 +54,12 @@ public class PantallaJuego implements Screen{
 	public PantallaJuego(Main game, HiloCliente hc) {
 		this.hc = hc;
 		this.game = game;
+		
+		// Hilo cliente
+		hc = new HiloCliente(this);
+		hc.start();
+		
+		teclas = new KeyListener(hc);
 		
 		// Carga las texturas del personaje
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
@@ -101,31 +110,17 @@ public class PantallaJuego implements Screen{
 	// Controlar jugador
 	private void handleInput(float dt) {
 		
-//		if(jugador1.currentState != Fumiko.State.DEAD 
-//				&& jugador2.currentState != Fumiko.State.DEAD) {
-			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-				hc.enviarMensaje("ApreteArriba");
-			} else {
-				hc.enviarMensaje("NoApreteArriba");
-			}
-			
-			// getLinearVelocity es para que fumiko no se mueva mas rapido del limite de velocidad que le ponga 
-			if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) 
-					&& jugador1.b2body.getLinearVelocity().x <=2 
-					&& jugador2.b2body.getLinearVelocity().x <=2) {
-				hc.enviarMensaje("ApreteDerecha");
-			} else {
-				hc.enviarMensaje("NoApreteDerecha");
-			}
-			
-			if(Gdx.input.isKeyPressed(Input.Keys.LEFT) 
-					&& jugador1.b2body.getLinearVelocity().x >=-2 
-					&& jugador2.b2body.getLinearVelocity().x >=-2) {
-				hc.enviarMensaje("ApreteIzquierda");
-			} else {
-				hc.enviarMensaje("NoApreteIzquierda");
-			}
-//		}
+		if(teclas.isUp()) {
+			hc.enviarMensaje("ApreteArriba");
+		}
+		
+		if(teclas.isRight()) {
+			hc.enviarMensaje("ApreteDerecha");
+		}
+		
+		if(teclas.isLeft()) {
+			hc.enviarMensaje("ApreteIzquierda");
+		}
 		
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
@@ -179,6 +174,16 @@ public class PantallaJuego implements Screen{
 		// Renderiza lo que la camara puede ver
 		renderer.setView(gamecam);
 	}
+
+	public Fumiko getJugador1() {
+		return jugador1;
+	}
+
+
+	public Fumiko getJugador2() {
+		return jugador2;
+	}
+
 
 	private void jugadorGanaMuere() {
 		// Cuando el personaje se cae en la lava
