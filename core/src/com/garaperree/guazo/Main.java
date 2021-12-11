@@ -1,14 +1,8 @@
 package com.garaperree.guazo;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.garaperree.guazo.cliente.HiloCliente;
-import com.garaperree.guazo.diseños.Recursos;
-import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.utiles.Global;
-import com.garaperree.guazo.utiles.Render;
 
 public class Main extends Game {
 
@@ -32,41 +26,16 @@ public class Main extends Game {
 	
 	public SpriteBatch batch;
 	
-	// Diseños
-	private Texto espera;
-	
-	// Red
-	private HiloCliente hc;
-	
-	private PantallaJuego app;
-	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-//		
-		// Texto para la conexion
-		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
-		espera.setTexto("Conectando...");
-		espera.setPosition((V_WIDTH/2)-(espera.getAncho()/2), (V_HEIGHT/2)+(espera.getAlto()/2));
-		
-		// Hilo cliente
-		hc = new HiloCliente(app);
-		hc.start();
-
-		setScreen(new PantallaJuego(this, hc));
+		setScreen(new PantallaJuego(this));
 	}
 
 	@Override
 	public void render () {
-		Render.limpiarPantalla();
-		if(!Global.empieza) {		
-			Render.begin();
-			espera.dibujar();
-			Render.end();
-		}else {
-			// delegar el metodo de render para la pantalla del juego
-			super.render(); 
-		}
+		// delegar el metodo de render para la pantalla del juego
+		super.render(); 
 	}
 	
 	@Override

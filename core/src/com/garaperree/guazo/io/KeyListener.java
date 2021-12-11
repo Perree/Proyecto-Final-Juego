@@ -3,7 +3,6 @@ package com.garaperree.guazo.io;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.garaperree.guazo.cliente.HiloCliente;
-import com.garaperree.guazo.utiles.Utiles;
 
 public class KeyListener implements InputProcessor {
 	
@@ -32,7 +31,7 @@ public class KeyListener implements InputProcessor {
 			hc.enviarMensaje("ApreteDerecha");
 		}
 		
-		Utiles.listener.keyDown(keycode);
+//		Utiles.listener.keyDown(keycode);
 		return false;
 	}
 
@@ -53,7 +52,7 @@ public class KeyListener implements InputProcessor {
 			hc.enviarMensaje("NoApreteDerecha");
 		}	
 		
-		Utiles.listener.keyUp(keycode);
+//		Utiles.listener.keyUp(keycode);
 		return false;
 	}
 

@@ -1,7 +1,9 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,10 +17,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 import com.garaperree.guazo.cliente.HiloCliente;
+import com.garaperree.guazo.diseños.Recursos;
+import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.io.KeyListener;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.Objetos.B2WorldCreator;
+import com.garaperree.guazo.utiles.Global;
+import com.garaperree.guazo.utiles.Render;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen{
@@ -28,6 +34,9 @@ public class PantallaJuego implements Screen{
 	
 	// Red
 	private HiloCliente hc;
+	
+	// Diseños
+	private Texto espera;
 	
 	// Control de las teclas
 	private KeyListener teclas;
@@ -51,13 +60,17 @@ public class PantallaJuego implements Screen{
 	// Referenciar a nuestro personaje principal (sprites)
 	private Fumiko jugador1, jugador2;
 	
-	public PantallaJuego(Main game, HiloCliente hc) {
-		this.hc = hc;
+	public PantallaJuego(Main game) {
 		this.game = game;
 		
 		// Hilo cliente
 		hc = new HiloCliente(this);
 		hc.start();
+		
+		// Texto para la conexion
+		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
+		espera.setTexto("Conectando...");
+		espera.setPosition((Main.V_WIDTH/2)-(espera.getAncho()/2), (Main.V_HEIGHT/2)+(espera.getAlto()/2));
 		
 		// Cuando el cliente deja de presionar la tecla 
 		teclas = new KeyListener(hc);
@@ -110,18 +123,6 @@ public class PantallaJuego implements Screen{
 	
 	// Controlar jugador
 	private void handleInput(float dt) {
-		
-		if(teclas.isUp()) {
-			hc.enviarMensaje("ApreteArriba");
-		}
-		
-		if(teclas.isRight()) {
-			hc.enviarMensaje("ApreteDerecha");
-		}
-		
-		if(teclas.isLeft()) {
-			hc.enviarMensaje("ApreteIzquierda");
-		}
 		
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
@@ -250,49 +251,56 @@ public class PantallaJuego implements Screen{
 	@Override
 	public void render(float delta) {
 		
-		// Separa la actualizacion logica del renderizado
-		update(delta);
-		
-		// Limpiar pantalla con negro
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 
-		
-		// Renderizar el mapa del juego
-		renderer.render();
-		
-		// Renderizar Box2DDebugRenderer
-		b2dr.render(world, gamecam.combined);
-		
-		game.batch.setProjectionMatrix(gamecam.combined);
-		game.batch.begin();
-		jugador1.draw(game.batch);
-		jugador2.draw(game.batch);
-		game.batch.end();
-		
-		// Setea el batch para dibujar el hud
-		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-		hud.stage.draw();
-		
-		// Si el tiempo se acaba, se termina el juego
-		if(hud.getWorldTimer()==0) {
-			finishing();
-		}
-		
-		// Llego a la meta GANO!
-		if(jugador1.isPuedeSalir()) {
-			String nombre = "Jugador 1";
-			finishing(nombre);
-		}
-		
-		// Llego a la meta GANO!
-		if(jugador2.isPuedeSalir()) {
-			String nombre = "Jugador 2";
-			finishing(nombre);
-		}
-		
-		// El personaje perdio
-		if(FinJuego()) {
-			finishing();
+		Render.limpiarPantalla();
+		if(!Global.empieza) {		
+			Render.begin();
+			espera.dibujar();
+			Render.end();
+		}else {
+			// Separa la actualizacion logica del renderizado
+			update(delta);
+			
+			// Limpiar pantalla con negro
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); 
+			
+			// Renderizar el mapa del juego
+			renderer.render();
+			
+			// Renderizar Box2DDebugRenderer
+			b2dr.render(world, gamecam.combined);
+			
+			game.batch.setProjectionMatrix(gamecam.combined);
+			game.batch.begin();
+			jugador1.draw(game.batch);
+			jugador2.draw(game.batch);
+			game.batch.end();
+			
+			// Setea el batch para dibujar el hud
+			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+			hud.stage.draw();
+			
+			// Si el tiempo se acaba, se termina el juego
+			if(hud.getWorldTimer()==0) {
+				finishing();
+			}
+			
+			// Llego a la meta GANO!
+			if(jugador1.isPuedeSalir()) {
+				String nombre = "Jugador 1";
+				finishing(nombre);
+			}
+			
+			// Llego a la meta GANO!
+			if(jugador2.isPuedeSalir()) {
+				String nombre = "Jugador 2";
+				finishing(nombre);
+			}
+			
+			// El personaje perdio
+			if(FinJuego()) {
+				finishing();
+			}
 		}
 	}
 
