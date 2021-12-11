@@ -43,7 +43,7 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		
+//		
 		// Texto para la conexion
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
 		espera.setTexto("Conectando...");

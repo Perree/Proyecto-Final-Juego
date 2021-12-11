@@ -59,6 +59,7 @@ public class PantallaJuego implements Screen{
 		hc = new HiloCliente(this);
 		hc.start();
 		
+		// Cuando el cliente deja de presionar la tecla 
 		teclas = new KeyListener(hc);
 		
 		// Carga las texturas del personaje
