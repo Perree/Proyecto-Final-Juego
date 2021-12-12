@@ -62,10 +62,10 @@ public HiloCliente() {
 			DatagramPacket dp = new DatagramPacket(data, data.length);
 			try {
 				conexion.receive(dp);	
+				procesarMensaje(dp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			procesarMensaje(dp);
 		}while(!fin);
 	}
 
@@ -82,7 +82,6 @@ public HiloCliente() {
 			
 			if(msgCompuesto[0].equals("ConexionAceptada")) {
 				Utiles.listener.asignarJugador(Integer.valueOf(msgCompuesto[1]));
-				//ipServer msgCompuesto[2]
 			}
 			
 			if(msgCompuesto[0].equals("coordenadas")) {
