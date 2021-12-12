@@ -37,7 +37,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	// Red
 	private Cliente cliente;
 	int jugador = 0;
-//	private HiloCliente hc;
 	
 	// Diseños
 	Texto espera;
@@ -49,7 +48,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	
-	// Overlays Lo CAMBIE A PRIVADO !!GUARDA!!
+	// Overlays 
 	private Hud hud;
 	
 	// Variables del Tiled map
@@ -118,8 +117,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		// Hilo cliente
 		cliente = new Cliente();
 		cliente.enviarMensaje("Conexion");
-//		hc = new HiloCliente();
-//		hc.start();
 		
 		// Momento al colisionar
 		world.setContactListener(new WorldContactListener());
@@ -174,20 +171,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 //				jugador1.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador1.b2body.getWorldCenter(), true);
 //			}	
 //		}
-//		
-//		if(jugador2.currentState != Fumiko.State.DEAD) {
-//			if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-//				jugador2.jump();
-//			}	
-//			
-//			if(Gdx.input.isKeyPressed(Input.Keys.D) && jugador2.b2body.getLinearVelocity().x <=2) {
-//				jugador2.b2body.applyLinearImpulse(new Vector2(0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-//			}
-//				
-//			if(Gdx.input.isKeyPressed(Input.Keys.A) && jugador2.b2body.getLinearVelocity().x >=-2) {
-//				jugador2.b2body.applyLinearImpulse(new Vector2(-0.1f, 0),jugador2.b2body.getWorldCenter(), true);
-//			} 
-//		}
 	}
 	
 	public void update(float dt) {
@@ -202,9 +185,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		hud.update(dt);
 		
 		jugadorGanaMuere();
-		
-		// Sigue la camara del jugador (no lo necesitamos)
-//		gamecam.position.x = fumiko.b2body.getPosition().x;
 		
 		// Actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
 		gamecam.update();
@@ -428,15 +408,15 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	@Override
 	public void keyDown(int keycode) {
 		if(keycode==Keys.UP) {
-			cliente.enviarMensaje("ApreteArriba");
+			cliente.enviarMensaje("ApretoArriba");
 		}	
 		
 		if(keycode==Keys.LEFT) {
-			cliente.enviarMensaje("ApreteIzquierda");
+			cliente.enviarMensaje("ApretoIzquierda");
 		}
 		
 		if(keycode==Keys.RIGHT) {
-			cliente.enviarMensaje("ApreteDerecha");
+			cliente.enviarMensaje("ApretoDerecha");
 		}
 	}
 
@@ -453,8 +433,5 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			jugador1.setY(coordenadas);
 		}
 	}
-	
-	
 }
-
 

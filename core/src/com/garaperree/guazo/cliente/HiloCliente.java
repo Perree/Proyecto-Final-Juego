@@ -15,7 +15,6 @@ public class HiloCliente extends Thread {
 	private InetAddress ipServer;
 	private boolean fin = false;
 	private int puertoServer; 
-//	private PantallaJuego app;
 	
 public HiloCliente() {
 		
@@ -32,17 +31,6 @@ public HiloCliente() {
 			e.printStackTrace();
 		}
 	}
-	
-//	public HiloCliente(PantallaJuego app) {
-//		this.app = app;
-//		try {
-//			ipServer = InetAddress.getByName("192.168.0.47");
-//			conexion = new DatagramSocket();
-//		} catch (SocketException | UnknownHostException e) {
-//			e.printStackTrace();
-//		}
-//		enviarMensaje("Conexion");
-//	}
 	
 	public void enviarMensaje(String msg) {
 		byte[] data = msg.getBytes();
@@ -91,38 +79,6 @@ public HiloCliente() {
 					Utiles.listener.asignarCoordenadas(2,Float.parseFloat(msgCompuesto[2]));
 				}
 			}
-			
-//			if(msgCompuesto[0].equals("pelota")) {
-//				float posX = Float.valueOf(msgCompuesto[1]);
-//				float posY = Float.valueOf(msgCompuesto[2]);
-////				Utiles.listener.actualizarPelota(posX,posY);
-//			}
-//			
-//			if(msgCompuesto[0].equals("punto")) {
-////				Utiles.listener.actualizarPuntaje(Integer.parseInt(msgCompuesto[1]));
-//			}
-//			
-//			if(msgCompuesto[0].equals("termino")) {
-////				Utiles.listener.terminoJuego(Integer.parseInt(msgCompuesto[1]));
-//			}
 		}
-		
-//		if(msgCompuesto.length<2) {
-//			if(msg.equals("Conexion")) {
-//				ipServer = dp.getAddress();
-//			} else if(msg.equals("Empieza")) {
-//				Utiles.listener.empieza();
-////				System.out.println("Llega EMPIEZA");
-////				Global.empieza = true; 
-//			}
-//		} else {
-//			if(msgCompuesto[0].equals("coordenadas")) {
-//				if(msgCompuesto[1].equals("p1")) {
-//					float posY = Float.parseFloat(msgCompuesto[2]);
-//					System.out.println("posicionY1"+posY);
-////					app.jugador1.setY(posY);
-//				}
-//			}
-//		}
 	}
 }
