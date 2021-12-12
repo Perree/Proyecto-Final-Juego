@@ -57,23 +57,28 @@ public class HiloCliente extends Thread {
 	private void procesarMensaje(DatagramPacket dp) {
 		String msg = (new String(dp.getData())).trim();
 		
-//		String[] msgCompuesto = msg.split("!");
+		String[] msgCompuesto = msg.split("!");
 		
-//		if(msgCompuesto.length<2) {
+		if(msgCompuesto.length<2) {
 			if(msg.equals("Ok")) {
 				ipServer = dp.getAddress();
 			} else if(msg.equals("Empieza")) {
 				System.out.println("Llega EMPIEZA");
 				Global.empieza = true; 
 			}
-		} 
-//	    else {
-//			if(msgCompuesto[0].equals("Actualizar")) {
-//				if(msgCompuesto[1].equals("P1")) {
-//					float posY = Float.parseFloat(msgCompuesto[2]);
-//					app.getJugador1().setY(posY);
+		} else {
+			if(msgCompuesto[0].equals("Actualizar")) {
+				if(msgCompuesto[1].equals("P1")) {
+					float posY = Float.parseFloat(msgCompuesto[2]);
+					System.out.println("posicionY1"+posY);
+					app.getJugador1().setY(posY);
+				}
+//				if(msgCompuesto[3].equals("P2")) {
+//					float posY = Float.parseFloat(msgCompuesto[4]);
+//					System.out.println("posicionY2"+posY);
+//					app.getJugador2().setY(posY);
 //				}
-//			}
-//		}
-//	}
+			}
+		}
+	}
 }

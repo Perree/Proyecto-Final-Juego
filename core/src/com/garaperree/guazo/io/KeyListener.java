@@ -31,7 +31,6 @@ public class KeyListener implements InputProcessor {
 			hc.enviarMensaje("ApreteDerecha");
 		}
 		
-//		Utiles.listener.keyDown(keycode);
 		return false;
 	}
 
@@ -52,7 +51,6 @@ public class KeyListener implements InputProcessor {
 			hc.enviarMensaje("NoApreteDerecha");
 		}	
 		
-//		Utiles.listener.keyUp(keycode);
 		return false;
 	}
 

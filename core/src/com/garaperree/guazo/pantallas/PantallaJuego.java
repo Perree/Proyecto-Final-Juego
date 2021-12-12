@@ -1,7 +1,6 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -108,10 +107,11 @@ public class PantallaJuego implements Screen{
 		jugador1 = new Fumiko(this);
 		jugador2 = new Fumiko(this);
 		
+		Gdx.input.setInputProcessor(teclas);
+		
 		// Momento al colisionar
 		world.setContactListener(new WorldContactListener());
 	}
-
 	
 	public TextureAtlas getAtlas() {
 		return atlas;
@@ -123,7 +123,16 @@ public class PantallaJuego implements Screen{
 	
 	// Controlar jugador
 	private void handleInput(float dt) {
-		
+
+		if(teclas.isUp()) {
+			
+		}
+		if(teclas.isRight()) {
+			
+		}
+		if(teclas.isLeft()) {
+			
+		}
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
 //			if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
@@ -250,7 +259,6 @@ public class PantallaJuego implements Screen{
 
 	@Override
 	public void render(float delta) {
-		
 		Render.limpiarPantalla();
 		if(!Global.empieza) {		
 			Render.begin();
