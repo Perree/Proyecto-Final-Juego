@@ -111,12 +111,12 @@ public class PantallaMenu implements Screen {
 		
 		if(entradas.isEnter() || (entradas.isClick())) {
 			if(((opc==1) && (entradas.isEnter())) || ((opc==1) && (entradas.isClick())&&(mouseArriba))) {
-				Render.app.setScreen(new PantallaJuego(); 
+//				Render.app.setScreen(new PantallaJuego(); 
 			}else if(((opc==4) && (entradas.isEnter())) || ((opc==4) && (entradas.isClick())&&(mouseArriba))) {
 				Gdx.app.exit();
 			}
-		}
 		
+	}
 			
 	}
 	

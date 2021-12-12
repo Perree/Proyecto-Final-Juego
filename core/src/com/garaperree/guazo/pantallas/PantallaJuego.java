@@ -1,6 +1,7 @@
 package com.garaperree.guazo.pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,33 +13,37 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
-import com.garaperree.guazo.cliente.HiloCliente;
+import com.garaperree.guazo.cliente.Cliente;
 import com.garaperree.guazo.diseños.Recursos;
 import com.garaperree.guazo.diseños.Texto;
 import com.garaperree.guazo.escenas.Hud;
+import com.garaperree.guazo.io.JuegoEventListener;
 import com.garaperree.guazo.io.KeyListener;
 import com.garaperree.guazo.sprites.Fumiko;
 import com.garaperree.guazo.sprites.Objetos.B2WorldCreator;
-import com.garaperree.guazo.utiles.Global;
 import com.garaperree.guazo.utiles.Render;
+import com.garaperree.guazo.utiles.Utiles;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
-public class PantallaJuego implements Screen{
+public class PantallaJuego implements Screen, JuegoEventListener{
 	// Referenciar a nuestro Juego, para setear las pantallas
 	private Main game;
 	private TextureAtlas atlas;
 	
 	// Red
-	private HiloCliente hc;
+	private Cliente cliente;
+	int jugador = 0;
+//	private HiloCliente hc;
 	
 	// Diseños
-	private Texto espera;
+	Texto espera;
 	
 	// Control de las teclas
-	private KeyListener teclas;
+	KeyListener teclas;
 	
 	// Control de camara
 	private OrthographicCamera gamecam;
@@ -57,22 +62,13 @@ public class PantallaJuego implements Screen{
 	private Box2DDebugRenderer b2dr;
 	
 	// Referenciar a nuestro personaje principal (sprites)
-	private Fumiko jugador1, jugador2;
+	public Fumiko jugador1, jugador2;
+	
+	// Booleanos para la red
+	private boolean empieza = false;
 	
 	public PantallaJuego(Main game) {
 		this.game = game;
-		
-		// Hilo cliente
-		hc = new HiloCliente(this);
-		hc.start();
-		
-		// Texto para la conexion
-		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
-		espera.setTexto("Conectando...");
-		espera.setPosition((Main.V_WIDTH/2)-(espera.getAncho()/2), (Main.V_HEIGHT/2)+(espera.getAlto()/2));
-		
-		// Cuando el cliente deja de presionar la tecla 
-		teclas = new KeyListener(hc);
 		
 		// Carga las texturas del personaje
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
@@ -107,7 +103,23 @@ public class PantallaJuego implements Screen{
 		jugador1 = new Fumiko(this);
 		jugador2 = new Fumiko(this);
 		
+		// Cuando el cliente deja de presionar la tecla 
+		teclas = new KeyListener();
+		
+		// Texto para la conexion
+		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
+		espera.setTexto("Conectando...");
+		espera.setPosition((Main.V_WIDTH/2)-(espera.getAncho()/2), (Main.V_HEIGHT/2)+(espera.getAlto()/2));
+		
+		Utiles.listener = this;
+		
 		Gdx.input.setInputProcessor(teclas);
+		
+		// Hilo cliente
+		cliente = new Cliente();
+		cliente.enviarMensaje("Conexion");
+//		hc = new HiloCliente();
+//		hc.start();
 		
 		// Momento al colisionar
 		world.setContactListener(new WorldContactListener());
@@ -125,12 +137,27 @@ public class PantallaJuego implements Screen{
 	private void handleInput(float dt) {
 
 		if(teclas.isUp()) {
-			
+			if(this.jugador==1) {
+				jugador1.jump();
+			}else {
+				jugador2.jump();
+			}
 		}
+		
 		if(teclas.isRight()) {
-			
+			if(this.jugador==1) {
+				jugador1.right();
+			}else {
+				jugador2.right();
+			}
 		}
+		
 		if(teclas.isLeft()) {
+			if(this.jugador==1) {
+				jugador1.left();
+			}else {
+				jugador2.left();
+			}
 			
 		}
 		// controlar a nuestro jugador mediante impulsos
@@ -260,7 +287,7 @@ public class PantallaJuego implements Screen{
 	@Override
 	public void render(float delta) {
 		Render.limpiarPantalla();
-		if(!Global.empieza) {		
+		if(!empieza) {		
 			Render.begin();
 			espera.dibujar();
 			Render.end();
@@ -369,6 +396,62 @@ public class PantallaJuego implements Screen{
 	
 	public Hud getHud() {
 		return hud;
+	}
+
+	@Override
+	public boolean handle(Event event) {
+		return false;
+	}
+
+	@Override
+	public void empieza() {
+		this.empieza = true;
+		
+	}
+
+	@Override
+	public void keyUp(int keycode) {
+		
+		if(keycode==Keys.UP) {
+			cliente.enviarMensaje("NoApretoArriba");
+		}	
+		
+		if(keycode==Keys.LEFT) {
+			cliente.enviarMensaje("NoApretoIzquierda");
+		}
+		
+		if(keycode==Keys.RIGHT) {
+			cliente.enviarMensaje("NoApretoDerecha");
+		}	
+	}
+
+	@Override
+	public void keyDown(int keycode) {
+		if(keycode==Keys.UP) {
+			cliente.enviarMensaje("ApreteArriba");
+		}	
+		
+		if(keycode==Keys.LEFT) {
+			cliente.enviarMensaje("ApreteIzquierda");
+		}
+		
+		if(keycode==Keys.RIGHT) {
+			cliente.enviarMensaje("ApreteDerecha");
+		}
+	}
+
+	@Override
+	public void asignarJugador(int jugador) {
+		this.jugador = jugador;
+	}
+
+	@Override
+	public void asignarCoordenadas(int nroJugador, float coordenadas) {
+		if(nroJugador==1) {
+			jugador1.setY(coordenadas);
+		}else {
+			jugador1.setY(coordenadas);
+		}
 	}
 	
 	

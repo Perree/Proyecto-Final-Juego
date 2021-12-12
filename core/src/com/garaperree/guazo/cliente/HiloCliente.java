@@ -7,33 +7,48 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import com.garaperree.guazo.pantallas.PantallaJuego;
-import com.garaperree.guazo.utiles.Global;
+import com.garaperree.guazo.utiles.Utiles;
 
 public class HiloCliente extends Thread {
 	
 	private DatagramSocket conexion;
 	private InetAddress ipServer;
-	private int puerto = 8080;
-	boolean fin = false;
-	private PantallaJuego app;
+	private boolean fin = false;
+	private int puertoServer; 
+//	private PantallaJuego app;
 	
-	public HiloCliente(PantallaJuego app) {
-		this.app = app;
+public HiloCliente() {
+		
 		try {
 			ipServer = InetAddress.getByName("192.168.0.47");
+			puertoServer = 8080;
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
 			conexion = new DatagramSocket();
-		} catch (SocketException | UnknownHostException e) {
+		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-		enviarMensaje("Conexion");
 	}
+	
+//	public HiloCliente(PantallaJuego app) {
+//		this.app = app;
+//		try {
+//			ipServer = InetAddress.getByName("192.168.0.47");
+//			conexion = new DatagramSocket();
+//		} catch (SocketException | UnknownHostException e) {
+//			e.printStackTrace();
+//		}
+//		enviarMensaje("Conexion");
+//	}
 	
 	public void enviarMensaje(String msg) {
 		byte[] data = msg.getBytes();
-		DatagramPacket dp = new DatagramPacket(data, data.length, ipServer, puerto);
+		DatagramPacket dp = new DatagramPacket(data, data.length, ipServer, puertoServer);
 		try {
-			System.out.println("Enviando Mensaje "+ msg + " ip " + ipServer + " puerto " + puerto);
+			System.out.println("Enviando Mensaje "+ msg + " ip " + ipServer + " puerto " + puertoServer);
 			conexion.send(dp);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,26 +74,56 @@ public class HiloCliente extends Thread {
 		
 		String[] msgCompuesto = msg.split("!");
 		
-		if(msgCompuesto.length<2) {
-			if(msg.equals("Ok")) {
-				ipServer = dp.getAddress();
-			} else if(msg.equals("Empieza")) {
-				System.out.println("Llega EMPIEZA");
-				Global.empieza = true; 
-			}
+		if(msgCompuesto.length==1) {
+			if(msg.equals("Empieza")) {
+				Utiles.listener.empieza();
+			}	
 		} else {
-			if(msgCompuesto[0].equals("Actualizar")) {
-				if(msgCompuesto[1].equals("P1")) {
-					float posY = Float.parseFloat(msgCompuesto[2]);
-					System.out.println("posicionY1"+posY);
-					app.getJugador1().setY(posY);
-				}
-//				if(msgCompuesto[3].equals("P2")) {
-//					float posY = Float.parseFloat(msgCompuesto[4]);
-//					System.out.println("posicionY2"+posY);
-//					app.getJugador2().setY(posY);
-//				}
+			
+			if(msgCompuesto[0].equals("ConexionAceptada")) {
+				Utiles.listener.asignarJugador(Integer.valueOf(msgCompuesto[1]));
+				//ipServer msgCompuesto[2]
 			}
+			
+			if(msgCompuesto[0].equals("coordenadas")) {
+				if(msgCompuesto[1].equals("p1")) {
+					Utiles.listener.asignarCoordenadas(1,Float.parseFloat(msgCompuesto[2]));
+				} else if(msgCompuesto[1].equals("p2")) {
+					Utiles.listener.asignarCoordenadas(2,Float.parseFloat(msgCompuesto[2]));
+				}
+			}
+			
+//			if(msgCompuesto[0].equals("pelota")) {
+//				float posX = Float.valueOf(msgCompuesto[1]);
+//				float posY = Float.valueOf(msgCompuesto[2]);
+////				Utiles.listener.actualizarPelota(posX,posY);
+//			}
+//			
+//			if(msgCompuesto[0].equals("punto")) {
+////				Utiles.listener.actualizarPuntaje(Integer.parseInt(msgCompuesto[1]));
+//			}
+//			
+//			if(msgCompuesto[0].equals("termino")) {
+////				Utiles.listener.terminoJuego(Integer.parseInt(msgCompuesto[1]));
+//			}
 		}
+		
+//		if(msgCompuesto.length<2) {
+//			if(msg.equals("Conexion")) {
+//				ipServer = dp.getAddress();
+//			} else if(msg.equals("Empieza")) {
+//				Utiles.listener.empieza();
+////				System.out.println("Llega EMPIEZA");
+////				Global.empieza = true; 
+//			}
+//		} else {
+//			if(msgCompuesto[0].equals("coordenadas")) {
+//				if(msgCompuesto[1].equals("p1")) {
+//					float posY = Float.parseFloat(msgCompuesto[2]);
+//					System.out.println("posicionY1"+posY);
+////					app.jugador1.setY(posY);
+//				}
+//			}
+//		}
 	}
 }

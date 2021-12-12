@@ -1,6 +1,7 @@
 package com.garaperree.guazo.cliente;
 
 public class Cliente {
+	
 	private HiloCliente hc;
 		
 	public Cliente() {
