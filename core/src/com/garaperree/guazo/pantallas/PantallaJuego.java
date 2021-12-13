@@ -429,8 +429,10 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	public void asignarCoordenadas(int nroJugador, float coordenadas) {
 		if(nroJugador==1) {
 			jugador1.setY(coordenadas);
+			jugador1.setX(coordenadas);
 		}else {
 			jugador2.setY(coordenadas);
+			jugador2.setX(coordenadas);
 		}
 	}
 }
