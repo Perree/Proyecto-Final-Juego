@@ -36,13 +36,13 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	
 	// Red
 	private Cliente cliente;
-	int jugador = 0;
+	private int jugador = 0;
 	
 	// Diseños
-	Texto espera;
+	private Texto espera;
 	
 	// Control de las teclas
-	KeyListener teclas;
+	private KeyListener teclas;
 	
 	// Control de camara
 	private OrthographicCamera gamecam;
@@ -61,7 +61,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private Box2DDebugRenderer b2dr;
 	
 	// Referenciar a nuestro personaje principal (sprites)
-	public Fumiko jugador1, jugador2;
+	private Fumiko jugador1, jugador2;
 	
 	// Booleanos para la red
 	private boolean empieza = false;
@@ -430,7 +430,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		if(nroJugador==1) {
 			jugador1.setY(coordenadas);
 		}else {
-			jugador1.setY(coordenadas);
+			jugador2.setY(coordenadas);
 		}
 	}
 }

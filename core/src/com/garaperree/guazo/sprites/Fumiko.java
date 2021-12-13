@@ -221,4 +221,5 @@ public class Fumiko extends Sprite{
 	public boolean isDead() {
 		return fumikoIsDead;
 	}
+	
 }
