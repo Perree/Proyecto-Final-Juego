@@ -74,37 +74,45 @@ public HiloCliente() {
 				Utiles.listener.asignarJugador(Integer.valueOf(msgCompuesto[1]));
 			}
 			
-			if(msgCompuesto[0].equals("Acciones")) {
-				if(msgCompuesto[1].equals("p1")) {
-					if(msgCompuesto[2].equals("saltar")) {
-						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-					}
-					if(msgCompuesto[2].equals("izquierda")) {
-						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-					}
-					if(msgCompuesto[2].equals("derecha")) {
-						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-					}
-				} else {
-					if(msgCompuesto[2].equals("saltar")) {
-						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-					}
-					if(msgCompuesto[2].equals("izquierda")) {
-						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-					}
-					if(msgCompuesto[2].equals("derecha")) {
-						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-					}
+			if(msgCompuesto[0].equals("actualizarPos")) {
+				if(msgCompuesto[1].equals("1")) {
+					Utiles.listener.asignarPos(1,Float.parseFloat(msgCompuesto[2]), Float.parseFloat(msgCompuesto[3]));
+				} else if(msgCompuesto[1].equals("p2")) {
+					Utiles.listener.asignarPos(2,Float.parseFloat(msgCompuesto[2]), Float.parseFloat(msgCompuesto[3]));
 				}
 			}
 			
-			if(msgCompuesto[0].equals("coordenadas")) {
-				if(msgCompuesto[1].equals("p1")) {
-					Utiles.listener.asignarCoordenadas(1,Float.parseFloat(msgCompuesto[2]));
-				} else if(msgCompuesto[1].equals("p2")) {
-					Utiles.listener.asignarCoordenadas(2,Float.parseFloat(msgCompuesto[2]));
-				}
-			}
+//			if(msgCompuesto[0].equals("Acciones")) {
+//				if(msgCompuesto[1].equals("p1")) {
+//					if(msgCompuesto[2].equals("saltar")) {
+//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+//					}
+//					if(msgCompuesto[2].equals("izquierda")) {
+//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+//					}
+//					if(msgCompuesto[2].equals("derecha")) {
+//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+//					}
+//				} else {
+//					if(msgCompuesto[2].equals("saltar")) {
+//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+//					}
+//					if(msgCompuesto[2].equals("izquierda")) {
+//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+//					}
+//					if(msgCompuesto[2].equals("derecha")) {
+//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+//					}
+//				}
+//			}
+			
+//			if(msgCompuesto[0].equals("coordenadas")) {
+//				if(msgCompuesto[1].equals("p1")) {
+//					Utiles.listener.asignarCoordenadas(1,Float.parseFloat(msgCompuesto[2]));
+//				} else if(msgCompuesto[1].equals("p2")) {
+//					Utiles.listener.asignarCoordenadas(2,Float.parseFloat(msgCompuesto[2]));
+//				}
+//			}
 			
 			if(msgCompuesto[0].equals("termino")) {
 				Utiles.listener.terminoJuego(Integer.parseInt(msgCompuesto[1]));			

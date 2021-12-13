@@ -474,12 +474,10 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 				if(jugador1.currentState != Fumiko.State.DEAD) 
 					jugador1.jump();
 			}
-			if(Accion.equals("izquierda")) {
-//				if(jugador1.b2body.getLinearVelocity().x >=-2 && jugador1.currentState != Fumiko.State.DEAD) 
+			if(Accion.equals("izquierda")) { 
 					jugador1.left();
 			}
 			if(Accion.equals("derecha")) {
-//				if(jugador1.b2body.getLinearVelocity().x <=2 && jugador1.currentState != Fumiko.State.DEAD) 
 					jugador1.right();
 			}
 		}else {
@@ -488,15 +486,22 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 					jugador2.jump();
 			}
 			if(Accion.equals("izquierda")) {
-//				if(jugador2.b2body.getLinearVelocity().x >=-2 && jugador1.currentState != Fumiko.State.DEAD) 
 					jugador2.left();
 			}
 			if(Accion.equals("derecha")) {
-//				if(jugador2.b2body.getLinearVelocity().x <=2 && jugador1.currentState != Fumiko.State.DEAD)
 					jugador2.right();
 			}
 		}
-		
+	}
+
+	@Override
+	public void asignarPos(int nroJugador, float x, float y) {
+		if(nroJugador==1) {
+			jugador1.setPosition(x, y);
+		} else {
+			jugador2.setPosition(x, y);
+		}
+
 	}
 }
 

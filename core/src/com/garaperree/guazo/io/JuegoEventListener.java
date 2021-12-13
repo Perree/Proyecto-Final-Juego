@@ -12,4 +12,5 @@ public interface JuegoEventListener extends EventListener {
 	public void terminoJuego(int nroJugador);
 	public void actualizarTiempo();
 	public void controlarAccion(int nroJugador, String Accion);
+	public void asignarPos(int nroJugador, float x, float y);
 }
