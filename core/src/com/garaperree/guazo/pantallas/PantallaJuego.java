@@ -134,25 +134,32 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private void handleInput(float dt) {
 
 		if(teclas.isUp()) {
-			if(this.jugador==1) {
-				jugador1.jump();
-			}else {
+			if(this.jugador==1 
+					&& jugador1.currentState != Fumiko.State.DEAD) {
+				jugador1.jump(); // Evitamos un poco el retraso
+			}else if(jugador2.currentState != Fumiko.State.DEAD){
 				jugador2.jump();
 			}
 		}
 		
-		if(teclas.isRight()) {
-			if(this.jugador==1) {
+		if(teclas.isRight() ) {
+			if(this.jugador==1 
+					&& jugador1.b2body.getLinearVelocity().x <=2 
+					&& jugador1.currentState != Fumiko.State.DEAD) {
 				jugador1.right();
-			}else {
+			}else if (jugador2.b2body.getLinearVelocity().x <=2 
+					&& jugador2.currentState != Fumiko.State.DEAD){
 				jugador2.right();
 			}
 		}
 		
 		if(teclas.isLeft()) {
-			if(this.jugador==1) {
+			if(this.jugador==1 
+					&& jugador1.b2body.getLinearVelocity().x >=-2 
+					&& jugador1.currentState != Fumiko.State.DEAD) {
 				jugador1.left();
-			}else {
+			}else if(jugador2.b2body.getLinearVelocity().x >=-2 
+					&& jugador2.currentState != Fumiko.State.DEAD){
 				jugador2.left();
 			}
 			
@@ -184,7 +191,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		jugador2.update(dt);
 		hud.update(dt);
 		
-		jugadorGanaMuere();
+//		jugadorGanaMuere();
 		
 		// Actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
 		gamecam.update();
@@ -296,38 +303,44 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			hud.stage.draw();
 			
 			// Si el tiempo se acaba, se termina el juego
-			if(hud.getWorldTimer()==0) {
-				finishing();
-			}
+//			if(hud.getWorldTimer()==0) {
+//				acaboTiempo();
+//			}
 			
 			// Llego a la meta GANO!
-			if(jugador1.isPuedeSalir()) {
-				String nombre = "Jugador 1";
-				finishing(nombre);
-			}
+//			if(jugador1.isPuedeSalir()) {
+//				ganadorJugador();
+//			}
 			
 			// Llego a la meta GANO!
-			if(jugador2.isPuedeSalir()) {
-				String nombre = "Jugador 2";
-				finishing(nombre);
-			}
+//			if(jugador2.isPuedeSalir()) {
+//				ganadorJugador();
+//			}
 			
 			// El personaje perdio
-			if(FinJuego()) {
-				finishing();
-			}
+//			if(FinJuego()) {
+//				perdedor();
+//			}
 		}
 	}
-
-	public void finishing() {
-		game.setScreen(new FinDelJuego(game));
-		dispose();
-	}
 	
-	public void finishing(String nombre) {
-		game.setScreen(new FinDelJuego(game, nombre));
+	// Se termino el tiempo
+	private void acaboTiempo() {
+		game.setScreen(new AcaboTiempo(game));
 		dispose();
 	}
+
+	// Un jugador ha muerto y por lo tanto ha ganado el otro
+		public void perdedor() {
+			game.setScreen(new PerdioJuego(game));
+			dispose();
+		}
+	
+	// Un jugador ha ganado
+		public void ganadorJugador() {
+			game.setScreen(new FinDelJuego(game));
+			dispose();
+		}
 	
 	// Se corrobora que si el estado del jugador esta muerto y el tiempo
 	public boolean FinJuego() {
@@ -434,6 +447,20 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			jugador2.setY(coordenadas);
 			jugador2.setX(coordenadas);
 		}
+	}
+
+	@Override
+	public void terminoJuego(int nroJugador) {
+		if(nroJugador==this.jugador) {
+			// Ganaste
+			game.setScreen(new FinDelJuego(game));
+			dispose();
+		} else {
+			// Perdiste
+			game.setScreen(new PerdioJuego(game));
+			dispose();
+		}
+		
 	}
 }
 

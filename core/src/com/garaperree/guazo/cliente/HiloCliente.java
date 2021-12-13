@@ -79,6 +79,10 @@ public HiloCliente() {
 					Utiles.listener.asignarCoordenadas(2,Float.parseFloat(msgCompuesto[2]));
 				}
 			}
+			
+			if(msgCompuesto[0].equals("termino")) {
+				Utiles.listener.terminoJuego(Integer.parseInt(msgCompuesto[1]));			
+			}
 		}
 	}
 }
