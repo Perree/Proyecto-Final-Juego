@@ -36,7 +36,6 @@ public HiloCliente() {
 		byte[] data = msg.getBytes();
 		DatagramPacket dp = new DatagramPacket(data, data.length, ipServer, puertoServer);
 		try {
-			System.out.println("Enviando Mensaje "+ msg + " ip " + ipServer + " puerto " + puertoServer);
 			conexion.send(dp);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,11 +60,14 @@ public HiloCliente() {
 		String msg = (new String(dp.getData())).trim();
 		
 		String[] msgCompuesto = msg.split("!");
-		
+		 
 		if(msgCompuesto.length==1) {
 			if(msg.equals("Empieza")) {
 				Utiles.listener.empieza();
 			}	
+			if(msg.equals("actualizarTiempo")) {
+				Utiles.listener.actualizarTiempo();
+			}
 		} else {
 			
 			if(msgCompuesto[0].equals("ConexionAceptada")) {

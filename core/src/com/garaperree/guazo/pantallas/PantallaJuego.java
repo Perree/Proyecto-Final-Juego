@@ -30,19 +30,25 @@ import com.garaperree.guazo.utiles.Utiles;
 import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen, JuegoEventListener{
-	// Referenciar a nuestro Juego, para setear las pantallas
-	private Main game;
-	private TextureAtlas atlas;
+	// Referenciar a nuestro personaje principal (sprites)
+	private Fumiko jugador1, jugador2;
 	
-	// Red
-	private Cliente cliente;
-	private int jugador = 0;
+	// Control de las teclas
+	private KeyListener teclas;
 	
 	// Diseños
 	private Texto espera;
 	
-	// Control de las teclas
-	private KeyListener teclas;
+	// Referenciar a nuestro Juego, para setear las pantallas
+	private Main game;
+	private TextureAtlas atlas;
+	
+	// Booleanos para la red
+	private boolean empieza = false;
+	private int jugador = 0;
+	
+	// Red
+	private Cliente cliente;
 	
 	// Control de camara
 	private OrthographicCamera gamecam;
@@ -60,17 +66,8 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private World world;
 	private Box2DDebugRenderer b2dr;
 	
-	// Referenciar a nuestro personaje principal (sprites)
-	private Fumiko jugador1, jugador2;
-	
-	// Booleanos para la red
-	private boolean empieza = false;
-	
 	public PantallaJuego(Main game) {
 		this.game = game;
-		
-		// Carga las texturas del personaje
-		atlas = new TextureAtlas("fumiko/personaje.atlas");
 		
 		// Crea una camara para seguir al personaje a traves del mundo
 		gamecam = new OrthographicCamera(); 
@@ -97,6 +94,9 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		
 		// Crea los objetos para poder ser colisionados 
 		new B2WorldCreator(this);
+		
+		// Carga las texturas del personaje
+		atlas = new TextureAtlas("fumiko/personaje.atlas");
 		
 		// Crear personajes en nuestro juego
 		jugador1 = new Fumiko(this);
@@ -162,7 +162,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 					&& jugador2.currentState != Fumiko.State.DEAD){
 				jugador2.left();
 			}
-			
 		}
 		// controlar a nuestro jugador mediante impulsos
 //		if(jugador1.currentState != Fumiko.State.DEAD) {
@@ -191,7 +190,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		jugador2.update(dt);
 		hud.update(dt);
 		
-//		jugadorGanaMuere();
+		jugadorGanaMuere();
 		
 		// Actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
 		gamecam.update();
@@ -303,24 +302,24 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			hud.stage.draw();
 			
 			// Si el tiempo se acaba, se termina el juego
-//			if(hud.getWorldTimer()==0) {
-//				acaboTiempo();
-//			}
+			if(hud.getWorldTimer()==0) {
+				acaboTiempo();
+			}
 			
 			// Llego a la meta GANO!
-//			if(jugador1.isPuedeSalir()) {
-//				ganadorJugador();
-//			}
+			if(jugador1.isPuedeSalir()) {
+				ganadorJugador();
+			}
 			
 			// Llego a la meta GANO!
-//			if(jugador2.isPuedeSalir()) {
-//				ganadorJugador();
-//			}
+			if(jugador2.isPuedeSalir()) {
+				ganadorJugador();
+			}
 			
 			// El personaje perdio
-//			if(FinJuego()) {
-//				perdedor();
-//			}
+			if(FinJuego()) {
+				perdedor();
+			}
 		}
 	}
 	
@@ -399,7 +398,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	@Override
 	public void empieza() {
 		this.empieza = true;
-		
 	}
 
 	@Override
@@ -442,10 +440,10 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	public void asignarCoordenadas(int nroJugador, float coordenadas) {
 		if(nroJugador==1) {
 			jugador1.setY(coordenadas);
-			jugador1.setX(coordenadas);
+//			jugador1.setX(coordenadas);
 		}else {
 			jugador2.setY(coordenadas);
-			jugador2.setX(coordenadas);
+//			jugador2.setX(coordenadas);
 		}
 	}
 
@@ -460,6 +458,12 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			game.setScreen(new PerdioJuego(game));
 			dispose();
 		}
+		
+	}
+
+	@Override
+	public void actualizarTiempo() {
+		// TODO actualizar tiempo en los clientes 
 		
 	}
 }

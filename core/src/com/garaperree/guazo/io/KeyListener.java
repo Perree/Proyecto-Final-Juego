@@ -6,38 +6,38 @@ import com.garaperree.guazo.utiles.Utiles;
 
 public class KeyListener implements InputProcessor {
 	
-	private boolean up1 = false, left1 = false, right1 = false;
+	private boolean up = false, left = false, right = false;
 
 	@Override
 	public boolean keyDown(int keycode) {
 		if(keycode==Keys.UP) {
-			up1 = true;
+			up = true;
 		}	
 		
 		if(keycode==Keys.LEFT) {
-			left1 = true;
+			left = true;
 		}
 		
 		if(keycode==Keys.RIGHT) {
-			right1 = true;	
+			right = true;	
 		}
 		
-		Utiles.listener.keyUp(keycode);
+		Utiles.listener.keyDown(keycode);
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
 		if(keycode==Keys.UP) {
-			up1 = false;
+			up = false;
 		}	
 		
 		if(keycode==Keys.LEFT) {
-			left1 = false;
+			left = false;
 		}
 		
 		if(keycode==Keys.RIGHT) {
-			right1 = false;	
+			right = false;	
 		}	
 		
 		Utiles.listener.keyUp(keycode);
@@ -75,15 +75,15 @@ public class KeyListener implements InputProcessor {
 	}
 
 	public boolean isUp() {
-		return up1;
+		return up;
 	}
 
 	public boolean isRight() {
-		return right1;
+		return right;
 	}
 
 	public boolean isLeft() {
-		return left1;
+		return left;
 	}
 	
 	
