@@ -19,7 +19,7 @@ public class HiloCliente extends Thread {
 public HiloCliente() {
 		
 		try {
-			ipServer = InetAddress.getByName("192.168.0.47");
+			ipServer = InetAddress.getByName("192.168.0.77");
 			puertoServer = 8080;
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
@@ -72,6 +72,30 @@ public HiloCliente() {
 			
 			if(msgCompuesto[0].equals("ConexionAceptada")) {
 				Utiles.listener.asignarJugador(Integer.valueOf(msgCompuesto[1]));
+			}
+			
+			if(msgCompuesto[0].equals("Acciones")) {
+				if(msgCompuesto[1].equals("p1")) {
+					if(msgCompuesto[2].equals("saltar")) {
+						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+					}
+					if(msgCompuesto[2].equals("izquierda")) {
+						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+					}
+					if(msgCompuesto[2].equals("derecha")) {
+						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
+					}
+				} else {
+					if(msgCompuesto[2].equals("saltar")) {
+						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+					}
+					if(msgCompuesto[2].equals("izquierda")) {
+						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+					}
+					if(msgCompuesto[2].equals("derecha")) {
+						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
+					}
+				}
 			}
 			
 			if(msgCompuesto[0].equals("coordenadas")) {

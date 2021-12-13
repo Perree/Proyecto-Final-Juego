@@ -466,5 +466,37 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		// TODO actualizar tiempo en los clientes 
 		
 	}
+
+	@Override
+	public void controlarAccion(int nroJugador, String Accion) {
+		if(nroJugador==1) {
+			if(Accion.equals("saltar")) {
+				if(jugador1.currentState != Fumiko.State.DEAD) 
+					jugador1.jump();
+			}
+			if(Accion.equals("izquierda")) {
+//				if(jugador1.b2body.getLinearVelocity().x >=-2 && jugador1.currentState != Fumiko.State.DEAD) 
+					jugador1.left();
+			}
+			if(Accion.equals("derecha")) {
+//				if(jugador1.b2body.getLinearVelocity().x <=2 && jugador1.currentState != Fumiko.State.DEAD) 
+					jugador1.right();
+			}
+		}else {
+			if(Accion.equals("saltar")) {
+				if(jugador2.currentState != Fumiko.State.DEAD) 
+					jugador2.jump();
+			}
+			if(Accion.equals("izquierda")) {
+//				if(jugador2.b2body.getLinearVelocity().x >=-2 && jugador1.currentState != Fumiko.State.DEAD) 
+					jugador2.left();
+			}
+			if(Accion.equals("derecha")) {
+//				if(jugador2.b2body.getLinearVelocity().x <=2 && jugador1.currentState != Fumiko.State.DEAD)
+					jugador2.right();
+			}
+		}
+		
+	}
 }
 

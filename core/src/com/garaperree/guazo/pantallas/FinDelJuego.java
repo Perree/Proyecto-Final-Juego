@@ -42,28 +42,6 @@ public class FinDelJuego implements Screen{
 		
 		stage.addActor(table);
 	}
-	
-//	public FinDelJuego(Game game) {
-//		this.game = game;
-//		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
-//		stage = new Stage(viewport, ((Main) game).batch);
-//		
-//		Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-//		
-//		Table table = new Table();
-//		table.center();
-//		table.setFillParent(true);
-//		
-//		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-//		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta", font);
-//		
-//		table.add(finJuegoLabel).expandX();
-//		table.row();
-//		table.row();
-//		table.add(juegarDeNuevoLabel).expandX().padTop(10f);
-//		
-//		stage.addActor(table);
-//	}
 
 	@Override
 	public void show() {
