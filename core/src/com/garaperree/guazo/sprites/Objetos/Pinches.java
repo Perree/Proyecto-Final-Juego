@@ -3,7 +3,7 @@ package com.garaperree.guazo.sprites.Objetos;
 import com.badlogic.gdx.maps.MapObject;
 import com.garaperree.guazo.pantallas.PantallaJuego;
 
-public class Pinches extends ObjetosInteractivos{
+public class Pinches extends ObjetosInteractivos {
 
 	public Pinches(PantallaJuego screen, MapObject object) {
 		super(screen, object);

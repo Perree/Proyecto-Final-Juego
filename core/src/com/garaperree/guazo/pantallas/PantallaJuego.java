@@ -33,8 +33,6 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 
 	// Diseños
 	private Texto espera;
-	
-	
 
 	// Referenciar a nuestro Juego, para setear las pantallas
 	private Main game;
@@ -42,7 +40,10 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 
 	// Booleanos para la red
 	private boolean empieza = false;
+	private boolean acaboTiempo = false;
+	
 	private boolean finJuego = false;
+	
 	private int jugador = 0;
 	private int juga;
 
@@ -91,7 +92,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 		// Cuando el cliente deja de presionar la tecla
 		teclas = new KeyListener();
 
-		// Texto para la conexion		
+		// Texto para la conexion
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
 		espera.setTexto("Conectando...");
 		espera.setPosition((Main.V_WIDTH / 2) - (espera.getAncho() / 2), (Main.V_HEIGHT / 2) + (espera.getAlto() / 2));
@@ -161,16 +162,20 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 			// Setea el batch para dibujar el hud
 			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 			hud.stage.draw();
-			
+
 			if (finJuego) {
-				if(juga==1) {
+				if (juga == 1) {
 					game.setScreen(new PerdioJuego(game));
 					dispose();
 				}
-				if(juga==2){
+				if (juga == 2) {
 					game.setScreen(new FinDelJuego(game));
 					dispose();
 				}
+			}
+			if(acaboTiempo) {
+				game.setScreen(new AcaboTiempo(game));
+				dispose();
 			}
 		}
 	}
@@ -281,22 +286,28 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 	@Override
 	public void terminoJuego(int nroJugador) {
 		if (nroJugador == this.jugador) {
-			juga=1;
+			juga = 1;
 		} else {
-			juga=2;
+			juga = 2;
 		}
-		
-		finJuego = true;		
+
+		finJuego = true;
 	}
 
 	@Override
 	public void ganoJuego(int nroJugador) {
 		if (nroJugador == this.jugador) {
-			juga=2;
+			juga = 2;
 		} else {
-			juga=1;
+			juga = 1;
 		}
 
 		finJuego = true;
+	}
+
+	@Override
+	public void seAcaboElTiempo() {
+		acaboTiempo=true;
+		
 	}
 }

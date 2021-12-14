@@ -5,41 +5,41 @@ import com.badlogic.gdx.InputProcessor;
 import com.garaperree.guazo.utiles.Utiles;
 
 public class KeyListener implements InputProcessor {
-	
+
 	private boolean up = false, left = false, right = false;
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode==Keys.UP) {
+		if (keycode == Keys.UP) {
 			up = true;
-		}	
-		
-		if(keycode==Keys.LEFT) {
+		}
+
+		if (keycode == Keys.LEFT) {
 			left = true;
 		}
-		
-		if(keycode==Keys.RIGHT) {
-			right = true;	
+
+		if (keycode == Keys.RIGHT) {
+			right = true;
 		}
-		
+
 		Utiles.listener.keyDown(keycode);
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if(keycode==Keys.UP) {
+		if (keycode == Keys.UP) {
 			up = false;
-		}	
-		
-		if(keycode==Keys.LEFT) {
+		}
+
+		if (keycode == Keys.LEFT) {
 			left = false;
 		}
-		
-		if(keycode==Keys.RIGHT) {
-			right = false;	
-		}	
-		
+
+		if (keycode == Keys.RIGHT) {
+			right = false;
+		}
+
 		Utiles.listener.keyUp(keycode);
 		return false;
 	}
@@ -85,7 +85,5 @@ public class KeyListener implements InputProcessor {
 	public boolean isLeft() {
 		return left;
 	}
-	
-	
 
 }

@@ -18,7 +18,7 @@ public abstract class ObjetosInteractivos {
 	protected Fixture fixture;
 	protected PantallaJuego screen;
 	protected MapObject object;
-	
+
 	// Definimos los objetos con los cuales el personaje va a interactuar
 	public ObjetosInteractivos(PantallaJuego screen, MapObject object) {
 //		this.object = object;
@@ -40,15 +40,15 @@ public abstract class ObjetosInteractivos {
 //		fdef.shape = shape;
 //		fixture = body.createFixture(fdef);
 	}
-	
+
 	// Metodo que detecta cuando hay colision
 //	public abstract void contactColision(Fumiko fumiko);
-	
+
 	// Seteamos el filtro
 //	public void setCategoryFilter(short filterBit) {
 //		Filter filter = new Filter();
 //		filter.categoryBits = filterBit;
 //		fixture.setFilterData(filter);
 //	}
-	
+
 }

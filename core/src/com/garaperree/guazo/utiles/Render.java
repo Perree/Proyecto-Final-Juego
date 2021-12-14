@@ -10,14 +10,14 @@ public class Render {
 	public static ShapeRenderer sr = new ShapeRenderer();
 
 	public static void limpiarPantalla() {
-		Gdx.gl.glClearColor(0,0,0,1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
-	
+
 	public static void begin() {
 		sb.begin();
 	}
-	
+
 	public static void end() {
 		sb.end();
 	}

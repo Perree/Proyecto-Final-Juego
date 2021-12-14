@@ -2,7 +2,7 @@ package com.garaperree.guazo.sprites.Objetos;
 
 public class B2WorldCreator {
 //	public B2WorldCreator(PantallaJuego screen) {
-		
+
 //		World world = screen.getWorld();
 //		TiledMap map = screen.getMap();
 //		

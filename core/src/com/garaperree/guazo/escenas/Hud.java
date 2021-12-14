@@ -12,83 +12,85 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
 
-public class Hud implements Disposable{
-	// Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de entrada.
-	public Stage stage; 
-	
-	// Administra una cámara y determina cómo se asignan las coordenadas mundiales hacia y desde la pantalla.
-	private Viewport viewport; 
-	
+public class Hud implements Disposable {
+	// Stage maneja la ventana gráfica (Viewport) y distribuye los eventos de
+	// entrada.
+	public Stage stage;
+
+	// Administra una cámara y determina cómo se asignan las coordenadas mundiales
+	// hacia y desde la pantalla.
+	private Viewport viewport;
+
 	// Marcadores y tiempos
 	private Integer worldTimer;
 	private static Integer nivel;
 	private float timeCount;
-	
+
 	// Scene2d widgets
 	private Label countdownLabel;
 	private Label timeLabel;
 	private static Label nivelLabel;
 	private Label worldLabel;
-	
-	public Hud(SpriteBatch sb) {	
+
+	public Hud(SpriteBatch sb) {
 		// Variables
 		worldTimer = 50;
 		timeCount = 0;
 		nivel = 1;
 
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
-		stage = new Stage(viewport, sb); 
-		
+		stage = new Stage(viewport, sb);
+
 		// Creando tabla
-		Table table = new Table(); 
+		Table table = new Table();
 		table.top();
 		table.setFillParent(true);
-		
 
 		// Creando los labels
-		countdownLabel = new Label(String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+		countdownLabel = new Label(String.format("%03d", worldTimer),
+				new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		timeLabel = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-		nivelLabel = new Label(String.format("%02d",nivel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+		nivelLabel = new Label(String.format("%02d", nivel), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 		worldLabel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-		
+
 		// Agrega los labels, padding top
 		table.add(worldLabel).expandX().padTop(10);
 		table.add(timeLabel).expandX().padTop(10);
-		
+
 		// Agrega una segundo fila
 		table.row();
 		table.add(nivelLabel).expandX();
-		table.add(countdownLabel).expandX();		
-		
+		table.add(countdownLabel).expandX();
+
 		// Agrega tabla al stage
 		stage.addActor(table);
-		
+
 	}
-	
+
 	public void update(float dt) {
 		// Disminuyendo el tiempo
 		timeCount += dt;
-        if(timeCount >= 1){
-            if (worldTimer > 0) {
-                worldTimer--;
-            }
-            countdownLabel.setText(String.format("%02d", worldTimer));
-            timeCount = 0;
-        }
+		if (timeCount >= 1) {
+			if (worldTimer > 0) {
+				worldTimer--;
+			}
+			countdownLabel.setText(String.format("%02d", worldTimer));
+			timeCount = 0;
+		}
 	}
 
 	@Override
 	public void dispose() {
-		stage.dispose();	
+		stage.dispose();
 	}
 
 	public void setWorldTimer(Integer worldTimer) {
 		this.worldTimer = worldTimer;
 	}
 
-	// Lo utilizo para poder obtener el tiempo 
+	// Lo utilizo para poder obtener el tiempo
 	public Integer getWorldTimer() {
 		return worldTimer;
 	}
-	
+
 }
