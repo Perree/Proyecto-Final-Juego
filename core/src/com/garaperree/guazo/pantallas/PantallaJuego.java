@@ -10,9 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -24,10 +21,8 @@ import com.garaperree.guazo.escenas.Hud;
 import com.garaperree.guazo.io.JuegoEventListener;
 import com.garaperree.guazo.io.KeyListener;
 import com.garaperree.guazo.sprites.Fumiko;
-import com.garaperree.guazo.sprites.Objetos.B2WorldCreator;
 import com.garaperree.guazo.utiles.Render;
 import com.garaperree.guazo.utiles.Utiles;
-import com.garaperree.guazo.utiles.WorldContactListener;
 
 public class PantallaJuego implements Screen, JuegoEventListener{
 	// Referenciar a nuestro personaje principal (sprites)
@@ -63,8 +58,8 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private OrthogonalTiledMapRenderer renderer; // Dibuja el mapa
 	
 	// Variables de Box2d
-	private World world;
-	private Box2DDebugRenderer b2dr;
+//	private World world;
+//	private Box2DDebugRenderer b2dr;
 	
 	public PantallaJuego(Main game) {
 		this.game = game;
@@ -87,13 +82,13 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 		
 		// Crea el box2d world, sin gravedad en el eje x, -10 en el eje, permitiendo que los cuerpos descansen
-		world = new World(new Vector2(0, -15), true);
+//		world = new World(new Vector2(0, -15), true);
 		
 		// Permite hacer los debugs de nuestro box2d world
-		b2dr = new Box2DDebugRenderer();
+//		b2dr = new Box2DDebugRenderer();
 		
 		// Crea los objetos para poder ser colisionados 
-		new B2WorldCreator(this);
+//		new B2WorldCreator(this);
 		
 		// Carga las texturas del personaje
 		atlas = new TextureAtlas("fumiko/personaje.atlas");
@@ -119,7 +114,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		cliente.enviarMensaje("Conexion");
 		
 		// Momento al colisionar
-		world.setContactListener(new WorldContactListener());
+//		world.setContactListener(new WorldContactListener());
 	}
 	
 	public TextureAtlas getAtlas() {
@@ -134,33 +129,26 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	private void handleInput(float dt) {
 
 		if(teclas.isUp()) {
-			if(this.jugador==1 
-					&& jugador1.currentState != Fumiko.State.DEAD) {
-				jugador1.jump(); // Evitamos un poco el retraso
-			}else if(jugador2.currentState != Fumiko.State.DEAD){
-				jugador2.jump();
+			if(this.jugador==1) {
+				
+			}else {
+				
 			}
 		}
 		
 		if(teclas.isRight() ) {
-			if(this.jugador==1 
-					&& jugador1.b2body.getLinearVelocity().x <=2 
-					&& jugador1.currentState != Fumiko.State.DEAD) {
-				jugador1.right();
-			}else if (jugador2.b2body.getLinearVelocity().x <=2 
-					&& jugador2.currentState != Fumiko.State.DEAD){
-				jugador2.right();
+			if(this.jugador==1) {
+
+			}else{
+
 			}
 		}
 		
 		if(teclas.isLeft()) {
-			if(this.jugador==1 
-					&& jugador1.b2body.getLinearVelocity().x >=-2 
-					&& jugador1.currentState != Fumiko.State.DEAD) {
-				jugador1.left();
-			}else if(jugador2.b2body.getLinearVelocity().x >=-2 
-					&& jugador2.currentState != Fumiko.State.DEAD){
-				jugador2.left();
+			if(this.jugador==1) {
+
+			}else {
+				
 			}
 		}
 		// controlar a nuestro jugador mediante impulsos
@@ -184,7 +172,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		handleInput(dt);
 		 
 		// Toma 1 paso en fisicas (60 veces por segundo)
-		world.step(1/60f, 6, 2);
+//		world.step(1/60f, 6, 2);
 		
 		jugador1.update(dt);
 		jugador2.update(dt);
@@ -210,63 +198,63 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 
 
 	private void jugadorGanaMuere() {
-		// Cuando el personaje se cae en la lava
-		if (jugador1.getY() < 0) {
-			jugador1.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 1
-		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
-				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
-			jugador1.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 2
-		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
-				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
-			jugador1.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 3
-		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
-				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
-			jugador1.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Usamos la ubicacion del personaje para poder determinar la meta
-		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
-				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
-			jugador1.llegoSalida();
-		}
-		
-		//Cuando el personaje se cae en la lava
-		if (jugador2.getY() < 0) {
-			jugador2.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 1
-		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
-				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
-			jugador2.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 2
-		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
-				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
-			jugador2.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Pinches 3
-		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
-				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
-			jugador2.currentState = Fumiko.State.DEAD;
-		}
-		
-		// Usamos la ubicacion del personaje para poder determinar la meta
-		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
-				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
-			jugador2.llegoSalida();
-		}
+//		// Cuando el personaje se cae en la lava
+//		if (jugador1.getY() < 0) {
+//			jugador1.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Pinches 1
+//		if((jugador1.getX() > 2.42f && jugador1.getY() >= 4.50f) && 
+//				(jugador1.getX() <= 2.81f && jugador1.getY() <= 5.15f)) {
+//			jugador1.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Pinches 2
+//		if((jugador1.getX() >= 4.9895763 && jugador1.getY() >= 4.98f) && 
+//				(jugador1.getX() <= 6.335001 && jugador1.getY() <= 4.99f)) {
+//			jugador1.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Pinches 3
+//		if((jugador1.getX() >= 5.12f && jugador1.getY() <= 1.5f) && 
+//				(jugador1.getX() <= 5.55f && jugador1.getY() >= 1.46f)) {
+//			jugador1.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Usamos la ubicacion del personaje para poder determinar la meta
+//		if ((jugador1.getX() <= 1.64f && jugador1.getY() >= 1.46f) &&
+//				(jugador1.getX() >= 1.32f && jugador1.getY() <= 1.6f)) {
+//			jugador1.llegoSalida();
+//		}
+//		
+//		//Cuando el personaje se cae en la lava
+//		if (jugador2.getY() < 0) {
+//			jugador2.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Pinches 1
+//		if((jugador2.getX() > 2.42f && jugador2.getY() >= 4.50f) && 
+//				(jugador2.getX() <= 2.81f && jugador2.getY() <= 5.15f)) {
+//			jugador2.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Pinches 2
+//		if((jugador2.getX() >= 4.9895763 && jugador2.getY() >= 4.98f) && 
+//				(jugador2.getX() <= 6.335001 && jugador2.getY() <= 4.99f)) {
+//			jugador2.currentState = Fumiko.State.DEAD;
+//		}
+//
+//		// Pinches 3
+//		if((jugador2.getX() >= 5.12f && jugador2.getY() <= 1.5f) && 
+//				(jugador2.getX() <= 5.55f && jugador2.getY() >= 1.46f)) {
+//			jugador2.currentState = Fumiko.State.DEAD;
+//		}
+//		
+//		// Usamos la ubicacion del personaje para poder determinar la meta
+//		if ((jugador2.getX() <= 1.64f && jugador2.getY() >= 1.46f) &&
+//				(jugador2.getX() >= 1.32f && jugador2.getY() <= 1.6f)) {
+//			jugador2.llegoSalida();
+//		}
 	}
 
 
@@ -289,7 +277,7 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			renderer.render();
 			
 			// Renderizar Box2DDebugRenderer
-			b2dr.render(world, gamecam.combined);
+//			b2dr.render(world, gamecam.combined);
 			
 			game.batch.setProjectionMatrix(gamecam.combined);
 			game.batch.begin();
@@ -301,29 +289,29 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 			hud.stage.draw();
 			
-			// Si el tiempo se acaba, se termina el juego
+//			// Si el tiempo se acaba, se termina el juego
 			if(hud.getWorldTimer()==0) {
 				acaboTiempo();
 			}
 			
-			// Llego a la meta GANO!
+//			// Llego a la meta GANO!
 			if(jugador1.isPuedeSalir()) {
 				ganadorJugador();
 			}
 			
-			// Llego a la meta GANO!
+//			// Llego a la meta GANO!
 			if(jugador2.isPuedeSalir()) {
 				ganadorJugador();
 			}
 			
 			// El personaje perdio
-			if(FinJuego()) {
-				perdedor();
-			}
+//			if(FinJuego()) {
+//				perdedor();
+//			}
 		}
 	}
 	
-	// Se termino el tiempo
+//	 Se termino el tiempo
 	private void acaboTiempo() {
 		game.setScreen(new AcaboTiempo(game));
 		dispose();
@@ -342,14 +330,14 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		}
 	
 	// Se corrobora que si el estado del jugador esta muerto y el tiempo
-	public boolean FinJuego() {
-		if (jugador1.currentState == Fumiko.State.DEAD) {
-			return true;
-		}else if (jugador2.currentState == Fumiko.State.DEAD){
-			return true;
-		}
-		return false;
-	}
+//	public boolean FinJuego() {
+//		if (jugador1.currentState == Fumiko.State.DEAD) {
+//			return true;
+//		} else if (jugador2.currentState == Fumiko.State.DEAD){
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	@Override
 	public void resize(int width, int height) {
@@ -361,9 +349,9 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		return map;
 	}
 	
-	public World getWorld() {
-		return world;
-	}
+//	public World getWorld() {
+//		return world;
+//	}
 
 	@Override
 	public void pause() {
@@ -381,8 +369,8 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	public void dispose() {
 		map.dispose();
 		renderer.dispose();
-		world.dispose();
-		b2dr.dispose();
+//		world.dispose();
+//		b2dr.dispose();
 		hud.dispose();
 	}
 	
@@ -436,16 +424,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		this.jugador = jugador;
 	}
 
-	@Override
-	public void asignarCoordenadas(int nroJugador, float coordenadas) {
-		if(nroJugador==1) {
-			jugador1.setY(coordenadas);
-//			jugador1.setX(coordenadas);
-		}else {
-			jugador2.setY(coordenadas);
-//			jugador2.setX(coordenadas);
-		}
-	}
 
 	@Override
 	public void terminoJuego(int nroJugador) {
@@ -471,7 +449,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 	public void controlarAccion(int nroJugador, String Accion) {
 		if(nroJugador==1) {
 			if(Accion.equals("saltar")) {
-				if(jugador1.currentState != Fumiko.State.DEAD) 
 					jugador1.jump();
 			}
 			if(Accion.equals("izquierda")) { 
@@ -482,7 +459,6 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 			}
 		}else {
 			if(Accion.equals("saltar")) {
-				if(jugador2.currentState != Fumiko.State.DEAD) 
 					jugador2.jump();
 			}
 			if(Accion.equals("izquierda")) {
@@ -501,7 +477,21 @@ public class PantallaJuego implements Screen, JuegoEventListener{
 		} else {
 			jugador2.setPosition(x, y);
 		}
+	}
 
+	@Override
+	public void actualizarAnimacion(int nroJugador, String Animacion) {
+		if(nroJugador==1) {
+			jugador1.setCurrentState(Animacion);
+		}else {
+			jugador2.setCurrentState(Animacion);
+		}
+		
+	}
+
+	@Override
+	public void terminoTiempo() {
+		acaboTiempo();
 	}
 }
 

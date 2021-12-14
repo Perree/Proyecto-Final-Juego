@@ -50,6 +50,7 @@ public class AcaboTiempo implements Screen{
 
 	@Override
 	public void render(float delta) {
+		
 		if(Gdx.input.justTouched()) {
 			game.setScreen(new PantallaJuego((Main) game));
 			dispose();
