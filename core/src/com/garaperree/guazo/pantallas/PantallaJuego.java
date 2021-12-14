@@ -32,7 +32,9 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 	private KeyListener teclas;
 
 	// Diseños
-	private Texto espera, resultado;
+	private Texto espera;
+	
+	
 
 	// Referenciar a nuestro Juego, para setear las pantallas
 	private Main game;
@@ -40,8 +42,9 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 
 	// Booleanos para la red
 	private boolean empieza = false;
-	private boolean finJuego= false;
+	private boolean finJuego = false;
 	private int jugador = 0;
+	private int juga;
 
 	// Red
 	private Cliente cliente;
@@ -88,8 +91,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 		// Cuando el cliente deja de presionar la tecla
 		teclas = new KeyListener();
 
-		// Texto para la conexion
-		resultado = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
+		// Texto para la conexion		
 		espera = new Texto(Recursos.FUENTE, 100, Color.WHITE, false);
 		espera.setTexto("Conectando...");
 		espera.setPosition((Main.V_WIDTH / 2) - (espera.getAncho() / 2), (Main.V_HEIGHT / 2) + (espera.getAlto() / 2));
@@ -116,7 +118,8 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 		jugador2.update(dt);
 		hud.update(dt);
 
-		// Actualiza la camara del juego con las coordenadas correctas despues de hacer los cambios
+		// Actualiza la camara del juego con las coordenadas correctas despues de hacer
+		// los cambios
 		gamecam.update();
 
 		// Renderiza lo que la camara puede ver
@@ -159,11 +162,15 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 			hud.stage.draw();
 			
-			if(finJuego) {
-				Render.limpiarPantalla();
-				Render.begin();
-				resultado.dibujar();
-				Render.end();
+			if (finJuego) {
+				if(juga==1) {
+					game.setScreen(new PerdioJuego(game));
+					dispose();
+				}
+				if(juga==2){
+					game.setScreen(new FinDelJuego(game));
+					dispose();
+				}
 			}
 		}
 	}
@@ -272,15 +279,24 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 	}
 
 	@Override
-	public void murioJugador(int nroJugador) {
-		if(nroJugador==this.jugador) {
-			resultado.setTexto("Perdiste");
+	public void terminoJuego(int nroJugador) {
+		if (nroJugador == this.jugador) {
+			juga=1;
 		} else {
-			resultado.setTexto("Ganaste");
+			juga=2;
 		}
 		
+		finJuego = true;		
+	}
+
+	@Override
+	public void ganoJuego(int nroJugador) {
+		if (nroJugador == this.jugador) {
+			juga=2;
+		} else {
+			juga=1;
+		}
+
 		finJuego = true;
-		
-		resultado.setPosition((Main.V_WIDTH/2)-(resultado.getAncho()/2),(Main.V_HEIGHT/2)+(resultado.getAlto()/2));
 	}
 }
