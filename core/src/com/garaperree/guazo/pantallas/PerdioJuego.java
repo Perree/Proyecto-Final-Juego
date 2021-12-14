@@ -45,7 +45,6 @@ public class PerdioJuego implements Screen{
 	
 	@Override
 	public void show() {
-		
 	}
 
 	@Override

@@ -65,12 +65,6 @@ public HiloCliente() {
 			if(msg.equals("Empieza")) {
 				Utiles.listener.empieza();
 			}	
-			if(msg.equals("actualizarTiempo")) {
-				Utiles.listener.actualizarTiempo();
-			}
-			if(msg.equals("terminoTiempo")) {
-				Utiles.listener.terminoTiempo();
-			}
 		} else {
 			
 			if(msgCompuesto[0].equals("ConexionAceptada")) {
@@ -85,40 +79,20 @@ public HiloCliente() {
 				}
 			}
 			
-			if(msgCompuesto[0].equals("Animacion")) {
+			if(msgCompuesto[0].equals("termino")) {
+				Utiles.listener.murioJugador(Integer.parseInt(msgCompuesto[1]));
+			}
+			
+			if(msgCompuesto[0].equals("tiempo")) {
+				Utiles.listener.actualizarTiempo(Integer.parseInt(msgCompuesto[1]));
+			}
+			
+			if(msgCompuesto[0].equals("Animacion")) { //tratamos de hacer la animacion del personaje pero solo pudimos conseguir que se mueva un frame
 				if(msgCompuesto[1].equals("1")) {
 					Utiles.listener.actualizarAnimacion(1,msgCompuesto[2]);
 				} else if(msgCompuesto[1].equals("2")) {
 					Utiles.listener.actualizarAnimacion(2,msgCompuesto[2]);
 				}
-			}
-			
-//			if(msgCompuesto[0].equals("Acciones")) {
-//				if(msgCompuesto[1].equals("p1")) {
-//					if(msgCompuesto[2].equals("saltar")) {
-//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-//					}
-//					if(msgCompuesto[2].equals("izquierda")) {
-//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-//					}
-//					if(msgCompuesto[2].equals("derecha")) {
-//						Utiles.listener.controlarAccion(1, msgCompuesto[2]);
-//					}
-//				} else {
-//					if(msgCompuesto[2].equals("saltar")) {
-//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-//					}
-//					if(msgCompuesto[2].equals("izquierda")) {
-//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-//					}
-//					if(msgCompuesto[2].equals("derecha")) {
-//						Utiles.listener.controlarAccion(2, msgCompuesto[2]);
-//					}
-//				}
-//			}
-			
-			if(msgCompuesto[0].equals("termino")) {
-				Utiles.listener.terminoJuego(Integer.parseInt(msgCompuesto[1]));			
 			}
 		}
 	}

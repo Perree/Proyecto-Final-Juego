@@ -82,6 +82,10 @@ public class Hud implements Disposable{
 		stage.dispose();	
 	}
 
+	public void setWorldTimer(Integer worldTimer) {
+		this.worldTimer = worldTimer;
+	}
+
 	// Lo utilizo para poder obtener el tiempo 
 	public Integer getWorldTimer() {
 		return worldTimer;
