@@ -41,7 +41,6 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 	// Booleanos para la red
 	private boolean empieza = false;
 	private boolean acaboTiempo = false;
-	
 	private boolean finJuego = false;
 	
 	// Esta variable hace referencia al cliente que esta en linea
@@ -100,6 +99,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 		espera.setTexto("Conectando...");
 		espera.setPosition((Main.V_WIDTH / 2) - (espera.getAncho() / 2), (Main.V_HEIGHT / 2) + (espera.getAlto() / 2));
 
+		// Llamando al JuegoEventListener
 		Utiles.listener = this;
 
 		Gdx.input.setInputProcessor(teclas);
@@ -168,7 +168,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 
 			if (finJuego) {
 				if (juga == 1) {
-					game.setScreen(new PerdioJuego(game));
+					game.setScreen(new PerdioJuego(game, cliente));
 					dispose();
 				}
 				if (juga == 2) {
@@ -177,7 +177,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 				}
 			}
 			if(acaboTiempo) {
-				game.setScreen(new AcaboTiempo(game));
+				game.setScreen(new AcaboTiempo(game, cliente));
 				dispose();
 			}
 		}

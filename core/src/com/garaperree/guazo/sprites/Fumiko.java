@@ -19,9 +19,6 @@ public class Fumiko extends Sprite {
 	public String currentState;
 	public String previousState;
 
-//	public World world;
-//	public Body b2body;
-
 	private Animation<?> fumikoStand;
 	private Animation<?> fumikoRun;
 	private Animation<?> fumikoJump;
@@ -32,7 +29,6 @@ public class Fumiko extends Sprite {
 	public Fumiko(PantallaJuego screen) {
 		super(screen.getAtlas().findRegion("fumiko"));
 
-//		this.world = screen.getWorld();
 		currentState = "STANDING";
 		previousState = "STANDING";
 		stateTimer = 0;
@@ -64,13 +60,10 @@ public class Fumiko extends Sprite {
 
 		// Seteamos los valores de posicion para fumiko
 		setBounds(0, 0, 52 / Main.PPM, 52 / Main.PPM);
-//		setRegion(fumikoStand);
 	}
 
 	// Se va actualizando la posicion del personaje
 	public void update(float dt) {
-//		setPosition(b2body.getPosition().x - getWidth() /2,b2body.getPosition().y - getHeight() /2);
-//		this.setOriginCenter();
 		setRegion(getFrame(dt));
 	}
 
@@ -88,19 +81,16 @@ public class Fumiko extends Sprite {
 			region = (TextureRegion) fumikoRun.getKeyFrame(stateTimer, true);
 			break;
 
-		case "FALLING":
-		case "STANDING":
-
 		default:
 			region = (TextureRegion) fumikoStand.getKeyFrame(stateTimer);
 			break;
 		}
 
 		// Controlar los lados del jugador
-		if ((/* b2body.getLinearVelocity().x < 0 || */!runningRight) && !region.isFlipX()) {
+		if ((!runningRight) && !region.isFlipX()) {
 			region.flip(true, false);
 			runningRight = false;
-		} else if ((/* b2body.getLinearVelocity().x > 0 || */ runningRight) && region.isFlipX()) {
+		} else if ((runningRight) && region.isFlipX()) {
 			region.flip(true, false);
 			runningRight = true;
 		}
@@ -111,93 +101,19 @@ public class Fumiko extends Sprite {
 
 	}
 
-	// Con este metodo sabemos que esta haciendo el jugador (correr, saltar, etc)
-//	public State getState() {
-//
-//		if(fumikoIsDead) 
-//			return State.DEAD;
-//		
-//		if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
-//			return State.JUMPING;
-//		
-//		else if(b2body.getLinearVelocity().y < 0) 
-//			return State.FALLING;
-//		
-//		else if(b2body.getLinearVelocity().x != 0)
-//			return State.RUNNING;
-//		
-//		else
-//			return State.STANDING;
-//	}
-
 	public void jump() {
-//        if (currentState != State.JUMPING) {
-//            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-//            currentState = State.JUMPING;
-//        }
 	}
 
 //	
 	public void right() {
-//		b2body.applyLinearImpulse(new Vector2(0.1f, 0),b2body.getWorldCenter(), true);
 	}
 
 //	
 	public void left() {
-//		b2body.applyLinearImpulse(new Vector2(-0.1f, 0),b2body.getWorldCenter(), true);
 	}
 
 	// Definimos el cuerpo, flitros y colisiones
 	private void defineFumiko() {
-//		BodyDef bdef = new BodyDef();
-//		bdef.position.set(128/Main.PPM, 512/Main.PPM);
-//		bdef.type = BodyDef.BodyType.DynamicBody;
-//		b2body = world.createBody(bdef);
-//		
-//		FixtureDef fdef = new FixtureDef();
-//		CircleShape shape = new CircleShape();
-//		
-//		// Cuan grande es el circulo
-//		shape.setRadius(12/Main.PPM);
-//		
-//		// Filtros
-//		fdef.filter.categoryBits = Main.FUMIKO_BIT;
-//		fdef.filter.maskBits = 
-//				Main.DEFAULT_BIT | 
-//				Main.META_BIT | 
-//				Main.PINCHES_BIT | 
-//				Main.LAVA_BIT | 
-//				Main.OBJECT_BIT;
-//		
-//		fdef.shape = shape;
-//		b2body.createFixture(fdef).setUserData(this);
-//		
-//		// colision derecha
-//		EdgeShape derecha = new EdgeShape();
-//		derecha.set(new Vector2(11/ Main.PPM, -10/Main.PPM), 
-//				new Vector2(11/ Main.PPM, 10/Main.PPM));
-//		fdef.filter.categoryBits = Main.DERECHA_BIT;
-//		fdef.shape = derecha;
-//		fdef.isSensor = true;
-//		b2body.createFixture(fdef).setUserData(this);
-//		
-//		// Colision izquierda
-//		EdgeShape izquierda = new EdgeShape();
-//		izquierda.set(new Vector2(-11/ Main.PPM, 10/Main.PPM), 
-//				new Vector2(-11/ Main.PPM, -10/Main.PPM));
-//		fdef.filter.categoryBits = Main.IZQUIERDA_BIT;
-//		fdef.shape = izquierda;
-//		fdef.isSensor = true;
-//		b2body.createFixture(fdef).setUserData(this);
-//		
-//		// Colision abajo
-//		EdgeShape porDeBajo = new EdgeShape();
-//		porDeBajo.set(new Vector2(-2/ Main.PPM, -12/Main.PPM), 
-//				new Vector2(2/ Main.PPM, -12/Main.PPM));
-//		fdef.filter.categoryBits = Main.POR_DEBAJO_BIT;
-//		fdef.shape = porDeBajo;
-//		fdef.isSensor = true;
-//		b2body.createFixture(fdef).setUserData(this);
 	}
 
 	public float getStateTimer() {

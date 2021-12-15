@@ -13,14 +13,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.garaperree.guazo.Main;
+import com.garaperree.guazo.cliente.Cliente;
 
 public class AcaboTiempo implements Screen {
 	private Viewport viewport;
 	private Stage stage;
 	private Game game;
+	private Cliente cliente;
 
-	public AcaboTiempo(Game game) {
+	public AcaboTiempo(Game game, Cliente cliente) {
 		this.game = game;
+		this.cliente = cliente;
+		
 		viewport = new FitViewport(Main.V_WIDTH, Main.V_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, ((Main) game).batch);
 
@@ -31,7 +35,7 @@ public class AcaboTiempo implements Screen {
 		table.setFillParent(true);
 
 		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
-		Label algunoPerdio = new Label("Se ha acabado el tiempo", font);
+		Label algunoPerdio = new Label("Se ha acabado el tiempo!", font);
 		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para salir",
 				font);
 
@@ -52,9 +56,8 @@ public class AcaboTiempo implements Screen {
 	@Override
 	public void render(float delta) {
 		if (Gdx.input.justTouched()) {
+			cliente.enviarMensaje("desconectar");
 			Gdx.app.exit();
-//			game.setScreen(new PantallaJuego((Main) game));
-//			dispose();
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);

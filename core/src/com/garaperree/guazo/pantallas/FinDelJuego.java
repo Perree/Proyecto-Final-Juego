@@ -57,8 +57,6 @@ public class FinDelJuego implements Screen {
 		if (Gdx.input.justTouched()) {
 			cliente.enviarMensaje("desconectar");
 			Gdx.app.exit();
-//			game.setScreen(new PantallaJuego((Main) game));
-//			dispose();
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);

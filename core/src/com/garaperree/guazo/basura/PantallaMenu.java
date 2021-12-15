@@ -31,7 +31,7 @@ public class PantallaMenu implements Screen {
 	@Override
 	public void show() {
 			
-		fondo = new Imagen(Recursos.FONDOMENU);
+//		fondo = new Imagen(Recursos.FONDOMENU);
 		fondo.setSize(Config.ANCHO, Config.ALTO);
 		b = Render.sb;
 		

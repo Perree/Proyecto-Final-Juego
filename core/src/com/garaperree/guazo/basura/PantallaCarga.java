@@ -27,7 +27,7 @@ public class PantallaCarga implements Screen{
 
 	@Override
 	public void show() {
-		fondo = new Imagen(Recursos.LOGO);
+//		fondo = new Imagen(Recursos.LOGO);
 		fondo.setTransparencia(0);
 	}
 
