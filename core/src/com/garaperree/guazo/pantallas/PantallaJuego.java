@@ -44,7 +44,10 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 	
 	private boolean finJuego = false;
 	
+	// Esta variable hace referencia al cliente que esta en linea
 	private int jugador = 0;
+	
+	// Variable para saber quien gano o perdio
 	private int juga;
 
 	// Red
@@ -71,7 +74,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 		// Crea un FitViewport para mantenar el aspecto virtual
 		gamePort = new FitViewport(Main.V_WIDTH / Main.PPM, Main.V_HEIGHT / Main.PPM, gamecam);
 
-		// Crea un hud para puntos/tiempos/niveles
+		// Crea un hud para tiempos/niveles
 		hud = new Hud(game.batch);
 
 		// cargando el mapa
@@ -169,7 +172,7 @@ public class PantallaJuego implements Screen, JuegoEventListener {
 					dispose();
 				}
 				if (juga == 2) {
-					game.setScreen(new FinDelJuego(game));
+					game.setScreen(new FinDelJuego(game, cliente));
 					dispose();
 				}
 			}

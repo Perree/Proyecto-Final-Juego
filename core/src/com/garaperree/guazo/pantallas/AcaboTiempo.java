@@ -32,7 +32,7 @@ public class AcaboTiempo implements Screen {
 
 		Label finJuegoLabel = new Label("FIN DEL JUEGO", font);
 		Label algunoPerdio = new Label("Se ha acabado el tiempo", font);
-		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para iniciar de vuelta",
+		Label juegarDeNuevoLabel = new Label("Haz click en cualquier parte de la pantalla para salir",
 				font);
 
 		table.add(finJuegoLabel).expandX();
@@ -52,8 +52,9 @@ public class AcaboTiempo implements Screen {
 	@Override
 	public void render(float delta) {
 		if (Gdx.input.justTouched()) {
-			game.setScreen(new PantallaJuego((Main) game));
-			dispose();
+			Gdx.app.exit();
+//			game.setScreen(new PantallaJuego((Main) game));
+//			dispose();
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);

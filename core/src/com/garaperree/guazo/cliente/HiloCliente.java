@@ -19,7 +19,7 @@ public class HiloCliente extends Thread {
 	public HiloCliente() {
 
 		try {
-			ipServer = InetAddress.getByName("192.168.0.47");
+			ipServer = InetAddress.getByName("192.168.0.77");
 			puertoServer = 8080;
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
